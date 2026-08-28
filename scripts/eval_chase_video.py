@@ -22,6 +22,12 @@ from a2rl_drone_training.config import ObservationConfig, RacingEnvConfig, Train
 from a2rl_drone_training.course import GateCourse, course_by_name
 from a2rl_drone_training.env import CrazyflowRacingEnv
 from a2rl_drone_training.networks import mode_action
+from a2rl_drone_training.normalization import (
+    actor_normalization_spec,
+    init_normalization_state,
+    normalization_state_from_dict,
+    normalize_actor_observation,
+)
 
 
 def latest_checkpoint(directory: Path) -> Path:
@@ -72,11 +78,11 @@ def build_eval_config(
         device=device,
         max_episode_time_s=max_episode_time_s or env_config.max_episode_time_s,
         auto_reset=False,
-        curriculum_enabled=False,
         gate_window_scale=1.0,
-        start_gate_curriculum_enabled=False,
+        reset_distribution="evaluation",
+        artificial_time_limit_s=None,
     )
-    obs_config = replace(obs_config, pnp_dropout_prob=0.0, additive_noise_std=0.0)
+    obs_config = replace(obs_config, pnp_dropout_prob=0.0, sensor_noise_scale=0.0)
     return env_config, obs_config
 
 
@@ -87,10 +93,30 @@ def rollout_policy(
     obs_config: ObservationConfig,
     course: GateCourse,
     seed: int,
+    normalization_payload: dict[str, Any] | None,
+    visualization_env: int = 0,
 ) -> dict[str, np.ndarray | int | float]:
     env = CrazyflowRacingEnv(env_config, obs_config, course=course)
-    env.max_reset_gate = 0
-    obs = env.reset(seed=seed)
+    raw_obs = env.reset(seed=seed)
+    if bool(jnp.any(env.reset_gate != 0)):
+        raise RuntimeError("Evaluation visualization must start every environment at gate 1")
+    normalization_state = (
+        normalization_state_from_dict(normalization_payload, obs_config)
+        if normalization_payload is not None
+        else init_normalization_state(obs_config)
+    )
+    normalization_spec = actor_normalization_spec(obs_config)
+
+    def normalize(x: jax.Array) -> jax.Array:
+        return normalize_actor_observation(
+            normalization_state,
+            x,
+            normalization_spec,
+            obs_config.normalization_clip,
+            obs_config.normalization_epsilon,
+        )
+
+    obs = normalize(raw_obs)
 
     active = jnp.ones((env_config.num_envs,), dtype=jnp.bool_)
     policy = jax.jit(lambda x: mode_action(actor_params, x, obs_config))
@@ -108,7 +134,8 @@ def rollout_policy(
     for _ in range(max_steps):
         action = policy(obs)
         action = jnp.where(active[:, None], action, jnp.zeros_like(action))
-        obs, reward, terminated, truncated, info = env.step(action)
+        raw_obs, reward, terminated, truncated, info = env.step(action)
+        obs = normalize(raw_obs)
         done = terminated | truncated
         active = active & ~done
 
@@ -135,25 +162,25 @@ def rollout_policy(
     miss_np = np.stack(misses) if misses else np.zeros((0, env_config.num_envs), dtype=bool)
     finish_np = np.stack(finishes) if finishes else np.zeros((0, env_config.num_envs), dtype=bool)
 
-    best_env = int(np.argmax(np.nanmax(gate_np, axis=0)))
-    first_done = np.flatnonzero(done_np[:, best_env])
+    selected_env = int(np.clip(visualization_env, 0, env_config.num_envs - 1))
+    first_done = np.flatnonzero(done_np[:, selected_env])
     end_step = int(first_done[0] + 1) if first_done.size else int(positions_np.shape[0] - 1)
     end_step = max(end_step, 1)
 
     return {
-        "positions": positions_np[: end_step + 1, best_env],
-        "velocities": velocities_np[: end_step + 1, best_env],
-        "gate_counters": gate_np[: end_step + 1, best_env],
-        "rewards": reward_np[:end_step, best_env],
-        "passes": pass_np[:end_step, best_env],
-        "misses": miss_np[:end_step, best_env],
-        "finishes": finish_np[:end_step, best_env],
-        "best_env": best_env,
+        "positions": positions_np[: end_step + 1, selected_env],
+        "velocities": velocities_np[: end_step + 1, selected_env],
+        "gate_counters": gate_np[: end_step + 1, selected_env],
+        "rewards": reward_np[:end_step, selected_env],
+        "passes": pass_np[:end_step, selected_env],
+        "misses": miss_np[:end_step, selected_env],
+        "finishes": finish_np[:end_step, selected_env],
+        "selected_env": selected_env,
         "end_step": end_step,
-        "return": float(np.sum(reward_np[:end_step, best_env])),
-        "gates": int(np.max(gate_np[: end_step + 1, best_env])),
-        "finished": bool(np.any(finish_np[:end_step, best_env])),
-        "missed": bool(np.any(miss_np[:end_step, best_env])),
+        "return": float(np.sum(reward_np[:end_step, selected_env])),
+        "gates": int(np.max(gate_np[: end_step + 1, selected_env])),
+        "finished": bool(np.any(finish_np[:end_step, selected_env])),
+        "missed": bool(np.any(miss_np[:end_step, selected_env])),
     }
 
 
@@ -362,6 +389,7 @@ def main() -> None:
     parser.add_argument("--fps", type=int, default=20)
     parser.add_argument("--stride", type=int, default=5)
     parser.add_argument("--view-radius", type=float, default=8.0)
+    parser.add_argument("--visualization-env", type=int, default=0)
     args = parser.parse_args()
 
     checkpoint = args.checkpoint or latest_checkpoint(args.checkpoint_dir)
@@ -379,6 +407,8 @@ def main() -> None:
         obs_config=obs_config,
         course=course,
         seed=args.seed,
+        normalization_payload=payload.get("normalization_state"),
+        visualization_env=args.visualization_env,
     )
     render_video(
         course=course,
@@ -392,7 +422,7 @@ def main() -> None:
     print(
         f"wrote {args.output} "
         f"checkpoint={checkpoint} "
-        f"selected_env={rollout['best_env']} "
+        f"selected_env={rollout['selected_env']} "
         f"gates={rollout['gates']} "
         f"return={rollout['return']:.3f} "
         f"finished={rollout['finished']} "

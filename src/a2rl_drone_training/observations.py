@@ -50,6 +50,14 @@ def quat_rotate_xyzw(q: Array, v: Array) -> Array:
     return v + q_w * t + jnp.cross(q_vec, t)
 
 
+def quat_multiply_xyzw(a: Array, b: Array) -> Array:
+    av, aw = a[..., :3], a[..., 3:4]
+    bv, bw = b[..., :3], b[..., 3:4]
+    vector = aw * bv + bw * av + jnp.cross(av, bv)
+    scalar = aw * bw - jnp.sum(av * bv, axis=-1, keepdims=True)
+    return quat_normalize_xyzw(jnp.concatenate([vector, scalar], axis=-1))
+
+
 def world_to_body_xyzw(q_body_to_world: Array, v_world: Array) -> Array:
     return quat_rotate_xyzw(quat_conjugate_xyzw(q_body_to_world), v_world)
 
@@ -88,6 +96,9 @@ def build_racing_observation(
     gate_counter: Array,
     total_gate_passes: int,
     last_action: Array,
+    remaining_time_fraction: Array,
+    yaw_error: Array,
+    stall_fraction: Array,
     config: ObservationConfig,
     key: Array | None = None,
 ) -> Array:
@@ -98,6 +109,32 @@ def build_racing_observation(
     """
 
     quat_xyzw = quat_normalize_xyzw(quat_xyzw)
+    noise_scale = max(float(config.sensor_noise_scale), 0.0)
+    if key is not None:
+        (
+            attitude_axis_key,
+            attitude_angle_key,
+            gyro_key,
+            accel_key,
+            velocity_key,
+            gate_position_key,
+            gate_normal_key,
+            bearing_key,
+            distance_key,
+            dropout_key,
+        ) = jax.random.split(key, 10)
+        if noise_scale > 0.0 and config.attitude_noise_std_rad > 0.0:
+            axis = jax.random.normal(attitude_axis_key, quat_xyzw[..., :3].shape)
+            axis = axis / jnp.maximum(jnp.linalg.norm(axis, axis=-1, keepdims=True), 1.0e-6)
+            angle = (
+                noise_scale
+                * config.attitude_noise_std_rad
+                * jax.random.normal(attitude_angle_key, quat_xyzw[..., 3:4].shape)
+            )
+            delta_quat = jnp.concatenate(
+                [axis * jnp.sin(0.5 * angle), jnp.cos(0.5 * angle)], axis=-1
+            )
+            quat_xyzw = quat_multiply_xyzw(quat_xyzw, delta_quat)
     vel_body = world_to_body_xyzw(quat_xyzw, vel_world)
     gyro_body = world_to_body_xyzw(quat_xyzw, ang_vel_world)
     gravity_world = jnp.array([0.0, 0.0, -9.81], dtype=pos_world.dtype)
@@ -105,17 +142,32 @@ def build_racing_observation(
     gravity_body = world_to_body_xyzw(
         quat_xyzw, jnp.broadcast_to(jnp.array([0.0, 0.0, -1.0]), vel_world.shape)
     )
+    if key is not None and noise_scale > 0.0:
+        gyro_body = gyro_body + noise_scale * config.gyro_noise_std_rad_s * jax.random.normal(
+            gyro_key, gyro_body.shape
+        )
+        accel_body = accel_body + (
+            noise_scale
+            * config.specific_force_noise_std_m_s2
+            * jax.random.normal(accel_key, accel_body.shape)
+        )
+        vel_body = vel_body + noise_scale * config.velocity_noise_std_m_s * jax.random.normal(
+            velocity_key, vel_body.shape
+        )
 
     progress = (gate_counter / max(float(total_gate_passes), 1.0))[..., None]
     core = jnp.concatenate(
         [
-            gyro_body / 12.0,
-            accel_body / 30.0,
+            gyro_body,
+            accel_body,
             quat_xyzw,
-            vel_body / 10.0,
+            vel_body,
             gravity_body,
             last_action,
             progress,
+            jnp.clip(remaining_time_fraction, 0.0, 1.0)[..., None],
+            wrap_pi(yaw_error)[..., None],
+            jnp.clip(stall_fraction, 0.0, 1.0)[..., None],
         ],
         axis=-1,
     )
@@ -129,15 +181,40 @@ def build_racing_observation(
     rel_body = world_to_body_xyzw(quat_for_gates, rel_world)
     normal_body = world_to_body_xyzw(quat_for_gates, normals)
 
-    distance = jnp.linalg.norm(rel_world, axis=-1, keepdims=True)
-    rel_scaled = jnp.clip(rel_body / config.max_gate_distance, -1.5, 1.5)
+    if key is not None and noise_scale > 0.0:
+        rel_body = rel_body + (
+            noise_scale
+            * config.gate_position_noise_std_m
+            * jax.random.normal(gate_position_key, rel_body.shape)
+        )
+        normal_perturbation = jax.random.normal(gate_normal_key, normal_body.shape)
+        normal_body = normal_body + (
+            noise_scale
+            * config.gate_normal_noise_std_rad
+            * jnp.cross(normal_perturbation, normal_body)
+        )
+        normal_body = normal_body / jnp.maximum(
+            jnp.linalg.norm(normal_body, axis=-1, keepdims=True), 1.0e-6
+        )
+
+    distance = jnp.linalg.norm(rel_body, axis=-1, keepdims=True)
     depth = rel_body[..., 0:1]
     denom = jnp.maximum(jnp.abs(depth), 0.25)
     bearing = jnp.concatenate([rel_body[..., 1:2] / denom, rel_body[..., 2:3] / denom], axis=-1)
+    if key is not None and noise_scale > 0.0:
+        bearing = bearing + (
+            noise_scale
+            * config.gate_bearing_noise_std
+            * jax.random.normal(bearing_key, bearing.shape)
+        )
+        distance = distance + (
+            noise_scale
+            * config.gate_distance_noise_std_m
+            * jax.random.normal(distance_key, distance.shape)
+        )
 
     visible = _gate_visibility(depth, bearing, config)
     if key is not None and config.pnp_dropout_prob > 0.0:
-        key, dropout_key = jax.random.split(key)
         keep = jax.random.bernoulli(
             dropout_key,
             p=1.0 - config.pnp_dropout_prob,
@@ -147,20 +224,71 @@ def build_racing_observation(
 
     gate_features = jnp.concatenate(
         [
-            rel_scaled,
-            normal_body,
-            jnp.clip(bearing, -2.0, 2.0),
+            rel_body * visible,
+            normal_body * visible,
+            jnp.clip(bearing, -2.0, 2.0) * visible,
             visible,
-            jnp.clip(distance / config.max_gate_distance, 0.0, 2.0),
+            jnp.clip(distance, 0.0, 2.0 * config.max_gate_distance) * visible,
         ],
         axis=-1,
     )
     flat = jnp.concatenate([core, gate_features.reshape(pos_world.shape[0], -1)], axis=-1)
 
-    if key is not None and config.additive_noise_std > 0.0:
-        _, noise_key = jax.random.split(key)
-        flat = flat + config.additive_noise_std * jax.random.normal(noise_key, flat.shape)
     return flat.astype(jnp.float32)
+
+
+def build_privileged_observation(
+    *,
+    pos_world: Array,
+    quat_xyzw: Array,
+    vel_world: Array,
+    ang_vel_world: Array,
+    acc_world: Array,
+    gate_centers_world: Array,
+    gate_normals_world: Array,
+    gate_right_axes_world: Array,
+    gate_counter: Array,
+    total_gate_passes: int,
+    elapsed_steps: Array,
+    max_episode_steps: int,
+    last_action: Array,
+    yaw_error: Array,
+    gate_window_scale: float,
+    started_local: Array,
+) -> Array:
+    gate_id = gate_counter % gate_centers_world.shape[0]
+    next_gate_id = (gate_id + 1) % gate_centers_world.shape[0]
+    rel_gate = gate_centers_world[gate_id] - pos_world
+    rel_next_gate = gate_centers_world[next_gate_id] - pos_world
+    position_from_gate = pos_world - gate_centers_world[gate_id]
+    plane = jnp.sum(position_from_gate * gate_normals_world[gate_id], axis=-1)
+    lateral = jnp.sum(position_from_gate * gate_right_axes_world[gate_id], axis=-1)
+    vertical = position_from_gate[..., 2]
+    progress = gate_counter / max(float(total_gate_passes), 1.0)
+    elapsed = elapsed_steps / max(float(max_episode_steps), 1.0)
+    features = jnp.concatenate(
+        [
+            pos_world / 20.0,
+            quat_normalize_xyzw(quat_xyzw),
+            vel_world / 10.0,
+            ang_vel_world / 12.0,
+            acc_world / 30.0,
+            rel_gate / 25.0,
+            gate_normals_world[gate_id],
+            rel_next_gate / 25.0,
+            progress[..., None],
+            elapsed[..., None],
+            last_action,
+            (wrap_pi(yaw_error) / jnp.pi)[..., None],
+            (plane / 25.0)[..., None],
+            (lateral / 5.0)[..., None],
+            (vertical / 5.0)[..., None],
+            jnp.full_like(progress[..., None], gate_window_scale / 1.8),
+            started_local.astype(jnp.float32)[..., None],
+        ],
+        axis=-1,
+    )
+    return features.astype(jnp.float32)
 
 
 def _gate_visibility(depth: Array, bearing: Array, config: ObservationConfig) -> Array:

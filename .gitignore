@@ -3,11 +3,17 @@ __pycache__/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
+.jax_cache/
+.coverage
+.coverage.*
+htmlcov/
 .venv/
 build/
 dist/
 *.egg-info/
+
+# Generated training outputs
 runs/
-checkpoints_arena_time_independent_g6_focus_200m_gpu/
-checkpoints_arena_time_independent_200m_gpu/
-checkpoints_arena_speed_reward/
+checkpoints/
+checkpoints_*/
+metrics.jsonl

@@ -61,8 +61,16 @@ def gc_actor_apply(params: Params, obs: Array, obs_config: ObservationConfig) ->
     return mean, log_std
 
 
-def init_critic(key: Array, obs_config: ObservationConfig, config: NetworkConfig) -> Params:
-    return {"value": init_mlp(key, obs_config.dim, config.critic_hidden, 1, output_scale=1.0)}
+def init_critic(key: Array, critic_observation_dim: int, config: NetworkConfig) -> Params:
+    return {
+        "value": init_mlp(
+            key,
+            critic_observation_dim,
+            config.critic_hidden,
+            1,
+            output_scale=1.0,
+        )
+    }
 
 
 def critic_apply(params: Params, obs: Array) -> Array:
@@ -104,11 +112,26 @@ def sample_action(
     key: Array,
     obs_config: ObservationConfig,
 ) -> tuple[Array, Array]:
+    action, log_prob, _ = sample_action_with_mode(
+        actor_params,
+        obs,
+        key,
+        obs_config,
+    )
+    return action, log_prob
+
+
+def sample_action_with_mode(
+    actor_params: Params,
+    obs: Array,
+    key: Array,
+    obs_config: ObservationConfig,
+) -> tuple[Array, Array, Array]:
     mean, log_std = gc_actor_apply(actor_params, obs, obs_config)
     raw = mean + jnp.exp(log_std) * jax.random.normal(key, mean.shape)
     action = jnp.tanh(raw)
     log_prob = squashed_gaussian_log_prob(raw, action, mean, log_std)
-    return action, log_prob
+    return action, log_prob, jnp.tanh(mean)
 
 
 def mode_action(actor_params: Params, obs: Array, obs_config: ObservationConfig) -> Array:
@@ -122,12 +145,27 @@ def evaluate_action_log_prob(
     action: Array,
     obs_config: ObservationConfig,
 ) -> tuple[Array, Array]:
+    log_prob, entropy, _ = evaluate_action_distribution(
+        actor_params,
+        obs,
+        action,
+        obs_config,
+    )
+    return log_prob, entropy
+
+
+def evaluate_action_distribution(
+    actor_params: Params,
+    obs: Array,
+    action: Array,
+    obs_config: ObservationConfig,
+) -> tuple[Array, Array, Array]:
     mean, log_std = gc_actor_apply(actor_params, obs, obs_config)
     action = jnp.clip(action, -0.999999, 0.999999)
     raw = atanh(action)
     log_prob = squashed_gaussian_log_prob(raw, action, mean, log_std)
     entropy = gaussian_entropy(log_std)
-    return log_prob, entropy
+    return log_prob, entropy, jnp.tanh(mean)
 
 
 def squashed_gaussian_log_prob(raw: Array, action: Array, mean: Array, log_std: Array) -> Array:
