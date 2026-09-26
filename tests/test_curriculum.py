@@ -88,6 +88,26 @@ class ResetSamplerTests(unittest.TestCase):
 
 
 class CurriculumControllerTests(unittest.TestCase):
+    def test_reset_evidence_preserves_phase_but_clears_old_distribution_statistics(self):
+        controller = CurriculumController(CurriculumConfig(), 3)
+        controller.state.phase_index = 1
+        controller.state.gate_window_scale = 1.4
+        controller.state.time_cost_scale = 0.25
+        controller.state.updates = 90
+        controller.state.skill_attempts[:] = 64
+        controller.state.skill_recent_attempts[:] = 8
+        controller.state.qualification_streak = 1
+        controller.state.latest_evaluation_passes[:] = 1
+        controller.reset_evidence()
+        self.assertEqual(controller.phase, "B")
+        self.assertEqual(controller.state.updates, 90)
+        self.assertEqual(controller.state.gate_window_scale, 1.4)
+        self.assertEqual(controller.state.time_cost_scale, 0.25)
+        self.assertFalse(controller.state.skill_attempts.any())
+        self.assertFalse(controller.state.skill_recent_attempts.any())
+        self.assertFalse(controller.state.latest_evaluation_passes.any())
+        self.assertEqual(controller.state.qualification_streak, 0)
+
     def test_advancement_uses_evaluation_thresholds_and_hysteresis(self):
         config = CurriculumConfig(
             min_eval_samples_per_gate=2,
@@ -139,7 +159,7 @@ class CurriculumControllerTests(unittest.TestCase):
         )
         controller.state.phase_index = 1
         controller.step()
-        self.assertAlmostEqual(controller.state.gate_window_scale, 1.78)
+        self.assertAlmostEqual(controller.state.gate_window_scale, 1.38)
 
     def test_prioritized_local_starts_keep_probability_floor(self):
         controller = CurriculumController(
@@ -233,6 +253,66 @@ class CurriculumControllerTests(unittest.TestCase):
         self.assertEqual(controller.phase, "B")
         self.assertLess(controller.skill_pass_rates()[1], 0.8)
         self.assertEqual(controller.recent_skill_pass_rates()[1], 1.0)
+
+    def test_scale_change_discards_recent_evidence_but_keeps_lifetime(self):
+        controller = CurriculumController(
+            CurriculumConfig(min_eval_samples_per_gate=16), num_gates=3
+        )
+        attempts = np.full(3, 8.0)
+        controller.record_skill_evaluation(attempts=attempts, passes=attempts)
+        controller.record_skill_evaluation(attempts=attempts, passes=attempts)
+        self.assertEqual(controller.state.qualification_streak, 1)
+        self.assertFalse(controller.record_skill_evaluation(
+            attempts=attempts, passes=np.zeros(3), gate_window_scale=1.3
+        ))
+        self.assertEqual(controller.state.qualification_streak, 0)
+        self.assertEqual(controller.state.skill_recent_count, 1)
+        self.assertFalse(controller.state.phase_a_priority_ready)
+        np.testing.assert_array_equal(controller.recent_skill_totals()[0], attempts)
+        np.testing.assert_array_equal(controller.state.skill_attempts, attempts * 3)
+        np.testing.assert_array_equal(controller.recent_skill_pass_rates(), np.zeros(3))
+
+    def test_transitional_scale_cannot_advance_phase(self):
+        controller = CurriculumController(
+            CurriculumConfig(min_eval_samples_per_gate=8, hysteresis_evaluations=1),
+            num_gates=3,
+        )
+        attempts = np.full(3, 8.0)
+        self.assertFalse(controller.record_skill_evaluation(
+            attempts=attempts, passes=attempts, gate_window_scale=1.6
+        ))
+        self.assertEqual(controller.phase, "A")
+        self.assertTrue(controller.record_skill_evaluation(
+            attempts=attempts, passes=attempts, gate_window_scale=1.4
+        ))
+
+    def test_unlabelled_checkpoint_history_is_not_used_to_qualify(self):
+        first = CurriculumController(CurriculumConfig(), num_gates=3)
+        first.record_skill_evaluation(attempts=np.full(3, 32.0), passes=np.full(3, 32.0))
+        payload = first.state_dict()
+        payload.pop("skill_history_scale")
+        restored = CurriculumController(CurriculumConfig(), num_gates=3)
+        restored.load_state_dict(payload)
+        self.assertEqual(restored.state.skill_recent_count, 0)
+        self.assertEqual(restored.state.qualification_streak, 0)
+        np.testing.assert_array_equal(restored.state.skill_attempts, np.full(3, 32.0))
+        self.assertEqual(restored.phase, "A")
+
+    def test_strict_course_resume_immediately_overrides_aperture_and_starts(self):
+        original = CurriculumController(CurriculumConfig(), 3)
+        original.record_skill_evaluation(attempts=np.full(3, 8.0), passes=np.full(3, 8.0))
+        restored = CurriculumController(CurriculumConfig(strict_course_training=True), 3)
+        restored.load_state_dict(original.state_dict())
+        self.assertEqual(restored.state.skill_recent_count, 0)
+        for phase in range(4):
+            restored.state.phase_index = phase
+            params = restored.parameters()
+            self.assertEqual(params.gate1_fraction, 1.0)
+            self.assertEqual(params.gate_window_scale, 1.0)
+            self.assertFalse(params.prioritized_local_starts)
+            restored.step()
+            self.assertEqual(restored.state.gate_window_scale, 1.0)
+        np.testing.assert_array_equal(restored.state.skill_attempts, np.full(3, 8.0))
 
     def test_curriculum_state_round_trips(self):
         first = CurriculumController(CurriculumConfig(), num_gates=4)

@@ -15,6 +15,7 @@ from a2rl_drone_training.config import (
     TrainingConfig,
 )
 from a2rl_drone_training.course import course_by_name
+from a2rl_drone_training.runtime import TRAINING_PROFILES, configure_runtime
 
 
 def _resolve_cpu_threads(value: str | None) -> int | None:
@@ -59,6 +60,17 @@ def _cpu_threads_arg(value: str) -> str:
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Train an A2RL FPV racing policy.")
+    parser.add_argument(
+        "--profile",
+        choices=list(TRAINING_PROFILES),
+        help="GPU starting preset; explicit flags override its defaults.",
+    )
+    parser.add_argument(
+        "--gpu-memory-fraction",
+        type=float,
+        default=None,
+        help="JAX GPU preallocation fraction, in (0, 1]; profile default: 0.60.",
+    )
     parser.add_argument("--num-envs", type=int, default=64)
     parser.add_argument("--total-env-steps", type=int, default=20_000_000)
     parser.add_argument("--schedule-env-steps", type=int, default=20_000_000)
@@ -118,10 +130,10 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--physics",
-        default="so_rpy_rotor_drag",
-        choices=["first_principles", "so_rpy", "so_rpy_rotor", "so_rpy_rotor_drag"],
+        default="first_principles",
+        choices=["first_principles"],
     )
-    parser.add_argument("--control-hz", type=int, default=100)
+    parser.add_argument("--control-hz", type=int, default=500)
     parser.add_argument("--sim-hz", type=int, default=500)
     parser.add_argument("--max-episode-time", type=float, default=24.0)
     parser.add_argument(
@@ -180,7 +192,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--action-delta-penalty",
         type=float,
-        default=0.001,
+        default=0.0002,
         help="Reward-v2 coefficient on squared action changes.",
     )
     parser.add_argument("--gate-margin-penalty", type=float, default=6.0)
@@ -206,12 +218,16 @@ def build_parser() -> argparse.ArgumentParser:
         "--stall-penalty", type=float, default=-0.02, help="Reward-v1 only."
     )
 
+    parser.add_argument("--corner-reset-bank", type=str, default=None,
+                        help="Recorded pre-G3 states for strict-gate mixed corner practice.")
     parser.add_argument("--no-curriculum", action="store_true")
-    parser.add_argument("--phase-a-gate1-fraction", type=float, default=0.20)
+    parser.add_argument("--strict-course-training", action="store_true",
+                        help="Train only from G1 with 1.0x gates, including on checkpoint resume.")
+    parser.add_argument("--phase-a-gate1-fraction", type=float, default=0.40)
     parser.add_argument("--phase-b-gate1-fraction", type=float, default=0.50)
     parser.add_argument("--phase-c-gate1-fraction", type=float, default=0.80)
     parser.add_argument("--phase-d-gate1-fraction", type=float, default=0.80)
-    parser.add_argument("--phase-a-window-scale", type=float, default=1.80)
+    parser.add_argument("--phase-a-window-scale", type=float, default=1.40)
     parser.add_argument("--phase-b-window-scale", type=float, default=1.30)
     parser.add_argument("--phase-c-window-scale", type=float, default=1.00)
     parser.add_argument("--phase-b-time-scale", type=float, default=0.25)
@@ -267,6 +283,8 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def _build_training_config(args: argparse.Namespace) -> TrainingConfig:
+    if args.corner_reset_bank and (args.strict_course_training or args.no_curriculum):
+        raise ValueError("Corner practice requires curriculum and mixed starts; use the rtx-5050-corner profile.")
     obs = replace(
         ObservationConfig(),
         gate_context=args.gate_context,
@@ -283,6 +301,7 @@ def _build_training_config(args: argparse.Namespace) -> TrainingConfig:
     )
     env = replace(
         RacingEnvConfig(),
+        corner_reset_bank=args.corner_reset_bank,
         num_envs=args.num_envs,
         sim_hz=args.sim_hz,
         control_hz=args.control_hz,
@@ -347,6 +366,8 @@ def _build_training_config(args: argparse.Namespace) -> TrainingConfig:
     curriculum = replace(
         CurriculumConfig(),
         enabled=not args.no_curriculum,
+        strict_course_training=args.strict_course_training,
+        corner_practice=bool(args.corner_reset_bank),
         phase_a_gate1_fraction=args.phase_a_gate1_fraction,
         phase_b_gate1_fraction=args.phase_b_gate1_fraction,
         phase_c_gate1_fraction=args.phase_c_gate1_fraction,
@@ -397,8 +418,21 @@ def _build_training_config(args: argparse.Namespace) -> TrainingConfig:
     )
 
 
+def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
+    parser = build_parser()
+    args = parser.parse_args(argv)
+    if args.profile is not None:
+        parser.set_defaults(**TRAINING_PROFILES[args.profile])
+        args = parser.parse_args(argv)
+    return args
+
+
 def main(argv: list[str] | None = None) -> None:
-    args = build_parser().parse_args(argv)
+    args = parse_args(argv)
+    try:
+        configure_runtime(args.device, args.gpu_memory_fraction)
+    except ValueError as exc:
+        raise SystemExit(str(exc)) from exc
     _configure_cpu_threads(args.cpu_threads, args.device)
 
     # Importing the trainer imports JAX, so it must happen after CPU runtime setup.

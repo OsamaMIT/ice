@@ -129,12 +129,13 @@ class CurriculumController:
     def __init__(self, config: CurriculumConfig, num_gates: int):
         self.config = config
         self.num_gates = int(num_gates)
+        self.skill_history_scale: float | None = None
         if config.skill_qualification_window < 1:
             raise ValueError("skill_qualification_window must be at least 1")
         window_shape = (config.skill_qualification_window, num_gates)
         self.state = CurriculumState(
             phase_index=0,
-            gate_window_scale=float(config.phase_a_window_scale),
+            gate_window_scale=1.0 if (config.strict_course_training or config.corner_practice) else float(config.phase_a_window_scale),
             time_cost_scale=0.0,
             qualification_streak=0,
             updates=0,
@@ -159,11 +160,37 @@ class CurriculumController:
             phase_a_priority_ready=False,
         )
 
+    def reset_evidence(self) -> None:
+        """Discard statistics from a different reset distribution, retaining phase."""
+        self.skill_history_scale = None
+        previous = self.state
+        self.state = CurriculumController(self.config, self.num_gates).state
+        for name in ("phase_index", "gate_window_scale", "time_cost_scale", "updates"):
+            setattr(self.state, name, getattr(previous, name))
+
+    def _clear_skill_history(self) -> None:
+        """Clear qualification evidence, retaining lifetime audit statistics."""
+        self.state.skill_recent_attempts.fill(0.0)
+        self.state.skill_recent_passes.fill(0.0)
+        self.state.skill_recent_strict_passes.fill(0.0)
+        self.state.skill_recent_index = 0
+        self.state.skill_recent_count = 0
+        self.state.phase_a_priority_ready = False
+        if self.state.phase_index == 0:
+            self.state.qualification_streak = 0
+
     @property
     def phase(self) -> str:
         return PHASES[self.state.phase_index]
 
     def parameters(self) -> CurriculumParameters:
+        if self.config.corner_practice:
+            return CurriculumParameters(
+                phase=self.phase, gate1_fraction=0.4, gate_window_scale=1.0,
+                time_cost_scale=float(self.state.time_cost_scale),
+                prioritized_local_starts=True,
+                local_gate_probabilities=self.local_gate_probabilities(),
+            )
         if not self.config.enabled:
             return CurriculumParameters(
                 phase="D",
@@ -185,10 +212,10 @@ class CurriculumController:
         )
         return CurriculumParameters(
             phase=self.phase,
-            gate1_fraction=float(gate1_fraction),
-            gate_window_scale=float(self.state.gate_window_scale),
+            gate1_fraction=1.0 if self.config.strict_course_training else float(gate1_fraction),
+            gate_window_scale=1.0 if self.config.strict_course_training else float(self.state.gate_window_scale),
             time_cost_scale=float(self.state.time_cost_scale),
-            prioritized_local_starts=prioritized,
+            prioritized_local_starts=prioritized and not self.config.strict_course_training,
             local_gate_probabilities=probabilities,
         )
 
@@ -206,6 +233,9 @@ class CurriculumController:
             self.config.phase_c_time_cost_scale,
             1.0,
         )[self.state.phase_index]
+        if self.config.strict_course_training or self.config.corner_practice:
+            target_window = 1.0
+            self.state.gate_window_scale = 1.0
         self.state.gate_window_scale = _move_toward(
             self.state.gate_window_scale,
             target_window,
@@ -250,6 +280,7 @@ class CurriculumController:
         attempts: np.ndarray,
         passes: np.ndarray,
         strict_passes: np.ndarray | None = None,
+        gate_window_scale: float | None = None,
     ) -> bool:
         attempts = self._validate_gate_array(attempts, "Skill-audit attempts")
         passes = self._validate_gate_array(passes, "Skill-audit passes")
@@ -259,6 +290,14 @@ class CurriculumController:
             strict_passes,
             "Skill-audit strict passes",
         )
+        scale = self.state.gate_window_scale if gate_window_scale is None else float(gate_window_scale)
+        if not np.isfinite(scale) or scale <= 0:
+            raise ValueError("Skill-audit gate scale must be finite and positive")
+        if self.skill_history_scale is None or not np.isclose(
+            scale, self.skill_history_scale, rtol=0.0, atol=1e-8
+        ):
+            self._clear_skill_history()
+        self.skill_history_scale = scale
         self.state.skill_attempts += attempts
         self.state.skill_passes += passes
         self.state.skill_strict_passes += strict_passes
@@ -273,11 +312,13 @@ class CurriculumController:
             self.config.skill_qualification_window,
         )
         self.state.phase_a_priority_ready = self.state.phase_a_priority_ready or bool(
-            np.all(self.state.skill_attempts >= self.config.min_eval_samples_per_gate)
+            np.all(self.recent_skill_totals()[0] >= self.config.min_eval_samples_per_gate)
         )
         if not self.config.enabled or self.state.phase_index != 0:
             return False
-        return self._update_qualification(self._skill_evaluation_qualified())
+        target_scale = 1.0 if (self.config.strict_course_training or self.config.corner_practice) else self.config.phase_a_window_scale
+        at_target = np.isclose(scale, target_scale, rtol=0.0, atol=1e-8)
+        return self._update_qualification(bool(at_target) and self._skill_evaluation_qualified())
 
     def _update_qualification(self, qualified: bool) -> bool:
         self.state.qualification_streak = (
@@ -372,6 +413,7 @@ class CurriculumController:
             "minimum_pass_rate": float(np.min(rates)) if rates.size else 0.0,
             "qualification_streak": self.state.qualification_streak,
             "recent_audits": self.state.skill_recent_count,
+            "skill_history_scale": self.skill_history_scale,
             "phase_a_priority_ready": self.state.phase_a_priority_ready,
             "lifetime_attempts": self.state.skill_attempts.copy(),
             "lifetime_pass_rates": self.skill_pass_rates(),
@@ -384,6 +426,13 @@ class CurriculumController:
         return self.local_gate_probability_components()["combined"]
 
     def local_gate_probability_components(self) -> dict[str, np.ndarray]:
+        if self.config.corner_practice:
+            if self.num_gates < 5:
+                raise ValueError("Corner practice requires G4 and G5")
+            # 60% local: two thirds before G3, one third across other local gates.
+            probabilities = np.full(self.num_gates - 1, (1.0 / 3.0) / (self.num_gates - 2), dtype=np.float32)
+            probabilities[1] = 2.0 / 3.0
+            return {"direct": probabilities.copy(), "link": probabilities.copy(), "combined": probabilities}
         if self.num_gates <= 1:
             empty = np.zeros((0,), dtype=np.float32)
             return {"direct": empty, "link": empty, "combined": empty}
@@ -471,6 +520,7 @@ class CurriculumController:
             "skill_passes": self.state.skill_passes.copy(),
             "skill_strict_passes": self.state.skill_strict_passes.copy(),
             "skill_audits": self.state.skill_audits,
+            "skill_history_scale": self.skill_history_scale,
             "skill_recent_attempts": self.state.skill_recent_attempts.copy(),
             "skill_recent_passes": self.state.skill_recent_passes.copy(),
             "skill_recent_strict_passes": self.state.skill_recent_strict_passes.copy(),
@@ -540,7 +590,17 @@ class CurriculumController:
             skill_recent_count=0,
             phase_a_priority_ready=bool(payload.get("phase_a_priority_ready", False)),
         )
+        if self.config.strict_course_training or self.config.corner_practice:
+            self.state.gate_window_scale = 1.0
         self._load_recent_history(payload)
+        self.skill_history_scale = payload.get("skill_history_scale")
+        # Older checkpoints cannot establish which aperture produced their audits.
+        if self.skill_history_scale is None or (
+            (self.config.strict_course_training or self.config.corner_practice)
+            and not np.isclose(self.skill_history_scale, 1.0, rtol=0.0, atol=1e-8)
+        ):
+            self._clear_skill_history()
+            self.skill_history_scale = None
 
     def _validate_gate_array(self, values: Any, label: str) -> np.ndarray:
         array = np.asarray(values, dtype=np.float64)

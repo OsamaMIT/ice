@@ -15,8 +15,6 @@ from a2rl_drone_training.curriculum import CurriculumParameters, sample_reset_ga
 from a2rl_drone_training.observations import (
     build_privileged_observation,
     build_racing_observation,
-    quat_to_yaw_xyzw,
-    wrap_pi,
     yaw_to_quat_xyzw,
 )
 from a2rl_drone_training.rewards import (
@@ -26,6 +24,9 @@ from a2rl_drone_training.rewards import (
     reward_v1,
     reward_v2,
 )
+
+
+SPAWN_GEOMETRY_VERSION = 2
 
 
 _OPTIONAL_WARP_IMPORT_PREFIXES = (
@@ -82,8 +83,24 @@ class CrazyflowRacingEnv:
         course: GateCourse | None = None,
     ):
         self.config = env_config
+        if env_config.physics != "first_principles":
+            raise ValueError("Direct motor control requires --physics first_principles; so_rpy models consume attitude commands.")
         self.obs_config = obs_config
         self.course = course or arena_38m_stacked_course()
+        self.corner_bank = None
+        if self.config.corner_reset_bank and self.config.reset_distribution == "training":
+            with np.load(self.config.corner_reset_bank, allow_pickle=False) as bank:
+                if self.course.num_gates < 5 or not np.allclose(bank["gate_center"], self.course.centers[2]) or not np.allclose(bank["gate_normal"], self.course.normals[2]):
+                    raise ValueError("Corner reset bank does not match G3 geometry")
+                values = {k: np.asarray(bank[k], dtype=np.float32) for k in ("pos", "vel", "quat", "angular", "rpm", "action")}
+            count = len(values["pos"])
+            for name, width in (("pos", 3), ("vel", 3), ("quat", 4), ("angular", 3), ("rpm", 4), ("action", 4)):
+                if count == 0 or values[name].shape != (count, width) or not np.isfinite(values[name]).all():
+                    raise ValueError(f"Invalid corner reset bank field: {name}")
+            plane = (values["pos"] - self.course.centers[2]) @ self.course.normals[2]
+            if np.any(plane >= 0) or not np.allclose(np.linalg.norm(values["quat"], axis=1), 1.0, atol=1e-3):
+                raise ValueError("Corner states must be before G3 with normalized attitudes")
+            self.corner_bank = {k: jnp.asarray(v) for k, v in values.items()}
         self.total_gate_passes = self.course.num_gates * self.config.laps
         self.n_substeps = self.config.sim_hz // self.config.control_hz
         if self.n_substeps < 1 or self.config.sim_hz % self.config.control_hz:
@@ -96,7 +113,7 @@ class CrazyflowRacingEnv:
             n_drones=1,
             drone_model=self.config.drone_model,
             physics=Physics(self.config.physics),
-            control=Control.attitude,
+            control=Control.rotor_vel,
             freq=self.config.sim_hz,
             attitude_freq=self.config.control_hz,
             device=self.config.device,
@@ -137,13 +154,25 @@ class CrazyflowRacingEnv:
         self.elapsed_steps = jnp.zeros((self.config.num_envs,), dtype=jnp.float32)
         self.segment_steps = jnp.zeros((self.config.num_envs,), dtype=jnp.float32)
         self.last_action = jnp.zeros((self.config.num_envs, 4), dtype=jnp.float32)
-        self.yaw_cmd = jnp.zeros((self.config.num_envs,), dtype=jnp.float32)
         self.prev_vel = jnp.zeros((self.config.num_envs, 3), dtype=jnp.float32)
         self.current_acc = jnp.zeros((self.config.num_envs, 3), dtype=jnp.float32)
         self.stall_steps = jnp.zeros((self.config.num_envs,), dtype=jnp.int32)
         self.episode_return = jnp.zeros((self.config.num_envs,), dtype=jnp.float32)
         self.episode_length = jnp.zeros((self.config.num_envs,), dtype=jnp.float32)
         self.thrust_min, self.thrust_hover, self.thrust_max = self._resolve_thrust_bounds()
+        from drone_models.transform import motor_force2rotor_vel
+
+        coefficient = np.asarray(self.sim.data.params.rpm2thrust)
+        if coefficient.shape != (3,) or not np.all(np.isfinite(coefficient)) or coefficient[2] <= 0:
+            raise ValueError("Motor thrust curve must be a finite quadratic with a positive leading coefficient")
+        rpm_bounds = motor_force2rotor_vel(
+            jnp.asarray([self.thrust_min, self.thrust_hover, self.thrust_max]) / 4.0,
+            self.sim.data.params.rpm2thrust,
+        )
+        bounds = np.asarray(rpm_bounds)
+        if not np.all(np.isfinite(bounds)) or not 0 <= bounds[0] < bounds[1] < bounds[2]:
+            raise ValueError("Model thrust limits do not define valid motor RPM bounds")
+        self.motor_rpm_min, self.motor_rpm_hover, self.motor_rpm_max = rpm_bounds
         self.reset(seed=0)
 
     @property
@@ -195,17 +224,25 @@ class CrazyflowRacingEnv:
             vel=jnp.where(mask3, vel[:, None, :], states.vel),
             quat=jnp.where(mask4, quat[:, None, :], states.quat),
             ang_vel=jnp.where(mask3, jnp.zeros_like(states.ang_vel), states.ang_vel),
+            rotor_vel=jnp.where(mask3, self.motor_rpm_hover, states.rotor_vel),
         )
+        if self.corner_bank is not None:
+            focused = mask & started_local & (reset_gate == 2)
+            selected = self.corner_bank_indices
+            new_states = new_states.replace(
+                ang_vel=jnp.where(focused[:, None, None], self.corner_bank["angular"][selected, None, :], new_states.ang_vel),
+                rotor_vel=jnp.where(focused[:, None, None], self.corner_bank["rpm"][selected, None, :], new_states.rotor_vel),
+            )
         self.sim.data = self.sim.data.replace(states=new_states)
 
-        reset_yaw = quat_to_yaw_xyzw(quat)
-        self.yaw_cmd = jnp.where(mask, reset_yaw, self.yaw_cmd)
         self.gate_counter = jnp.where(mask, reset_gate, self.gate_counter)
         self.reset_gate = jnp.where(mask, reset_gate, self.reset_gate)
         self.started_local = jnp.where(mask, started_local, self.started_local)
         self.elapsed_steps = jnp.where(mask, 0.0, self.elapsed_steps)
         self.segment_steps = jnp.where(mask, 0.0, self.segment_steps)
         self.last_action = jnp.where(mask[:, None], 0.0, self.last_action)
+        if self.corner_bank is not None:
+            self.last_action = jnp.where(focused[:, None], self.corner_bank["action"][selected], self.last_action)
         self.prev_vel = jnp.where(mask[:, None], vel, self.prev_vel)
         self.current_acc = jnp.where(mask[:, None], 0.0, self.current_acc)
         self.stall_steps = jnp.where(mask, 0, self.stall_steps)
@@ -225,7 +262,7 @@ class CrazyflowRacingEnv:
         obs_key = None
         if noisy:
             self.rng, obs_key = jax.random.split(self.rng)
-        yaw_error = wrap_pi(self.yaw_cmd - quat_to_yaw_xyzw(quat))
+        yaw_error = jnp.zeros((self.config.num_envs,), dtype=jnp.float32)
         stall_fraction = self.stall_steps.astype(jnp.float32) / max(
             float(self.config.stall_patience_steps), 1.0
         )
@@ -256,7 +293,7 @@ class CrazyflowRacingEnv:
         pos = states.pos[:, 0, :]
         quat = states.quat[:, 0, :]
         vel = states.vel[:, 0, :]
-        yaw_error = wrap_pi(self.yaw_cmd - quat_to_yaw_xyzw(quat))
+        yaw_error = jnp.zeros((self.config.num_envs,), dtype=jnp.float32)
         return build_privileged_observation(
             pos_world=pos,
             quat_xyzw=quat,
@@ -277,7 +314,10 @@ class CrazyflowRacingEnv:
         )
 
     def step(self, action: Array) -> tuple[Array, Array, Array, Array, dict[str, Array]]:
-        action = jnp.clip(jnp.asarray(action, dtype=jnp.float32), -1.0, 1.0)
+        action = jnp.asarray(action, dtype=jnp.float32)
+        if action.shape != (self.config.num_envs, 4):
+            raise ValueError("Motor actions must have shape (num_envs, 4)")
+        action = jnp.clip(action, -1.0, 1.0)
         previous_action = self.last_action
         pos_before = self.sim.data.states.pos[:, 0, :]
         gate_id = self.gate_counter % self.course.num_gates
@@ -307,11 +347,8 @@ class CrazyflowRacingEnv:
                 self.config.potential_track_scale,
             )
 
-        self.yaw_cmd = wrap_pi(
-            self.yaw_cmd + action[:, 3] * self.config.max_yaw_rate_rad_s * self.config.dt
-        )
-        cmd = self._fpv_action_to_crazyflow_attitude(action)
-        self.sim.attitude_control(cmd[:, None, :])
+        cmd = self._action_to_motor_rpm(action)
+        self.sim.rotor_vel_control(cmd[:, None, :])
         self.sim.step(self.n_substeps)
 
         states = self.sim.data.states
@@ -344,6 +381,12 @@ class CrazyflowRacingEnv:
             self.total_gate_passes,
             self.started_local,
         )
+
+        corner_complete = jnp.zeros_like(segment_complete)
+        if self.corner_bank is not None:
+            corner_complete = self.started_local & (self.reset_gate == 2) & (next_gate_counter >= 5)
+            segment_complete = segment_complete | corner_complete
+            local_segment_complete = local_segment_complete | corner_complete
 
         crashed = pos[:, 2] < 0.05
         out_of_bounds = jnp.any((pos < self.bounds_min) | (pos > self.bounds_max), axis=-1)
@@ -515,7 +558,8 @@ class CrazyflowRacingEnv:
             "started_local": self.started_local,
             # Compatibility aliases for existing dashboards.
             "random_start": self.started_local,
-            "focused_start": jnp.zeros_like(self.started_local),
+            "focused_start": self.started_local & (self.reset_gate == 2) & (self.corner_bank is not None),
+            "corner_complete": corner_complete,
             "speed": speed,
             "forward_speed": forward_speed,
             "time_to_gate": time_to_gate,
@@ -557,7 +601,7 @@ class CrazyflowRacingEnv:
         info["reset_occurred"] = reset_occurred
         info["reset_started_local"] = reset_started_local
         info["reset_random_start"] = reset_started_local
-        info["reset_focused_start"] = jnp.zeros_like(reset_started_local)
+        info["reset_focused_start"] = reset_started_local & (self.reset_gate == 2) & (self.corner_bank is not None)
         return obs, reward, terminated, truncated, info
 
     def render(self, **kwargs: Any) -> Any:
@@ -603,9 +647,8 @@ class CrazyflowRacingEnv:
                 params = ForceTorqueParams.load(self.config.drone_model)
                 thrust_min = float(params.thrust_min * 4.0) if thrust_min is None else thrust_min
                 thrust_max = float(params.thrust_max * 4.0) if thrust_max is None else thrust_max
-            except Exception:
-                thrust_min = 0.0 if thrust_min is None else thrust_min
-                thrust_max = 0.65 if thrust_max is None else thrust_max
+            except Exception as exc:
+                raise ValueError("Cannot resolve motor thrust limits for the configured drone model") from exc
 
         if self.config.thrust_hover_n is not None:
             thrust_hover = self.config.thrust_hover_n
@@ -615,21 +658,18 @@ class CrazyflowRacingEnv:
                 thrust_hover = mass * 9.81
             except Exception:
                 thrust_hover = 0.5 * (float(thrust_min) + float(thrust_max))
-        thrust_hover = float(np.clip(thrust_hover, thrust_min, thrust_max))
+        if not all(np.isfinite(x) for x in (thrust_min, thrust_hover, thrust_max)) or not 0 <= thrust_min < thrust_hover < thrust_max:
+            raise ValueError("Thrust limits must satisfy 0 <= min < hover < max")
         return float(thrust_min), thrust_hover, float(thrust_max)
 
-    def _fpv_action_to_crazyflow_attitude(self, action: Array) -> Array:
-        throttle = action[:, 0]
-        roll = action[:, 1] * self.config.max_roll_rad
-        pitch = action[:, 2] * self.config.max_pitch_rad
-        thrust_up = self.thrust_max - self.thrust_hover
-        thrust_down = self.thrust_hover - self.thrust_min
-        thrust = self.thrust_hover + jnp.where(
-            throttle >= 0.0,
-            throttle * thrust_up,
-            throttle * thrust_down,
+    def _action_to_motor_rpm(self, action: Array) -> Array:
+        """Map each motor independently: -1=min RPM, 0=hover RPM, +1=max RPM."""
+        action = jnp.clip(action, -1.0, 1.0)
+        return self.motor_rpm_hover + jnp.where(
+            action >= 0.0,
+            action * (self.motor_rpm_max - self.motor_rpm_hover),
+            action * (self.motor_rpm_hover - self.motor_rpm_min),
         )
-        return jnp.stack([roll, pitch, self.yaw_cmd, thrust], axis=-1)
 
     def _build_racing_line_spawn_geometry(self) -> tuple[Array, Array, Array, Array]:
         centers = np.asarray(self.course.centers, dtype=np.float32)
@@ -705,7 +745,9 @@ class CrazyflowRacingEnv:
         gate_id = reset_gate % self.course.num_gates
         centers = self.gate_centers[gate_id]
         approach_dirs = self.approach_dirs[gate_id]
-        right_axes = self.approach_right_axes[gate_id]
+        # Lateral noise must be tangent to the gate plane. A path-relative
+        # perpendicular can move starts beyond an oblique gate (notably G5).
+        right_axes = self.gate_right_axes[gate_id]
         approach_lengths = self.approach_lengths[gate_id]
         widths = self.gate_widths[gate_id] * self.gate_window_scale
         heights = self.gate_heights[gate_id] * self.gate_window_scale
@@ -758,6 +800,14 @@ class CrazyflowRacingEnv:
         course_yaw = jnp.arctan2(yaw_dirs[:, 1], yaw_dirs[:, 0])
         yaw = course_yaw + jax.random.normal(yaw_key, (self.config.num_envs,)) * 0.08
         quat = yaw_to_quat_xyzw(yaw)
+        if self.corner_bank is not None:
+            self.corner_bank_indices = jax.random.randint(
+                jax.random.fold_in(key, 73), (self.config.num_envs,), 0, self.corner_bank["pos"].shape[0]
+            )
+            focused = started_local & (reset_gate == 2)
+            pos = jnp.where(focused[:, None], self.corner_bank["pos"][self.corner_bank_indices], pos)
+            vel = jnp.where(focused[:, None], self.corner_bank["vel"][self.corner_bank_indices], vel)
+            quat = jnp.where(focused[:, None], self.corner_bank["quat"][self.corner_bank_indices], quat)
         return (
             pos.astype(jnp.float32),
             vel.astype(jnp.float32),

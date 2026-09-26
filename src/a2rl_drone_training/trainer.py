@@ -17,10 +17,11 @@ import numpy as np
 from jax import Array
 
 from a2rl_drone_training.config import TrainingConfig
+from a2rl_drone_training.actions import ACTION_NAMES, ACTION_SPACE, validate_checkpoint_actions
 from a2rl_drone_training.console import format_table, print_table
 from a2rl_drone_training.course import GateCourse
 from a2rl_drone_training.curriculum import CurriculumController
-from a2rl_drone_training.env import CrazyflowRacingEnv
+from a2rl_drone_training.env import CrazyflowRacingEnv, SPAWN_GEOMETRY_VERSION
 from a2rl_drone_training.networks import (
     critic_apply,
     init_critic,
@@ -48,7 +49,6 @@ from a2rl_drone_training.rewards import REWARD_COMPONENT_NAMES
 
 
 REWARD_COMPONENTS = REWARD_COMPONENT_NAMES
-ACTION_NAMES = ("throttle", "roll", "pitch", "yaw")
 
 
 @dataclass
@@ -228,6 +228,7 @@ class PPOTrainer:
             should_checkpoint = checkpoint_dir is not None and (
                 update == total_updates or update % cfg.checkpoint_interval == 0
             )
+            print(f"[Update {update}/{total_updates}] Collecting flight experience...", flush=True)
             rollout, rollout_metrics = self.collect_rollout(
                 collect_diagnostics=should_log or evaluation_due,
             )
@@ -241,6 +242,7 @@ class PPOTrainer:
                 gamma=cfg.ppo.gamma,
                 gae_lambda=cfg.ppo.gae_lambda,
             )
+            print(f"[Update {update}] Learning from collected flights...", flush=True)
             next_schedule_steps = self.state.schedule_steps + steps_per_update
             schedule_progress = min(
                 next_schedule_steps / max(cfg.ppo.schedule_env_steps, 1),
@@ -270,12 +272,19 @@ class PPOTrainer:
             self.state.env_steps += steps_per_update
             self.state.schedule_steps = next_schedule_steps
 
+            jax.block_until_ready(update_metrics["approx_kl"])
+            training_seconds = time.perf_counter() - update_start_time
+            evaluation_seconds = 0.0
+            skill_evaluation_seconds = 0.0
             self.curriculum.step()
             evaluation: dict[str, Any] | None = None
             skill_evaluation: dict[str, Any] | None = None
             if evaluation_due:
                 phase_before_evaluation = self.curriculum.phase
+                print(f"[Update {update}] Running full-course evaluation...", flush=True)
+                evaluation_start = time.perf_counter()
                 evaluation = self.evaluate_policy()
+                evaluation_seconds = time.perf_counter() - evaluation_start
                 advanced = self.curriculum.record_evaluation(
                     attempts=evaluation["gate_attempts"],
                     passes=evaluation["gate_passes"],
@@ -283,11 +292,15 @@ class PPOTrainer:
                     finishes=int(evaluation["finishes"]),
                 )
                 if self.config.curriculum.enabled and phase_before_evaluation == "A":
+                    print(f"[Update {update}] Checking individual gate skills...", flush=True)
+                    skill_start = time.perf_counter()
                     skill_evaluation = self.evaluate_gate_skills()
+                    skill_evaluation_seconds = time.perf_counter() - skill_start
                     advanced = self.curriculum.record_skill_evaluation(
                         attempts=skill_evaluation["gate_attempts"],
                         passes=skill_evaluation["gate_passes"],
                         strict_passes=skill_evaluation["strict_gate_passes"],
+                        gate_window_scale=skill_evaluation["gate_window_scale"],
                     )
                     skill_evaluation["phase_advanced"] = advanced
                     skill_evaluation["update"] = update
@@ -305,11 +318,18 @@ class PPOTrainer:
             run_env_steps = self.state.env_steps - run_start_env_steps
             timing_metrics = {
                 "update_seconds": update_seconds,
+                "training_seconds": training_seconds,
+                "evaluation_seconds": evaluation_seconds,
+                "skill_evaluation_seconds": skill_evaluation_seconds,
+                "training_env_steps_per_second": steps_per_update / max(training_seconds, 1e-9),
                 "env_steps_per_second": steps_per_update / max(update_seconds, 1.0e-9),
                 "run_env_steps_per_second": run_env_steps / max(run_seconds, 1.0e-9),
                 "updates_per_second": (update - start_update + 1) / max(run_seconds, 1.0e-9),
                 "elapsed_seconds": run_seconds,
             }
+            if not should_log:
+                print(f"[Update {update}] Completed in {_format_duration(update_seconds)}; "
+                      f"{self.state.env_steps:,} total steps.", flush=True)
             if should_log:
                 self._log(update, total_updates, rollout_metrics, update_metrics, timing_metrics)
             self._write_metrics_record(
@@ -326,6 +346,7 @@ class PPOTrainer:
                 checkpoint_dir = Path(checkpoint_dir)
                 self.save_checkpoint(checkpoint_dir / f"checkpoint_{update:06d}.pkl")
                 self.save_checkpoint(checkpoint_dir / "checkpoint_latest.pkl")
+                print(f"[Update {update}] Checkpoint saved: {checkpoint_dir / 'checkpoint_latest.pkl'}", flush=True)
 
     def collect_rollout(self, *, collect_diagnostics: bool = True) -> tuple[Rollout, dict[str, Any]]:
         obs_buf: list[Array] = []
@@ -373,6 +394,8 @@ class PPOTrainer:
         episode_count = jnp.asarray(0.0, dtype=jnp.float32)
         reset_count = jnp.asarray(0.0, dtype=jnp.float32)
         local_reset_count = jnp.asarray(0.0, dtype=jnp.float32)
+        corner_reset_count = jnp.asarray(0.0, dtype=jnp.float32)
+        corner_complete_count = jnp.asarray(0.0, dtype=jnp.float32)
         action_saturation_count = jnp.asarray(0.0, dtype=jnp.float32)
         mean_action_saturation_count = jnp.asarray(0.0, dtype=jnp.float32)
         mean_action_gap_sums = jnp.zeros((self.config.net.action_dim,), dtype=jnp.float32)
@@ -451,6 +474,8 @@ class PPOTrainer:
             gate_failure_counts += jnp.sum(
                 failure_one_hot * task_failure[:, None], axis=0
             )
+            corner_reset_count += jnp.sum(info["reset_focused_start"].astype(jnp.float32))
+            corner_complete_count += jnp.sum(info["corner_complete"].astype(jnp.float32))
             episode_count += jnp.sum(done.astype(jnp.float32))
             reset_count += jnp.sum(info["reset_occurred"].astype(jnp.float32))
             local_reset_count += jnp.sum(
@@ -555,6 +580,8 @@ class PPOTrainer:
                 "gate_failure_counts": gate_failure_np,
                 "reset_local_rate": _safe_ratio(local_reset_count, reset_count),
                 "reset_event_count": float(reset_count),
+                "corner_reset_count": float(corner_reset_count),
+                "corner_complete_count": float(corner_complete_count),
             }
 
         sample_count = float(self.config.ppo.horizon * self.config.env.num_envs)
@@ -586,6 +613,8 @@ class PPOTrainer:
             ),
             "reset_local_rate": _safe_ratio(local_reset_count, reset_count),
             "reset_event_count": float(reset_count),
+            "corner_reset_count": float(corner_reset_count),
+            "corner_complete_count": float(corner_complete_count),
             "gate_window_scale": self.env.gate_window_scale,
             "time_cost_scale": self.env.time_cost_scale,
             "curriculum_phase": self.curriculum.phase,
@@ -851,7 +880,9 @@ class PPOTrainer:
         path = Path(path)
         path.parent.mkdir(parents=True, exist_ok=True)
         payload = {
-            "checkpoint_version": 5,
+            "checkpoint_version": 6,
+            "spawn_geometry_version": SPAWN_GEOMETRY_VERSION,
+            "action_space": ACTION_SPACE,
             "course_fingerprint": _course_fingerprint(self.env.course),
             "actor_params": jax.device_get(self.state.actor_params),
             "critic_params": jax.device_get(self.state.critic_params),
@@ -884,6 +915,7 @@ class PPOTrainer:
         path = Path(path)
         with path.open("rb") as file:
             payload = pickle.load(file)
+        validate_checkpoint_actions(payload)
         required = ("actor_params", "critic_params", "actor_opt_state", "critic_opt_state")
         missing = [name for name in required if name not in payload]
         if missing:
@@ -957,6 +989,15 @@ class PPOTrainer:
         self.last_skill_evaluation_metrics = payload.get(
             "last_skill_evaluation_metrics"
         )
+        if payload.get("spawn_geometry_version", 1) != SPAWN_GEOMETRY_VERSION:
+            self.curriculum.reset_evidence()
+            self.last_evaluation_metrics = None
+            self.last_skill_evaluation_metrics = None
+            warnings.warn(
+                "Reset geometry changed: cleared curriculum audit/evaluation evidence; "
+                "policy, optimizer, normalization, phase, and schedule are preserved.",
+                RuntimeWarning,
+            )
         self.run_id = str(payload.get("run_id", self.run_id))
         self._apply_exploration_constraint()
         self.env.set_curriculum(self.curriculum.parameters())
@@ -1146,276 +1187,61 @@ class PPOTrainer:
         update_metrics: dict[str, Array],
         timing_metrics: dict[str, float],
     ) -> None:
-        scalars = {name: float(value) for name, value in update_metrics.items()}
-        target_steps = max(
-            self.config.ppo.total_env_steps,
-            self.config.env.num_envs * self.config.ppo.horizon,
-        )
-        steps_left = max(target_steps - self.state.env_steps, 0)
+        target = max(self.config.ppo.total_env_steps, 1)
         rate = timing_metrics["run_env_steps_per_second"]
-        eta = _format_duration(steps_left / rate) if rate > 0.0 else "n/a"
-        std = np.exp(_to_numpy(self.state.actor_params["log_std"]))
-        completion = (
-            float(self.last_evaluation_metrics["completion_rate"])
-            if self.last_evaluation_metrics is not None
-            else 0.0
-        )
-        qualification = self.curriculum.qualification_statistics()
-        curriculum_parameters = self.curriculum.parameters()
-        sections: list[tuple[str, list[tuple[str, Any]]]] = [
-            (
-                "time",
-                [
-                    ("iterations", f"{update:,} / {total_updates:,}"),
-                    ("progress", f"{100.0 * self.state.env_steps / max(target_steps, 1):.1f}%"),
-                    ("fps", f"{timing_metrics['env_steps_per_second']:,.0f}"),
-                    ("fps_avg", f"{rate:,.0f}"),
-                    ("iteration_time", f"{timing_metrics['update_seconds']:.2f}s"),
-                    ("iterations_per_sec", f"{timing_metrics['updates_per_second']:.3f}"),
-                    ("time_elapsed", _format_duration(timing_metrics["elapsed_seconds"])),
-                    ("eta", eta),
-                    ("total_timesteps", f"{self.state.env_steps:,}"),
-                    ("schedule_progress", f"{self._schedule_progress():.1%}"),
-                ],
-            ),
-            (
-                "rollout",
-                [
-                    ("ep_rew_mean", f"{rollout_metrics['episodic_return']:.3f}"),
-                    ("ep_len_mean", f"{rollout_metrics['episodic_length']:.1f}"),
-                    ("step_rew_mean", f"{rollout_metrics['mean_reward']:.5f}"),
-                    ("episodes", f"{rollout_metrics['episodes_completed']:,}"),
-                    (
-                        "course_finishes",
-                        f"{rollout_metrics['course_finished_count']:,}",
-                    ),
-                    (
-                        "local_completions",
-                        f"{rollout_metrics['local_segment_complete_count']:,}",
-                    ),
-                    ("speed_mean", f"{rollout_metrics['avg_speed']:.3f} m/s"),
-                    ("action_saturation", f"{rollout_metrics['action_saturation_frequency']:.3%}"),
-                    (
-                        "mean_action_saturation",
-                        f"{rollout_metrics['mean_action_saturation_frequency']:.3%}",
-                    ),
-                    (
-                        "sample_mean_gap",
-                        _format_named_values(
-                            ACTION_NAMES,
-                            rollout_metrics["mean_action_gap"],
-                            precision=3,
-                        ),
-                    ),
-                    (
-                        "action_delta_rms",
-                        _format_named_values(
-                            ACTION_NAMES,
-                            rollout_metrics["action_delta_rms"],
-                            precision=3,
-                        ),
-                    ),
-                    (
-                        "track_progress",
-                        f"{rollout_metrics['track_progress_delta']:+.5f} / step",
-                    ),
-                ],
-            ),
-            (
-                "train",
-                [
-                    ("approx_kl", f"{scalars.get('approx_kl', 0.0):.6f}"),
-                    ("clip_fraction", f"{scalars.get('clip_fraction', 0.0):.3f}"),
-                    ("entropy", f"{scalars.get('entropy', 0.0):.3f}"),
-                    ("actor_loss", f"{scalars.get('actor_loss', 0.0):.4f}"),
-                    ("critic_loss", f"{scalars.get('critic_loss', 0.0):.4f}"),
-                    ("explained_variance", f"{scalars.get('explained_variance', 0.0):.3f}"),
-                    ("actor_grad_norm", f"{scalars.get('actor_grad_norm', 0.0):.3f}"),
-                    ("critic_grad_norm", f"{scalars.get('critic_grad_norm', 0.0):.3f}"),
-                    ("epochs", f"{scalars.get('epochs_completed', 0.0):.0f}"),
-                    ("actor_lr", f"{scalars.get('actor_lr', 0.0):.2e}"),
-                    ("critic_lr", f"{scalars.get('critic_lr', 0.0):.2e}"),
-                    ("entropy_coef", f"{scalars.get('entropy_coef', 0.0):.5f}"),
-                    (
-                        "std_ceiling",
-                        f"{scalars.get('exploration_std_ceiling', 0.0):.3f}",
-                    ),
-                    (
-                        "mean_alignment",
-                        f"{scalars.get('mean_action_alignment_loss', 0.0):.4f}",
-                    ),
-                    ("action_std", _format_named_values(ACTION_NAMES, std, precision=3)),
-                ],
-            ),
-            (
-                "curriculum",
-                [
-                    ("phase", self.curriculum.phase),
-                    ("gate_window_scale", f"{self.env.gate_window_scale:.2f}x"),
-                    ("time_cost_scale", f"{self.env.time_cost_scale:.2f}"),
-                    ("local_reset_rate", f"{rollout_metrics['reset_local_rate']:.1%}"),
-                    (
-                        "local_reset_target",
-                        f"{1.0 - curriculum_parameters.gate1_fraction:.1%}",
-                    ),
-                    ("reset_events", f"{rollout_metrics['reset_event_count']:,.0f}"),
-                    ("qualification_source", qualification["source"]),
-                    ("qualification_samples", f"{qualification['minimum_samples']:.0f} min"),
-                    ("recent_active_pass", f"{qualification['minimum_pass_rate']:.1%} min"),
-                    (
-                        "recent_strict_pass",
-                        f"{float(np.min(qualification['strict_pass_rates'])):.1%} min",
-                    ),
-                    (
-                        "lifetime_active_pass",
-                        f"{float(np.min(qualification['lifetime_pass_rates'])):.1%} min",
-                    ),
-                    (
-                        "qualification_streak",
-                        f"{qualification['qualification_streak']} / "
-                        f"{self.config.curriculum.hysteresis_evaluations}",
-                    ),
-                    (
-                        "gate1_completion",
-                        f"{completion:.1%}" if self.last_evaluation_metrics is not None else "n/a",
-                    ),
-                ],
-            ),
-            (
-                "rewards",
-                [
-                    (name[7:], f"{rollout_metrics[name]:+.5f}")
-                    for name in REWARD_COMPONENTS
-                ],
-            ),
-            (
-                "successful_course",
-                [
-                    (
-                        "reward_total",
-                        f"{rollout_metrics['successful_course_reward_total']:+.3f}",
-                    ),
-                    (
-                        "smoothness_total",
-                        f"{rollout_metrics['successful_course_reward_smoothness']:+.3f}",
-                    ),
-                ],
-            ),
-            (
-                "local_segment",
-                [
-                    (
-                        "reward_total",
-                        f"{rollout_metrics['local_segment_reward_total']:+.3f}",
-                    ),
-                    (
-                        "smoothness_total",
-                        f"{rollout_metrics['local_segment_reward_smoothness']:+.3f}",
-                    ),
-                ],
-            ),
-            (
-                "gates",
-                [
-                    ("order", _format_gate_order(rollout_metrics["gate_pass_rates"])),
-                    ("active_pass", _format_gate_series(rollout_metrics["gate_pass_rates"])),
-                    ("strict_pass", _format_gate_series(rollout_metrics["strict_gate_pass_rates"])),
-                    ("physical_clearance_m", _format_gate_series(rollout_metrics["gate_clearance"])),
-                    (
-                        "curriculum_clearance_m",
-                        _format_gate_series(rollout_metrics["curriculum_gate_clearance"]),
-                    ),
-                    ("segment_time_s", _format_gate_series(rollout_metrics["gate_segment_time"])),
-                    ("targets", _format_gate_count_series(rollout_metrics["gate_target_counts"])),
-                    ("passes", _format_gate_count_series(rollout_metrics["gate_pass_counts"])),
-                    ("failures", _format_gate_count_series(rollout_metrics["gate_failure_counts"])),
-                    ("qualification_n", _format_gate_count_series(qualification["attempts"])),
-                    ("recent_active_rate", _format_gate_series(qualification["pass_rates"])),
-                    ("recent_strict_rate", _format_gate_series(qualification["strict_pass_rates"])),
-                    (
-                        "latest_course_rate",
-                        _format_gate_series(
-                            qualification["latest_evaluation_pass_rates"]
-                        ),
-                    ),
-                    (
-                        "lifetime_active_rate",
-                        _format_gate_series(qualification["lifetime_pass_rates"]),
-                    ),
-                    (
-                        "lifetime_strict_rate",
-                        _format_gate_series(qualification["lifetime_strict_pass_rates"]),
-                    ),
-                    (
-                        "weakest_recent_active",
-                        _weakest_rate_summary(qualification["pass_rates"]),
-                    ),
-                    (
-                        "weakest_recent_strict",
-                        _weakest_rate_summary(qualification["strict_pass_rates"]),
-                    ),
-                    (
-                        "weakest_lifetime_active",
-                        _weakest_rate_summary(qualification["lifetime_pass_rates"]),
-                    ),
-                    (
-                        "weakest_lifetime_strict",
-                        _weakest_rate_summary(
-                            qualification["lifetime_strict_pass_rates"]
-                        ),
-                    ),
-                    (
-                        "local_start_probability",
-                        _format_gate_series(
-                            self.curriculum.local_gate_probabilities()
-                        ),
-                    ),
-                    ("weakest", _weak_gate_summary(rollout_metrics)),
-                ],
-            ),
+        eta = _format_duration(max(target - self.state.env_steps, 0) / rate) if rate > 0 else "n/a"
+        scalars = {name: float(value) for name, value in update_metrics.items()}
+        finite = all(np.isfinite(value) for value in scalars.values())
+        if not finite:
+            status = "WARNING: non-finite PPO values"
+        elif scalars["approx_kl"] > self.config.ppo.target_kl:
+            status = "Large policy change; inspect KL"
+        else:
+            status = "PPO values finite"
+        sections = [
+            ("Progress", [
+                ("Update completed", f"{update} / {total_updates}"),
+                ("Steps", f"{self.state.env_steps:,} / {target:,}"),
+                ("Estimated remaining", eta),
+                ("Training time", _format_duration(timing_metrics["training_seconds"])),
+                ("Evaluation time", _format_duration(timing_metrics["evaluation_seconds"] + timing_metrics["skill_evaluation_seconds"])),
+            ]),
+            ("Training", [
+                ("Gate opening", f"{self.env.gate_window_scale:.2f}x"),
+                ("G1 start target", f"{self.env.gate1_start_fraction:.0%}"),
+                ("Mean episode reward", f"{rollout_metrics['episodic_return']:.2f}"),
+                ("Status", status),
+                ("Policy change (KL)", f"{scalars['approx_kl']:.4f}"),
+                ("Clipped samples", f"{scalars['clip_fraction']:.1%}"),
+            ]),
         ]
-        if self.last_evaluation_metrics is not None:
-            evaluation = self.last_evaluation_metrics
-            sections.append(
-                (
-                    "eval",
-                    [
-                        ("last_update", f"{int(evaluation.get('update', 0)):,}"),
-                        ("seed", evaluation["seed"]),
-                        ("completion_rate", f"{evaluation['completion_rate']:.1%}"),
-                        ("pass_rate", _format_gate_series(evaluation["gate_pass_rates"])),
-                        ("clearance_m", _format_gate_series(evaluation["gate_clearance"])),
-                        ("segment_time_s", _format_gate_series(evaluation["gate_segment_time"])),
-                    ],
-                )
-            )
-        if self.last_skill_evaluation_metrics is not None:
-            skill = self.last_skill_evaluation_metrics
-            sections.append(
-                (
-                    "skill_eval",
-                    [
-                        ("last_update", f"{int(skill.get('update', 0)):,}"),
-                        ("seed", skill["seed"]),
-                        ("attempts_per_gate", self.config.evaluation.skill_attempts_per_gate),
-                        ("gate_window_scale", f"{skill['gate_window_scale']:.2f}x"),
-                        ("active_pass", _format_gate_series(skill["gate_pass_rates"])),
-                        (
-                            "strict_pass",
-                            _format_gate_series(skill["strict_gate_pass_rates"]),
-                        ),
-                        (
-                            "physical_clearance_m",
-                            _format_gate_series(skill["gate_clearance"]),
-                        ),
-                        (
-                            "curriculum_clearance_m",
-                            _format_gate_series(skill["curriculum_gate_clearance"]),
-                        ),
-                        ("segment_time_s", _format_gate_series(skill["gate_segment_time"])),
-                    ],
-                )
-            )
+        if self.config.curriculum.corner_practice:
+            sections.append(("G3-to-G5 practice", [
+                ("Resets this rollout", str(int(rollout_metrics["corner_reset_count"]))),
+                ("Segments completed", str(int(rollout_metrics["corner_complete_count"]))),
+            ]))
+        evaluation = self.last_evaluation_metrics
+        if evaluation is None:
+            sections.append(("Course test", [("Status", "Not evaluated yet")]))
+        else:
+            rows = [
+                ("Results from update", str(evaluation["update"])),
+                ("Finished course", f"{int(evaluation['finishes'])} / {int(evaluation['episodes'])} flights"),
+            ]
+            for gate, (attempts, passes) in enumerate(zip(evaluation["gate_attempts"], evaluation["gate_passes"]), 1):
+                if attempts > 0:
+                    rows.append((f"G{gate} passed / reached", f"{int(passes)} / {int(attempts)}"))
+            if any(a == 0 for a in evaluation["gate_attempts"]):
+                rows.append(("Other gates", "Not reached"))
+            sections.append(("Course test (strict gates)", rows))
+        skill = self.last_skill_evaluation_metrics
+        if skill is not None:
+            rates = np.asarray(skill["strict_gate_pass_rates"])
+            gate = int(np.argmin(rates))
+            sections.append(("Local skill test", [
+                ("Results from update", str(skill["update"])),
+                ("Weakest strict gate", f"G{gate + 1}: {int(skill['strict_gate_passes'][gate])} / {int(skill['gate_attempts'][gate])} passed"),
+            ]))
         print(format_table(sections), flush=True)
 
     def _startup_log_table(
@@ -1443,6 +1269,7 @@ class PPOTrainer:
                     "training",
                     [
                         ("algorithm", "PPO"),
+                        ("action_space", ACTION_SPACE),
                         ("num_envs", f"{self.config.env.num_envs:,}"),
                         ("rollout_length", f"{self.config.ppo.horizon:,}"),
                         ("batch_size", f"{steps_per_update:,}"),

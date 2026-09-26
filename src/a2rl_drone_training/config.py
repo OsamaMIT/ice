@@ -39,13 +39,13 @@ class RacingEnvConfig:
 
     num_envs: int = 64
     sim_hz: int = 500
-    control_hz: int = 100
+    control_hz: int = 500
     max_episode_time_s: float = 24.0
     artificial_time_limit_s: float | None = None
     laps: int = 1
     device: str = "cpu"
     physics: Literal["first_principles", "so_rpy", "so_rpy_rotor", "so_rpy_rotor_drag"] = (
-        "so_rpy_rotor_drag"
+        "first_principles"
     )
     drone_model: str = "cf2x_L250"
     reward_version: Literal["v1", "v2"] = "v2"
@@ -74,15 +74,12 @@ class RacingEnvConfig:
     potential_center_scale: float = 0.25
     potential_plane_sigma_m: float = 0.75
     potential_gamma: float = 0.999
-    action_delta_penalty: float = 0.001
+    action_delta_penalty: float = 0.0002
     gate_margin_penalty: float = 6.0
     vehicle_radius_m: float = 0.15
     position_uncertainty_k: float = 2.0
     v2_miss_penalty: float = 8.0
     v2_crash_penalty: float = 12.0
-    max_roll_rad: float = 0.7853981633974483
-    max_pitch_rad: float = 0.7853981633974483
-    max_yaw_rate_rad_s: float = 3.141592653589793
     thrust_min_n: float | None = None
     thrust_hover_n: float | None = None
     thrust_max_n: float | None = None
@@ -90,6 +87,7 @@ class RacingEnvConfig:
     gate_miss_depth_m: float = 1.0
     auto_reset: bool = True
     reset_distribution: Literal["training", "evaluation"] = "training"
+    corner_reset_bank: str | None = None
     gate_window_scale: float = 1.0
     racing_line_spawn_min_distance_m: float = 1.0
     racing_line_spawn_max_distance_m: float = 3.0
@@ -163,11 +161,13 @@ class PrivilegedObservationConfig:
 @dataclass(frozen=True)
 class CurriculumConfig:
     enabled: bool = True
-    phase_a_gate1_fraction: float = 0.20
+    strict_course_training: bool = False
+    corner_practice: bool = False
+    phase_a_gate1_fraction: float = 0.40
     phase_b_gate1_fraction: float = 0.50
     phase_c_gate1_fraction: float = 0.80
     phase_d_gate1_fraction: float = 0.80
-    phase_a_window_scale: float = 1.80
+    phase_a_window_scale: float = 1.40
     phase_b_window_scale: float = 1.30
     phase_c_window_scale: float = 1.00
     phase_d_window_scale: float = 1.00

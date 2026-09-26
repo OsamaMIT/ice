@@ -21,9 +21,22 @@ CASES = (
     BenchmarkCase("cpu_threads_8", ("--cpu-threads", "8")),
     BenchmarkCase("epochs_2_ablation", ("--update-epochs", "2")),
     BenchmarkCase(
-        "fast_physics_200hz",
-        ("--sim-hz", "200", "--control-hz", "100", "--physics", "so_rpy_rotor"),
+        "motor_control_200hz",
+        ("--sim-hz", "200", "--control-hz", "200", "--physics", "first_principles"),
     ),
+)
+
+GPU_CASES = tuple(
+    BenchmarkCase(
+        f"gpu_envs_{count}",
+        (
+            "--profile", "rtx-5050",
+            "--device", "gpu",
+            "--num-envs", str(count),
+            "--minibatches", str(count // 8),
+        ),
+    )
+    for count in (64, 128, 256, 512)
 )
 
 
@@ -114,7 +127,8 @@ def _run_case(
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Benchmark CPU A2RL training presets.")
+    parser = argparse.ArgumentParser(description="Benchmark CPU or GPU A2RL training presets.")
+    parser.add_argument("--device", choices=["cpu", "gpu"], default="cpu")
     parser.add_argument("--updates", type=int, default=3)
     parser.add_argument("--warmup-updates", type=int, default=1)
     parser.add_argument("--num-envs", type=int, default=64)
@@ -134,7 +148,7 @@ def main() -> None:
         "case,measured_env_steps,seconds,env_steps_per_second",
         flush=True,
     )
-    for case in CASES:
+    for case in GPU_CASES if args.device == "gpu" else CASES:
         total_env_steps, elapsed = _run_case(
             case=case,
             repo_root=repo_root,
