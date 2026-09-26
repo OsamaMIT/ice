@@ -63,7 +63,7 @@ class ConfigCourseTests(unittest.TestCase):
 
     def test_default_curriculum_reset_mixtures(self):
         cfg = CurriculumConfig()
-        self.assertAlmostEqual(cfg.phase_a_gate1_fraction, 0.2)
+        self.assertAlmostEqual(cfg.phase_a_gate1_fraction, 0.4)
         self.assertAlmostEqual(cfg.phase_b_gate1_fraction, 0.5)
         self.assertAlmostEqual(cfg.phase_c_gate1_fraction, 0.8)
         self.assertAlmostEqual(cfg.phase_d_gate1_fraction, 0.8)

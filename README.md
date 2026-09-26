@@ -229,7 +229,7 @@ Windows (Command Prompt):
 ```
 
 Continue only when PPO values remain finite, at least 1,000 reset events are within
-`80% +/- 3%` local starts, linked G12 crossings are present, no recent active-window
+the configured local-start target (default `60% +/- 3%`), linked G12 crossings are present, no recent active-window
 gate is below 50%, and the minimum recent rate is moving toward 80%. Also verify
 that sampled-action saturation and the sampled/mean action gap trend down with the
 scheduled exploration ceiling.
@@ -283,7 +283,7 @@ python -m a2rl_drone_training.train ^
   --no-evaluation
 ```
 
-Training logs use an aligned SB3-style table. The `time/` section reports current and run-average FPS, iteration time, elapsed time, and ETA; the remaining sections retain every reward component, PPO diagnostic, curriculum state, and per-gate metric.
+Training logs use compact progress tables and stage messages. The table shows training progress, separate training/evaluation times, basic PPO checks, and clearly labelled gate results. Detailed reward components, PPO diagnostics, and curriculum statistics remain in `metrics.jsonl`.
 
 Tables automatically fit the terminal width, including after resizing the window.
 Long labels and values are shortened with `...` to keep columns aligned without
@@ -329,7 +329,7 @@ reset on each event, with stochastic rounding for small reset batches.
 
 | Phase | Gate-1 starts | Local starts | Gate window | Time cost |
 | --- | ---: | ---: | ---: | ---: |
-| A: gate skill | 20% | 80% stratified | 1.8x | 0% |
+| A: gate skill | 40% | 60% stratified | 1.4x | 0% |
 | B: course linking | 50% | 50% stratified | toward 1.3x | 25% |
 | C: reliable course | 80% | 20% prioritized | toward 1.0x | 50% |
 | D: racing | 80% | 20% prioritized | 1.0x | ramps to 100% |
@@ -340,6 +340,11 @@ while recording physical strict passes from the same crossings. Qualification us
 the last ten audits, requires at least 32 samples per gate, an approximately 80%
 minimum active-window pass rate, and two consecutive qualifying audits. Lifetime
 rates remain diagnostics only, so old failures cannot permanently lock the phase.
+Rolling audits are tagged with their actual gate-window scale. A different scale
+clears rolling qualification evidence and its streak, retaining lifetime statistics
+and historical metrics. Phase A cannot advance while its aperture is still moving
+toward the configured target. Older checkpoints without audit-scale metadata start
+with empty rolling evidence on resume; policy, optimizer and schedule are retained.
 After coverage, Phase-A direct local starts mix 50% uniform coverage with 50% recent
 audit-failure priority. Half of local starts are additionally allocated to predecessor
 gates for weak strict-evaluation gates, training the transition into the failure rather
@@ -476,3 +481,247 @@ set "PYTHONPATH=src"
 
 In Command Prompt, `set "PYTHONPATH=src"` applies to subsequent commands in the current
 terminal session.
+
+## Motor Policy Diagnostics And Corrected Spawns
+
+Lateral reset offsets now lie in the gate plane. Previously, offsets perpendicular
+only to the incoming path could place a drone beyond an oblique gate before its
+attempt began. On checkpoint 90, three of eight gate-5 audit starts had this issue.
+With the same policy and seeds, corrected spawns improved gate-5 local passes from
+0/8 to 5/8. This changes reset geometry, not gate positions or pass criteria.
+
+On resume from an older motor checkpoint, the trainer clears audit/evaluation
+statistics and sampling priorities collected with the old reset geometry. Policy,
+optimizer, normalization, phase, environment steps, and schedules are preserved.
+Use a separate output directory to retain the original experiment:
+
+```bash
+./.venv/bin/python3.13 -m a2rl_drone_training.train \
+  --profile rtx-5050 \
+  --physics first_principles \
+  --sim-hz 500 \
+  --control-hz 500 \
+  --total-env-steps 20000000 \
+  --schedule-env-steps 20000000 \
+  --restore-checkpoint checkpoints_motors/checkpoint_000090.pkl \
+  --checkpoint-dir checkpoints_motors_spawnfix
+```
+
+Reproduce the deterministic diagnostics in WSL (CPU, frozen normalization,
+noise/dropout disabled). These commands save traces and summaries without training:
+
+```bash
+./.venv/bin/python3.13 scripts/check_motor_response.py
+./.venv/bin/python3.13 scripts/diagnose_motor_policy.py \
+  --checkpoint checkpoints_motors/checkpoint_000090.pkl \
+  --scenario course --output artifacts/motor_diagnostics/course90_replay
+./.venv/bin/python3.13 scripts/diagnose_motor_policy.py \
+  --checkpoint checkpoints_motors/checkpoint_000090.pkl \
+  --scenario skill --seconds 4 --output artifacts/motor_diagnostics/skill90_replay
+```
+
+For a baseline comparison, add `--legacy-spawns` and use a different output folder.
+The legacy option exists only in the diagnostic script. See
+[the diagnostic report](artifacts/motor_diagnostics/REPORT.md) for results and the
+remaining G1-to-G2 control failure. The spawn fix does not establish full-course
+success; evaluation must remain enabled during further training.
+
+
+## Follow-up after the 1.40x run
+
+The Phase-A default now allocates 40% of resets to G1 and 60% to local starts.
+This increases practice on G1-to-G2 transitions while retaining local gate coverage.
+The update-306 diagnostics found G6 passing 7/8 local attempts (6/8 strict), but
+full-course evaluation passed G1 in 32/32 attempts and G2 in 0/32 at seed 123.
+This is a sampling intervention to evaluate, not a demonstrated performance gain.
+
+Training tables and JSON metrics now separate training, course evaluation, and
+skill-audit seconds. In JSON metrics, `training_env_steps_per_second` excludes
+evaluations; `env_steps_per_second` includes them. Initial compilation is included in the relevant timer. Checkpoint writing and
+log output are outside these update timers.
+
+Re-run read-only diagnostics against a fixed checkpoint in WSL:
+
+```bash
+./.venv/bin/python3.13 scripts/diagnose_motor_policy.py \
+  --checkpoint checkpoints_motors_spawnfix/checkpoint_000306.pkl \
+  --scenario skill --output artifacts/motor_diagnostics/skill306 --seconds 6
+./.venv/bin/python3.13 scripts/diagnose_motor_policy.py \
+  --checkpoint checkpoints_motors_spawnfix/checkpoint_000306.pkl \
+  --scenario course --output artifacts/motor_diagnostics/course306 --seconds 8
+```
+
+Skill diagnostics use the checkpoint's saved aperture by default; use
+`--gate-window-scale 1.40` to override it. Course diagnostics always use strict
+1.0x gates. `summary.json` contains pass/failure events and gate totals; `traces.npz`
+contains positions, velocity, attitude, angular velocity, motor actions and RPM.
+Events can have more than one failure reason; do not add overlapping reason counts.
+Repeat course diagnostics with `--seed 124` and a different output directory to
+check whether a finding persists across starts.
+
+Update 306 has already reached the original 20-million-step target. To evaluate the
+new reset mixture, use a separate output directory and a higher total-step target:
+
+```bash
+./.venv/bin/python3.13 -m a2rl_drone_training.train \
+  --profile rtx-5050 \
+  --physics first_principles --sim-hz 500 --control-hz 500 \
+  --phase-a-window-scale 1.40 --phase-a-gate1-fraction 0.40 \
+  --total-env-steps 22000000 --schedule-env-steps 20000000 \
+  --restore-checkpoint checkpoints_motors_spawnfix/checkpoint_000306.pkl \
+  --checkpoint-dir checkpoints_motors_link_practice
+```
+
+The existing schedule remains consumed: learning rates and exploration stay at
+their scheduled final values. This does not restart annealing. Compare strict G2
+passes and local per-gate audits against the fixed source checkpoint before
+adopting the change for a longer run.
+
+If linking remains weak, test longer credit assignment separately from the reset
+mixture change. A candidate uses `--num-envs 64 --horizon 1024 --minibatches 32`
+(the same 65,536 transitions/update as 256 x 256), `--gamma 0.99979992`,
+`--gae-lambda 0.99799195`, and `--potential-gamma 0.99979992`. At 500 Hz this gives
+2.048-second rollouts and a roughly 0.9-second GAE decay time. These are experimental
+settings, not new defaults or a validated improvement. Start both comparisons from
+the same fixed checkpoint, keep the reset mixture and update budget equal, and use
+separate checkpoint directories. No long training run is launched by diagnostics.
+
+
+## Longer credit with increased exploration
+
+Use `--profile rtx-5050-long-credit` for the experimental continuation from update
+367. It sets 64 environments, a 1024-step (2.048-second) horizon, 32 minibatches,
+gamma/potential gamma 0.99979992 and GAE lambda 0.99799195. The batch remains
+65,536 transitions; GAE decay time is approximately 0.9 seconds.
+
+The profile also holds the exploration standard-deviation ceiling at 0.35, raises
+the floor to 0.25, and holds the entropy coefficient at 0.001. These apply even
+when the checkpoint's schedule is exhausted. The floor actually increases resumed
+standard deviations below 0.25; just increasing a ceiling would not do so.
+These standard deviations are in the policy's pre-tanh action distribution,
+not percentages of motor RPM. Learning-rate schedules are preserved.
+
+Run a monitored two-million-step continuation, retaining evaluation:
+
+```bash
+./.venv/bin/python3.13 -m a2rl_drone_training.train \
+  --profile rtx-5050-long-credit \
+  --physics first_principles \
+  --sim-hz 500 --control-hz 500 \
+  --phase-a-window-scale 1.40 --phase-a-gate1-fraction 0.40 \
+  --total-env-steps 26000000 --schedule-env-steps 20000000 \
+  --restore-checkpoint checkpoints_motors_link_practice/checkpoint_000367.pkl \
+  --checkpoint-dir checkpoints_motors_long_credit
+```
+
+This jointly tests longer credit and increased exploration; improvement cannot be
+attributed to either change alone. Compare strict course G3/G4/G5 passes and local
+G5/G11 accuracy against checkpoint 367. More exploration can initially increase
+crashes. Keep this run separate from the source checkpoints. Explicit CLI flags
+override profile defaults. This profile does not itself start training.
+
+
+### Current long-credit setup: initial starts and strict gates
+
+The `rtx-5050-long-credit` profile now enables `--strict-course-training`:
+all training resets start at G1 and all openings are 1.00x, immediately on resume
+and in every curriculum phase. This overrides phase-specific start fractions and
+window scales. Normal G1 spawn randomization remains; this does not fix every reset
+to identical coordinates. Local skill audits remain diagnostics only. The existing
+phase-dependent time-cost schedule is retained. Rolling audits from larger openings
+are cleared, while lifetime counts and learned policy parameters are retained.
+
+```bash
+./.venv/bin/python3.13 -m a2rl_drone_training.train \
+  --profile rtx-5050-long-credit \
+  --strict-course-training \
+  --physics first_principles --sim-hz 500 --control-hz 500 \
+  --total-env-steps 26000000 --schedule-env-steps 20000000 \
+  --restore-checkpoint checkpoints_motors_long_credit/checkpoint_000380.pkl \
+  --checkpoint-dir checkpoints_motors_strict_start
+```
+
+This replaces the earlier mixed-start, 1.40x long-credit command. Longer credit and
+increased exploration remain enabled. Restart training with the new configuration
+to apply it; editing the code does not change an already-running process.
+
+
+### Reading training progress
+
+The terminal now prints short stage messages for each update: collecting flight
+experience, learning, course evaluation, gate-skill evaluation, and checkpoint saved.
+The first update can take longer while JAX compiles. A quiet evaluation stage means
+that evaluation has started; it is not proof that the process is still running.
+
+`--log-interval 5` prints a compact results table every five updates (also the first
+and final updates). Other updates print a one-line completion message. The table
+shows steps, estimated remaining time, training/evaluation time, gate scale, G1
+start target, reward and basic PPO checks. Course results identify their evaluation
+update and show **passes / flights that reached that gate**, not all starting
+flights. Unreached gates are not counted as failed attempts. The local-skill row
+identifies the weakest strict gate. Detailed diagnostic fields remain in
+`metrics.jsonl`; finite PPO values alone do not establish successful racing.
+
+
+## Targeted G3-to-G5 practice (current experiment)
+
+Use `rtx-5050-corner` to keep longer credit assignment and the same exploration,
+while replacing the strict-start-only reset policy with this expected mixture:
+
+| Training starts | Share |
+| --- | ---: |
+| Full course from G1 | 40% |
+| Recorded pre-G3 states, complete G3, G4 then G5 | 40% |
+| Other local gates, excluding G3 | 20% |
+
+The drone must fly through G3 and the entire G3-to-G4 leg before attempting the
+G4-to-G5 turn. G3 and G4 are about 9.4 metres apart, providing a substantial
+lead-in instead of dropping the drone directly into the final turn.
+
+All gates are **1.00x immediately on resume**, in every curriculum phase. The
+G3-focused episodes end only after G5 is passed (or an ordinary failure), do not
+count as full-course finishes, and receive no full-course finish bonus under
+Reward V2. Other local starts retain their existing remaining-course objective.
+Full-course evaluation still starts from G1; skill audits do not use the reset bank.
+The usual phase-dependent time cost is retained. Do not combine this profile with
+`--strict-course-training` or `--no-curriculum`.
+
+The reset bank contains 160 pre-G3 states from 28 checkpoint-380 flights, seed 124:
+1.5-4 metres before the G3 plane, at approximately 4.3-5.5 m/s. It restores position,
+velocity, quaternion, angular velocity, rotor RPM and previous motor action from
+those recorded flights. Sensor/acceleration history starts afresh on reset.
+The finite bank can overfit, so judge progress with full-course evaluation and
+additional seeds, not only targeted practice completions.
+
+Run from the repository root in WSL:
+
+```bash
+./.venv/bin/python3.13 -m a2rl_drone_training.train \
+  --profile rtx-5050-corner \
+  --physics first_principles --sim-hz 500 --control-hz 500 \
+  --log-interval 5 --checkpoint-interval 5 \
+  --total-env-steps 27000000 --schedule-env-steps 20000000 \
+  --restore-checkpoint checkpoints_motors_long_credit/checkpoint_000380.pkl \
+  --checkpoint-dir checkpoints_motors_corner_practice
+```
+
+This is about 2.1 million additional steps from checkpoint 380, in a separate
+output directory. Learning rates and exploration remain at their previous scheduled
+values; this does not restart annealing. The compact log adds G3-to-G5 practice
+resets and completed segments for the logged rollout. JSON records include
+`corner_reset_count` and `corner_complete_count` on every update. They are counts,
+not a success fraction: an episode may start and finish in different rollouts.
+
+The profile loads `artifacts/motor_diagnostics/g3_approach_bank.npz`; retain that
+file when moving the run. To reproduce it from the saved diagnostic trace:
+
+```bash
+./.venv/bin/python3.13 scripts/build_corner_reset_bank.py \
+  --traces artifacts/motor_diagnostics/course380_seed124/traces.npz \
+  --source-update 380 --source-seed 124 \
+  --output artifacts/motor_diagnostics/g3_approach_bank.npz
+```
+
+Stop and assess after the trial: look for strict G5 passes, survival after G4,
+preservation of G1-to-G4 performance, and local G11 accuracy. No improvement has
+yet been established for this new curriculum.

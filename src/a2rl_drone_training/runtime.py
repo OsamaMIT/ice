@@ -15,6 +15,33 @@ RTX_5050_DEFAULTS = {
 }
 
 
+RTX_5050_LONG_CREDIT_DEFAULTS = {
+    **RTX_5050_DEFAULTS,
+    "num_envs": 64,
+    "horizon": 1024,
+    "strict_course_training": True,
+    "gamma": 0.99979992,
+    "gae_lambda": 0.99799195,
+    "potential_gamma": 0.99979992,
+    # Keep exploration elevated even when resuming a consumed schedule.
+    "exploration_std_start": 0.35,
+    "exploration_std_end": 0.35,
+    "exploration_std_floor": 0.25,
+    "entropy_coef": 0.001,
+    "entropy_coef_end": 0.001,
+}
+
+TRAINING_PROFILES = {
+    "rtx-5050": RTX_5050_DEFAULTS,
+    "rtx-5050-long-credit": RTX_5050_LONG_CREDIT_DEFAULTS,
+    "rtx-5050-corner": {
+        **RTX_5050_LONG_CREDIT_DEFAULTS,
+        "strict_course_training": False,
+        "corner_reset_bank": "artifacts/motor_diagnostics/g3_approach_bank.npz",
+    },
+}
+
+
 def configure_runtime(device: str, gpu_memory_fraction: float | None = None) -> None:
     if gpu_memory_fraction is not None and not 0 < gpu_memory_fraction <= 1:
         raise ValueError("--gpu-memory-fraction must be greater than 0 and at most 1")

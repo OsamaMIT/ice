@@ -330,7 +330,7 @@ class TrainerSmokeTests(unittest.TestCase):
                     first_skill["strict_gate_passes"],
                     second_skill["strict_gate_passes"],
                 )
-                self.assertEqual(first_skill["gate_window_scale"], 1.8)
+                self.assertEqual(first_skill["gate_window_scale"], 1.4)
                 self.assertEqual(trainer._get_evaluation_env().gate_window_scale, 1.0)
                 checkpoint = Path(directory) / "checkpoint_000003.pkl"
                 self.assertTrue(checkpoint.exists())
@@ -342,6 +342,18 @@ class TrainerSmokeTests(unittest.TestCase):
                 self.assertEqual(len(records), 3)
                 self.assertFalse(records[1]["detailed"])
                 self.assertIsNone(records[1]["evaluation"])
+                self.assertEqual(records[1]["timing"]["evaluation_seconds"], 0.0)
+                self.assertEqual(records[1]["timing"]["skill_evaluation_seconds"], 0.0)
+                for record in records:
+                    timing = record["timing"]
+                    self.assertGreater(timing["training_seconds"], 0.0)
+                    self.assertGreater(timing["training_env_steps_per_second"], 0.0)
+                    self.assertGreaterEqual(
+                        timing["update_seconds"] + 1e-6,
+                        sum(timing[k] for k in ("training_seconds", "evaluation_seconds", "skill_evaluation_seconds")),
+                    )
+                self.assertGreater(records[-1]["timing"]["evaluation_seconds"], 0.0)
+                self.assertGreater(records[-1]["timing"]["skill_evaluation_seconds"], 0.0)
                 self.assertEqual(records[-1]["update"], 3)
                 self.assertTrue(records[-1]["detailed"])
                 self.assertIsNotNone(records[-1]["evaluation"])

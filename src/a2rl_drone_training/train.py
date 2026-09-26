@@ -15,7 +15,7 @@ from a2rl_drone_training.config import (
     TrainingConfig,
 )
 from a2rl_drone_training.course import course_by_name
-from a2rl_drone_training.runtime import RTX_5050_DEFAULTS, configure_runtime
+from a2rl_drone_training.runtime import TRAINING_PROFILES, configure_runtime
 
 
 def _resolve_cpu_threads(value: str | None) -> int | None:
@@ -62,7 +62,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Train an A2RL FPV racing policy.")
     parser.add_argument(
         "--profile",
-        choices=["rtx-5050"],
+        choices=list(TRAINING_PROFILES),
         help="GPU starting preset; explicit flags override its defaults.",
     )
     parser.add_argument(
@@ -218,12 +218,16 @@ def build_parser() -> argparse.ArgumentParser:
         "--stall-penalty", type=float, default=-0.02, help="Reward-v1 only."
     )
 
+    parser.add_argument("--corner-reset-bank", type=str, default=None,
+                        help="Recorded pre-G3 states for strict-gate mixed corner practice.")
     parser.add_argument("--no-curriculum", action="store_true")
-    parser.add_argument("--phase-a-gate1-fraction", type=float, default=0.20)
+    parser.add_argument("--strict-course-training", action="store_true",
+                        help="Train only from G1 with 1.0x gates, including on checkpoint resume.")
+    parser.add_argument("--phase-a-gate1-fraction", type=float, default=0.40)
     parser.add_argument("--phase-b-gate1-fraction", type=float, default=0.50)
     parser.add_argument("--phase-c-gate1-fraction", type=float, default=0.80)
     parser.add_argument("--phase-d-gate1-fraction", type=float, default=0.80)
-    parser.add_argument("--phase-a-window-scale", type=float, default=1.80)
+    parser.add_argument("--phase-a-window-scale", type=float, default=1.40)
     parser.add_argument("--phase-b-window-scale", type=float, default=1.30)
     parser.add_argument("--phase-c-window-scale", type=float, default=1.00)
     parser.add_argument("--phase-b-time-scale", type=float, default=0.25)
@@ -279,6 +283,8 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def _build_training_config(args: argparse.Namespace) -> TrainingConfig:
+    if args.corner_reset_bank and (args.strict_course_training or args.no_curriculum):
+        raise ValueError("Corner practice requires curriculum and mixed starts; use the rtx-5050-corner profile.")
     obs = replace(
         ObservationConfig(),
         gate_context=args.gate_context,
@@ -295,6 +301,7 @@ def _build_training_config(args: argparse.Namespace) -> TrainingConfig:
     )
     env = replace(
         RacingEnvConfig(),
+        corner_reset_bank=args.corner_reset_bank,
         num_envs=args.num_envs,
         sim_hz=args.sim_hz,
         control_hz=args.control_hz,
@@ -359,6 +366,8 @@ def _build_training_config(args: argparse.Namespace) -> TrainingConfig:
     curriculum = replace(
         CurriculumConfig(),
         enabled=not args.no_curriculum,
+        strict_course_training=args.strict_course_training,
+        corner_practice=bool(args.corner_reset_bank),
         phase_a_gate1_fraction=args.phase_a_gate1_fraction,
         phase_b_gate1_fraction=args.phase_b_gate1_fraction,
         phase_c_gate1_fraction=args.phase_c_gate1_fraction,
@@ -412,8 +421,8 @@ def _build_training_config(args: argparse.Namespace) -> TrainingConfig:
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = build_parser()
     args = parser.parse_args(argv)
-    if args.profile == "rtx-5050":
-        parser.set_defaults(**RTX_5050_DEFAULTS)
+    if args.profile is not None:
+        parser.set_defaults(**TRAINING_PROFILES[args.profile])
         args = parser.parse_args(argv)
     return args
 

@@ -19,6 +19,23 @@ class RuntimeTests(unittest.TestCase):
         args = parse_args([])
         self.assertEqual((args.device, args.num_envs, args.minibatches), ("cpu", 64, 8))
 
+    def test_long_credit_profile_and_explicit_overrides(self):
+        args = parse_args(["--profile", "rtx-5050-long-credit"])
+        self.assertEqual(args.num_envs * args.horizon, 65536)
+        self.assertEqual(args.horizon, 1024)
+        self.assertEqual(args.minibatches, 32)
+        self.assertEqual(args.gamma, args.potential_gamma)
+        self.assertAlmostEqual(args.gamma, 0.999 ** 0.2, places=8)
+        self.assertAlmostEqual(args.gae_lambda, 0.99 ** 0.2, places=8)
+        self.assertEqual(args.exploration_std_end, 0.35)
+        self.assertEqual(args.exploration_std_floor, 0.25)
+        self.assertEqual(args.entropy_coef_end, 0.001)
+        for flags in (
+            ["--exploration-std-floor", "0.20", "--profile", "rtx-5050-long-credit"],
+            ["--profile", "rtx-5050-long-credit", "--exploration-std-floor", "0.20"],
+        ):
+            self.assertEqual(parse_args(flags).exploration_std_floor, 0.20)
+
     def test_profile_preserves_minibatch_size(self):
         cpu = parse_args([])
         gpu = parse_args(["--profile", "rtx-5050"])

@@ -34,3 +34,17 @@ class MotorControlTests(unittest.TestCase):
             np.testing.assert_allclose(env.sim.data.states.rotor_vel[1], 10000.0)
         finally:
             env.close()
+
+    def test_oblique_gate_resets_stay_on_approach_side(self):
+        env = CrazyflowRacingEnv(RacingEnvConfig(num_envs=96, auto_reset=False,
+                                               reset_distribution="evaluation"))
+        try:
+            env.set_skill_audit_window_scale(1.8)
+            gates = jnp.repeat(jnp.arange(12), 8)
+            for seed in (10123, 10124, 7):
+                env.reset(seed=seed, forced_reset_gates=gates)
+                plane, _, _ = env._gate_offsets(env.sim.data.states.pos[:, 0], gates)
+                self.assertTrue(np.all(np.asarray(plane) < 0),
+                                f"Spawn beyond the gate plane with seed {seed}")
+        finally:
+            env.close()

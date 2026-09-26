@@ -87,6 +87,7 @@ class RacingEnvConfig:
     gate_miss_depth_m: float = 1.0
     auto_reset: bool = True
     reset_distribution: Literal["training", "evaluation"] = "training"
+    corner_reset_bank: str | None = None
     gate_window_scale: float = 1.0
     racing_line_spawn_min_distance_m: float = 1.0
     racing_line_spawn_max_distance_m: float = 3.0
@@ -160,11 +161,13 @@ class PrivilegedObservationConfig:
 @dataclass(frozen=True)
 class CurriculumConfig:
     enabled: bool = True
-    phase_a_gate1_fraction: float = 0.20
+    strict_course_training: bool = False
+    corner_practice: bool = False
+    phase_a_gate1_fraction: float = 0.40
     phase_b_gate1_fraction: float = 0.50
     phase_c_gate1_fraction: float = 0.80
     phase_d_gate1_fraction: float = 0.80
-    phase_a_window_scale: float = 1.80
+    phase_a_window_scale: float = 1.40
     phase_b_window_scale: float = 1.30
     phase_c_window_scale: float = 1.00
     phase_d_window_scale: float = 1.00
