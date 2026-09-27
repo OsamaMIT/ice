@@ -16,6 +16,12 @@ dependencies = [
 
 [project.scripts]
 a2rl-drone-train = "a2rl_drone_training.train:main"
+a2rl-drone-plan = "a2rl_drone_training.hierarchical.cli:plan_main"
+a2rl-drone-evaluate = "a2rl_drone_training.hierarchical.cli:evaluate_main"
+
+[project.optional-dependencies]
+planning = ["casadi>=3.7", "scipy>=1.15"]
+visualization = ["matplotlib>=3.9"]
 
 [tool.setuptools.packages.find]
 where = ["src"]

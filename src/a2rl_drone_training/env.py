@@ -87,6 +87,10 @@ class CrazyflowRacingEnv:
             raise ValueError("Direct motor control requires --physics first_principles; so_rpy models consume attitude commands.")
         self.obs_config = obs_config
         self.course = course or arena_38m_stacked_course()
+        self.frame_geometry = None
+        if env_config.gate_frame_collisions:
+            from a2rl_drone_training.hierarchical.geometry import frame_boxes
+            self.frame_geometry = frame_boxes(self.course, env_config.gate_frame_depth_m)
         self.corner_bank = None
         if self.config.corner_reset_bank and self.config.reset_distribution == "training":
             with np.load(self.config.corner_reset_bank, allow_pickle=False) as bank:
@@ -366,14 +370,22 @@ class CrazyflowRacingEnv:
         cross_pos = self._gate_crossing_position(pos_before, pos, plane_before, plane_after)
         _, cross_radial, cross_inside = self._gate_metrics(cross_pos, gate_id)
         _, cross_lateral, cross_vertical = self._gate_offsets(cross_pos, gate_id)
-        passed_gate = crossed_plane & cross_inside
+        frame_collision = jnp.zeros((self.config.num_envs,), dtype=jnp.bool_)
+        vehicle_outside = jnp.zeros_like(frame_collision)
+        if self.frame_geometry is not None:
+            frame_collision = self.frame_geometry.swept_collision(pos_before, pos, self.config.vehicle_radius_m)
+            vehicle_outside = jnp.any(
+                (pos < self.bounds_min + self.config.vehicle_radius_m)
+                | (pos > self.bounds_max - self.config.vehicle_radius_m), axis=-1
+            )
+        passed_gate = crossed_plane & cross_inside & ~(frame_collision | vehicle_outside)
         strict_inside = self._inside_gate(
             cross_lateral,
             cross_vertical,
             gate_id,
             window_scale=1.0,
         )
-        strict_passed_gate = crossed_plane & strict_inside
+        strict_passed_gate = crossed_plane & strict_inside & ~(frame_collision | vehicle_outside)
         missed_gate = (plane_after > self.config.gate_miss_depth_m) & ~passed_gate & ~inside_gate
         next_gate_counter = self.gate_counter + passed_gate.astype(jnp.int32)
         segment_complete, course_finished, local_segment_complete = classify_completion(
@@ -388,8 +400,10 @@ class CrazyflowRacingEnv:
             segment_complete = segment_complete | corner_complete
             local_segment_complete = local_segment_complete | corner_complete
 
-        crashed = pos[:, 2] < 0.05
-        out_of_bounds = jnp.any((pos < self.bounds_min) | (pos > self.bounds_max), axis=-1)
+        crashed = (pos[:, 2] < 0.05) | frame_collision
+        if self.frame_geometry is not None:
+            crashed |= pos[:, 2] < self.bounds_min[2] + self.config.vehicle_radius_m
+        out_of_bounds = jnp.any((pos < self.bounds_min) | (pos > self.bounds_max), axis=-1) | vehicle_outside
         deadline = self.elapsed_steps + 1 >= self.config.max_episode_steps
         terminated = crashed | out_of_bounds | missed_gate | segment_complete | deadline
         artificial_limit = self.config.artificial_time_limit_steps
@@ -543,6 +557,7 @@ class CrazyflowRacingEnv:
             "strict_passed_gate": strict_passed_gate,
             "missed_gate": missed_gate,
             "crashed": crashed,
+            "frame_collision": frame_collision,
             "out_of_bounds": out_of_bounds,
             # ``finished`` retains the legacy segment-end meaning for V1 consumers.
             "finished": segment_complete,

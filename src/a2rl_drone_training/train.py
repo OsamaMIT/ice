@@ -13,6 +13,9 @@ from a2rl_drone_training.config import (
     PPOConfig,
     RacingEnvConfig,
     TrainingConfig,
+    PlannerConfig,
+    MPCConfig,
+    ResidualConfig,
 )
 from a2rl_drone_training.course import course_by_name
 from a2rl_drone_training.runtime import TRAINING_PROFILES, configure_runtime
@@ -60,6 +63,22 @@ def _cpu_threads_arg(value: str) -> str:
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Train an A2RL FPV racing policy.")
+    parser.add_argument("--controller", choices=("direct_motor", "residual_mpc"), default="direct_motor")
+    parser.add_argument("--reference-path", type=Path)
+    parser.add_argument("--policy-hz", type=int, default=20)
+    parser.add_argument("--mpc-hz", type=int, default=100)
+    parser.add_argument("--mpc-horizon", type=float, default=0.5)
+    parser.add_argument("--mpc-prediction-dt", type=float, default=0.02)
+    parser.add_argument("--mpc-iterations", type=int, default=5)
+    parser.add_argument("--residual-position-limit", type=float, default=0.5)
+    parser.add_argument("--residual-speed-fraction", type=float, default=0.3)
+    parser.add_argument("--residual-smoothing-time", type=float, default=0.2)
+    parser.add_argument("--discount-per-second", type=float, default=0.98)
+    parser.add_argument("--gae-lambda-per-second", type=float, default=0.90)
+    parser.add_argument("--estimation-noise-std", type=float, default=0.)
+    parser.add_argument("--spawn-position-std", type=float, default=0.)
+    parser.add_argument("--spawn-velocity-std", type=float, default=0.)
+    parser.add_argument("--frame-depth", type=float, default=0.10)
     parser.add_argument(
         "--profile",
         choices=list(TRAINING_PROFILES),
@@ -406,6 +425,10 @@ def _build_training_config(args: argparse.Namespace) -> TrainingConfig:
     if metrics_file is None and checkpoint_dir is not None:
         metrics_file = checkpoint_dir / "metrics.jsonl"
     return TrainingConfig(
+        controller=args.controller,
+        planner=PlannerConfig(frame_depth_m=args.frame_depth),
+        mpc=MPCConfig(update_hz=args.mpc_hz, horizon_s=args.mpc_horizon, prediction_dt=args.mpc_prediction_dt, iterations=args.mpc_iterations),
+        residual=ResidualConfig(reference_path=args.reference_path, policy_hz=args.policy_hz, position_limit_m=args.residual_position_limit, speed_fraction=args.residual_speed_fraction, smoothing_time_s=args.residual_smoothing_time, discount_per_second=args.discount_per_second, gae_lambda_per_second=args.gae_lambda_per_second, estimation_noise_std=args.estimation_noise_std, spawn_position_std_m=args.spawn_position_std, spawn_velocity_std_m_s=args.spawn_velocity_std),
         env=env,
         obs=obs,
         net=NetworkConfig(),

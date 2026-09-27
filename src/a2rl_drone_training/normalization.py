@@ -47,6 +47,10 @@ def actor_normalization_spec(config: ObservationConfig) -> NormalizationSpec:
     fixed_scale[22] = np.pi
     fixed_mean[23] = 0.5
     fixed_scale[23] = 0.5
+    if config.core_dim > 24:
+        running[24:config.core_dim - 4] = True
+        fixed_scale[24:config.core_dim - 4] = 3.0
+        minimum_scale[24:config.core_dim - 4] = 0.1
 
     for gate_index in range(config.gate_context):
         start = config.core_dim + gate_index * config.gate_feature_dim

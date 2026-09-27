@@ -22,6 +22,7 @@ class Rollout(NamedTuple):
     next_values: Array
     terminated: Array
     truncated: Array
+    transition_fraction: Array | None = None
 
 
 @partial(jax.jit, static_argnames=("gamma", "gae_lambda"))
@@ -34,6 +35,7 @@ def compute_gae(
     *,
     gamma: float,
     gae_lambda: float,
+    transition_fraction: Array | None = None,
 ) -> tuple[Array, Array]:
     """GAE with distinct terminal and time-limit semantics.
 
@@ -43,13 +45,14 @@ def compute_gae(
 
     def scan_step(
         next_advantage: Array,
-        transition: tuple[Array, Array, Array, Array, Array],
+        transition: tuple[Array, Array, Array, Array, Array, Array],
     ) -> tuple[Array, Array]:
-        reward, value, next_value, terminal, truncation = transition
+        reward, value, next_value, terminal, truncation, fraction = transition
         bootstrap = 1.0 - terminal.astype(jnp.float32)
         episode_continues = 1.0 - (terminal | truncation).astype(jnp.float32)
-        delta = reward + gamma * next_value * bootstrap - value
-        advantage = delta + gamma * gae_lambda * episode_continues * next_advantage
+        discount = gamma ** fraction
+        delta = reward + discount * next_value * bootstrap - value
+        advantage = delta + discount * gae_lambda ** fraction * episode_continues * next_advantage
         return advantage, advantage
 
     _, advantages_rev = jax.lax.scan(
@@ -61,6 +64,7 @@ def compute_gae(
             next_values[::-1],
             terminated[::-1],
             truncated[::-1],
+            (jnp.ones_like(rewards) if transition_fraction is None else transition_fraction)[::-1],
         ),
     )
     advantages = advantages_rev[::-1]

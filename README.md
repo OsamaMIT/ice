@@ -725,3 +725,148 @@ file when moving the run. To reproduce it from the saved diagnostic trace:
 Stop and assess after the trial: look for strict G5 passes, survival after G4,
 preservation of G1-to-G4 performance, and local G11 accuracy. No improvement has
 yet been established for this new curriculum.
+
+## Hierarchical trajectory / residual RL / MPC controller
+
+The existing `--controller direct_motor` mode remains the default. The optional
+`residual_mpc` mode separates an offline minimum-time reference, a four-output
+residual policy, and a quaternion nonlinear MPC flight controller. It uses the
+same first-principles drone model and native motor ordering as Crazyflow.
+
+Install the offline optimizer and optional report plotting dependencies:
+
+```bash
+pip install -e '.[planning,visualization]'
+```
+
+Generate a reference before starting a residual run:
+
+```bash
+a2rl-drone-plan --course arena_38m_stacked \
+  --output artifacts/arena_reference.npz
+```
+
+The planner jointly optimizes motor commands, states, gate-crossing locations,
+and segment durations with CasADi/IPOPT multiple shooting. It includes rotor
+response, drag, thrust/torque curves, inertia, and normalized `xyzw` attitude.
+Gate openings are reduced by the vehicle radius (0.15 m by default) and a 0.10 m
+tracking margin. Gate frames use the union of outer rectangles minus the union
+of openings for each logical gate; frame depth defaults to 0.10 m. These are
+simulation geometry assumptions, not measured competition-frame specifications.
+Stacked-gate initialization uses explicit exit and re-approach waypoints with
+continuous acceleration and jerk. A feasibility solve supplies the warm start
+for minimum-time optimization. Separating planes around frame solids define a
+conservative clearance corridor along this route. The reference starts at rest
+at the course's nominal start. The final crossing ends the timed run; this mode currently
+supports one course run, not continuous flying laps.
+
+Every solution is replayed densely at **at least 500 Hz** to check numerical
+integration defects, frame clearance, bounds, and crossing geometry. Invalid
+solutions trigger mesh refinement and are rejected if validation still fails.
+This is a numerical local optimization and empirical feasibility check, not a
+global-optimality or formal safety certificate. The NPZ includes reference
+states, commands, timing, progress, gate events, and fingerprints for the model,
+course, planner settings, and artifact contents. An incompatible or unvalidated
+reference is rejected on load.
+An iteration-limited optimization candidate is usable only if it passes the same
+dense feasibility checks. Artifacts explicitly record solver status, iteration
+count, and whether the optimization converged; a feasible candidate is not a
+claim of optimality.
+
+Train the residual policy, using the GPU setup described above:
+
+```bash
+a2rl-drone-train --controller residual_mpc \
+  --reference-path artifacts/arena_reference.npz \
+  --device gpu --num-envs 16 --physics first_principles --sim-hz 500 \
+  --policy-hz 20 --mpc-hz 100 --mpc-horizon 0.5 \
+  --mpc-prediction-dt 0.02 --mpc-iterations 5 \
+  --checkpoint-dir checkpoints_residual
+```
+
+Before collecting training experience, the trainer runs a deterministic,
+noise-free, zero-offset flight. Training refuses to start if that flight does
+not complete the course. Planning feasibility alone does not imply that the
+flight controller can track an aggressive minimum-time solution. Use
+`--max-speed` when planning to constrain the reference if necessary, and set
+`--max-episode-time` to allow sufficient time for the planned course.
+
+The policy outputs `[offset_x, offset_y, offset_z, speed_offset]` in `[-1, 1]`.
+Defaults map these to world-frame position offsets of ±0.5 m per axis and a speed
+change of ±30%. A critically damped 0.2 s filter supplies position, velocity,
+acceleration, and speed derivatives for a consistent MPC reference. Progress is
+projected only onto the active gate segment, including stacked turns. All-zero
+residuals reproduce the planned reference. RL may explore outside the planner's
+tracking margin; there is no runtime gate-corridor safety shield. Physical motor
+bounds are always enforced, and swept vehicle/frame collisions terminate the
+episode before a simultaneous crossing can earn a gate reward.
+
+The MPC uses batched JAX iLQR, a 0.5 s prediction horizon, 0.02 s prediction
+spacing, and five iterations by default. Its model includes normalized rotor
+speeds and uses a three-component quaternion attitude error in its cost. It
+warm-starts the previous solution and checks numerical validity. A failed solve
+may reuse the previous valid sequence for one controller interval; subsequent
+failures use a bounded geometric stabilization fallback. Fallback counts and
+solve latency are reported. Control frequencies are simulated frequencies;
+real-time wall-clock performance must be measured on the target machine.
+
+Actor observations add tracking errors, three reference lookahead positions,
+nominal speed, previous residual actions, and the offset filter state and derivative
+so the controller memory is observable. The critic remains separate.
+Initial control uses exact simulator state. `--estimation-noise-std` adds position
+and velocity estimation noise for robustness experiments; it does not implement
+a sensor-fusion estimator. Spawn perturbations are configured separately with
+`--spawn-position-std` and `--spawn-velocity-std`.
+
+Each policy action spans up to 25 physics steps. Rewards accumulate only through
+the first terminal/truncation event. Terminal observations are captured before
+reset; time-limit bootstrapping uses the actual partial-action duration.
+`--discount-per-second` and `--gae-lambda-per-second` replace per-step discount
+settings in this mode. PPO budgets and schedules count **policy transitions**;
+`physics_steps` is recorded independently. Gate openings stay at 1.0×; the
+original gate-window curriculum and local reset bank do not apply. New
+checkpoints identify the controller, observation schema, and reference artifact,
+so a four-motor policy cannot be mistaken for a four-residual policy.
+
+Evaluate baseline stability or compare a trained checkpoint on paired held-out
+trials (100 by default):
+
+```bash
+a2rl-drone-evaluate --reference-path artifacts/arena_reference.npz \
+  --device gpu --trials 100 --num-envs 16 --plot \
+  --output-dir artifacts/mpc_baseline
+
+a2rl-drone-evaluate --reference-path artifacts/arena_reference.npz \
+  --checkpoint checkpoints_residual/checkpoint_latest.pkl \
+  --device gpu --trials 100 --num-envs 16 --plot \
+  --output-dir artifacts/residual_comparison
+```
+
+Both commands run exact-state and noisy-state suites with shared spawn seeds.
+Keep the batch size fixed across comparisons. Reports include failures, lap-time
+distributions, frame clearance, tracking errors, fallback counts, latency,
+throughput, raw NPZ trials, and optional trajectory/speed/clearance plots. Learned
+acceptance requires at least 100 trials, at least 95% completion, and a positive
+95% bootstrap confidence interval for mean lap-time improvement on paired
+successful trials in both suites. Failures are listed separately. A baseline-only
+report cannot claim learned-policy acceptance. No pretrained residual policy or
+claim of improved A2RL lap time is included with this implementation.
+Evaluation retains the configured episode deadline; `--max-episode-time` is an
+explicit override for controller experiments, not an automatic extension.
+
+Implementation validation (CPU, September 2026): the repository suite passes
+112 tests, with 19 focused controller tests also passing after the final
+start-at-rest correction. A deterministic two-gate straight-course flight from
+rest completed in 0.982 simulated seconds with no frame collision or MPC
+fallback. Its minimum vehicle/frame clearance was 0.0719 m and mean position
+tracking error was 0.0185 m. Median MPC solve latency was 30.9 ms on this CPU;
+this does **not** meet the configured 10 ms controller interval in wall time.
+The measurement is a smoke test, not a reliability estimate. Stacked two-gate
+trajectory optimization also passes dense validation.
+
+Full-arena zero-offset completion has **not** been established. The full-arena
+planning experiment required further refinement after failing dense validation;
+no accepted full-course flight result or trained residual policy is supplied.
+GPU throughput, the 100-trial held-out comparison, and noisy-state acceptance
+remain to be measured. Training stays disabled unless the runtime baseline
+check passes for the supplied reference.

@@ -93,6 +93,8 @@ class RacingEnvConfig:
     racing_line_spawn_max_distance_m: float = 3.0
     racing_line_spawn_speed_m_s: float = 2.0
     spawn_distance_m: float = 1.3
+    gate_frame_collisions: bool = False
+    gate_frame_depth_m: float = 0.10
 
     @property
     def dt(self) -> float:
@@ -201,6 +203,50 @@ class EvaluationConfig:
 
 
 @dataclass(frozen=True)
+class PlannerConfig:
+    tracking_margin_m: float = 0.10
+    frame_depth_m: float = 0.10
+    nodes_per_segment: int = 24
+    max_refinements: int = 2
+    max_iterations: int = 2000
+    max_speed_m_s: float = 12.0
+    max_body_rate_rad_s: float = 12.0
+    validation_hz: int = 500
+    integration_substeps: int = 10
+    dynamics_tolerance: float = 0.05
+
+
+@dataclass(frozen=True)
+class MPCConfig:
+    update_hz: int = 100
+    horizon_s: float = 0.5
+    prediction_dt: float = 0.02
+    iterations: int = 5
+    regularization: float = 0.01
+    position_weight: float = 20.0
+    velocity_weight: float = 4.0
+    attitude_weight: float = 2.0
+    angular_velocity_weight: float = 0.1
+    motor_weight: float = 0.02
+    motor_change_weight: float = 0.1
+
+
+@dataclass(frozen=True)
+class ResidualConfig:
+    reference_path: Path | None = None
+    policy_hz: int = 20
+    position_limit_m: float = 0.5
+    speed_fraction: float = 0.30
+    smoothing_time_s: float = 0.2
+    discount_per_second: float = 0.98
+    gae_lambda_per_second: float = 0.90
+    change_penalty: float = 0.01
+    estimation_noise_std: float = 0.0
+    spawn_position_std_m: float = 0.0
+    spawn_velocity_std_m_s: float = 0.0
+
+
+@dataclass(frozen=True)
 class TrainingConfig:
     env: RacingEnvConfig = RacingEnvConfig()
     obs: ObservationConfig = ObservationConfig()
@@ -212,3 +258,7 @@ class TrainingConfig:
     checkpoint_dir: Path | None = Path("checkpoints")
     checkpoint_interval: int = 10
     metrics_file: Path | None = None
+    controller: Literal["direct_motor", "residual_mpc"] = "direct_motor"
+    planner: PlannerConfig = PlannerConfig()
+    mpc: MPCConfig = MPCConfig()
+    residual: ResidualConfig = ResidualConfig()

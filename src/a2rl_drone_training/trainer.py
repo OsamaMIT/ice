@@ -17,7 +17,7 @@ import numpy as np
 from jax import Array
 
 from a2rl_drone_training.config import TrainingConfig
-from a2rl_drone_training.actions import ACTION_NAMES, ACTION_SPACE, validate_checkpoint_actions
+from a2rl_drone_training.actions import ACTION_SPACE, validate_checkpoint_actions
 from a2rl_drone_training.console import format_table, print_table
 from a2rl_drone_training.course import GateCourse
 from a2rl_drone_training.curriculum import CurriculumController
@@ -65,6 +65,7 @@ class TrainerState:
     updates: int = 0
     episodes_completed: int = 0
     schedule_steps: int = 0
+    physics_steps: int = 0
 
 
 @partial(jax.jit, static_argnames=("obs_config",))
@@ -120,9 +121,12 @@ class PPOTrainer:
         course: GateCourse | None = None,
         restore_checkpoint: Path | None = None,
     ):
+        if config.controller == "residual_mpc":
+            from a2rl_drone_training.hierarchical.environment import residual_training_config
+            config = residual_training_config(config)
         self.config = config
         self.course = course
-        self.env = CrazyflowRacingEnv(config.env, config.obs, course=course)
+        self.env = self._make_env(config.env, config.obs, course)
         self.curriculum = CurriculumController(config.curriculum, self.env.course.num_gates)
         self.env.set_curriculum(self.curriculum.parameters())
         self.normalization_spec = actor_normalization_spec(config.obs)
@@ -167,6 +171,13 @@ class PPOTrainer:
 
     def train(self) -> None:
         cfg = self.config
+        if cfg.controller == "residual_mpc":
+            from a2rl_drone_training.hierarchical.evaluation import run_trials
+            print("Validating zero-offset MPC before residual training...", flush=True)
+            baseline_config = replace(cfg, env=replace(cfg.env, num_envs=1, auto_reset=False), residual=replace(cfg.residual, estimation_noise_std=0., spawn_position_std_m=0., spawn_velocity_std_m_s=0.))
+            baseline = run_trials(baseline_config, self.env.course, trials=1)
+            if not bool(baseline["success"][0]):
+                raise RuntimeError("Zero-offset MPC did not complete the nominal course; residual training is disabled until the planner/controller baseline passes.")
         if self._pre_correction_v2_checkpoint and cfg.env.reward_version == "v2":
             raise RuntimeError(
                 "Pre-correction Reward-V2 checkpoints cannot resume corrected training. "
@@ -241,6 +252,7 @@ class PPOTrainer:
                 rollout.truncated,
                 gamma=cfg.ppo.gamma,
                 gae_lambda=cfg.ppo.gae_lambda,
+                transition_fraction=rollout.transition_fraction,
             )
             print(f"[Update {update}] Learning from collected flights...", flush=True)
             next_schedule_steps = self.state.schedule_steps + steps_per_update
@@ -270,6 +282,7 @@ class PPOTrainer:
             )
             self.state.updates = update
             self.state.env_steps += steps_per_update
+            self.state.physics_steps += int(rollout_metrics.get("physics_steps", steps_per_update))
             self.state.schedule_steps = next_schedule_steps
 
             jax.block_until_ready(update_metrics["approx_kl"])
@@ -358,6 +371,10 @@ class PPOTrainer:
         next_value_buf: list[Array] = []
         terminated_buf: list[Array] = []
         truncated_buf: list[Array] = []
+        transition_fraction_buf: list[Array] = []
+        physics_steps = 0
+        controller_fallbacks = 0
+        controller_latencies = []
         smoothness_buf: list[Array] = []
         done_buf: list[Array] = []
         course_finished_buf: list[Array] = []
@@ -426,6 +443,11 @@ class PPOTrainer:
                 self.config.obs,
             )
             next_raw_obs, reward, terminated, truncated, info = self.env.step(action)
+            transition_fraction_buf.append(info.get("transition_seconds", jnp.full_like(reward, self.config.env.dt)) / self.config.env.dt)
+            physics_steps += int(jnp.sum(info.get("physics_steps", jnp.full_like(reward, self.config.env.sim_hz // self.config.env.control_hz))))
+            if self.config.controller == "residual_mpc":
+                controller_fallbacks += self.env.last_controller_metrics["mpc_fallbacks"]
+                controller_latencies.append(self.env.last_controller_metrics["mpc_latency_mean_s"])
             done = terminated | truncated
             reset_critic_obs = self.env.privileged_observe()
             bootstrap_critic_obs = jnp.where(
@@ -463,10 +485,17 @@ class PPOTrainer:
             failure_gate_id = (
                 info["gate_id"] + info["passed_gate"].astype(jnp.int32)
             ) % num_gates
+            if "gate_pass_events" in info:
+                failure_gate_id = info["gate_id"]
             failure_one_hot = jax.nn.one_hot(
                 failure_gate_id, num_gates, dtype=jnp.float32
             )
             gate_pass_counts += jnp.sum(one_hot * passed[:, None], axis=0)
+            if "gate_pass_events" in info:
+                # Include every crossing in a macro-step, not only its last gate.
+                correction = jnp.sum(info["gate_pass_events"] - one_hot * passed[:, None], axis=0)
+                gate_pass_counts += correction
+                strict_gate_pass_counts += correction
             strict_gate_pass_counts += jnp.sum(
                 one_hot * info["strict_passed_gate"].astype(jnp.float32)[:, None],
                 axis=0,
@@ -497,6 +526,14 @@ class PPOTrainer:
                     one_hot * jnp.nan_to_num(info["segment_time"])[:, None], axis=0
                 )
                 gate_measurement_counts += jnp.sum(one_hot * measurement[:, None], axis=0)
+                if "gate_pass_events" in info:
+                    old_clearance = one_hot * jnp.nan_to_num(info["gate_clearance"])[:, None]
+                    old_curriculum = one_hot * jnp.nan_to_num(info["curriculum_gate_clearance"])[:, None]
+                    old_time = one_hot * jnp.nan_to_num(info["segment_time"])[:, None]
+                    gate_clearance_sums += jnp.sum(info["gate_clearance_events"] - old_clearance, axis=0)
+                    curriculum_gate_clearance_sums += jnp.sum(info["gate_clearance_events"] - old_curriculum, axis=0)
+                    gate_segment_time_sums += jnp.sum(info["gate_segment_time_events"] - old_time, axis=0)
+                    gate_measurement_counts += jnp.sum(info["gate_pass_events"] - one_hot * measurement[:, None], axis=0)
                 for name in REWARD_COMPONENTS:
                     reward_sums[name] += jnp.sum(info[name])
                 for name in event_sums:
@@ -565,6 +602,7 @@ class PPOTrainer:
             next_values=jnp.stack(next_value_buf),
             terminated=jnp.stack(terminated_buf),
             truncated=jnp.stack(truncated_buf),
+            transition_fraction=jnp.stack(transition_fraction_buf),
         )
         gate_pass_np = _to_numpy(gate_pass_counts)
         strict_gate_pass_np = _to_numpy(strict_gate_pass_counts)
@@ -574,6 +612,9 @@ class PPOTrainer:
         if not collect_diagnostics:
             return rollout, {
                 "mean_reward": float(jnp.mean(rollout.rewards)),
+                "physics_steps": physics_steps,
+                "mpc_fallbacks": controller_fallbacks,
+                "mpc_latency_mean_s": float(np.mean(controller_latencies)) if controller_latencies else 0.,
                 "episodes_completed": int(float(episode_count)),
                 "gate_pass_counts": gate_pass_np,
                 "strict_gate_pass_counts": strict_gate_pass_np,
@@ -677,10 +718,16 @@ class PPOTrainer:
         for name, value in event_sums.items():
             metrics[f"{name}_rate"] = float(value / sample_count)
             metrics[f"{name}_count"] = int(float(value))
+        metrics.update(physics_steps=physics_steps, mpc_fallbacks=controller_fallbacks, mpc_latency_mean_s=float(np.mean(controller_latencies)) if controller_latencies else 0.)
         return rollout, metrics
 
     def evaluate_policy(self) -> dict[str, Any]:
         """Run deterministic, strict, fixed-seed gate-1 evaluation."""
+
+        if self.config.controller == "residual_mpc":
+            from a2rl_drone_training.hierarchical.evaluation import run_trials, trainer_metrics
+            result = run_trials(self.config, self.env.course, trials=self.config.evaluation.num_envs, seed=self.config.evaluation.seed, policy=lambda raw: _deterministic_action(self.state.actor_params, self._normalize(raw), self.config.obs))
+            return trainer_metrics(result)
 
         env = self._get_evaluation_env()
         raw_obs = env.reset(seed=self.config.evaluation.seed)
@@ -880,9 +927,13 @@ class PPOTrainer:
         path = Path(path)
         path.parent.mkdir(parents=True, exist_ok=True)
         payload = {
-            "checkpoint_version": 6,
+            "checkpoint_version": 7 if self.config.controller == "residual_mpc" else 6,
             "spawn_geometry_version": SPAWN_GEOMETRY_VERSION,
-            "action_space": ACTION_SPACE,
+            "controller": self.config.controller,
+            "action_space": self._action_space(),
+            "observation_schema": "residual_reference_v1" if self.config.controller == "residual_mpc" else "motor_v1",
+            "reference_fingerprint": self.env.reference.fingerprint if self.config.controller == "residual_mpc" else None,
+            "physics_steps": self.state.physics_steps,
             "course_fingerprint": _course_fingerprint(self.env.course),
             "actor_params": jax.device_get(self.state.actor_params),
             "critic_params": jax.device_get(self.state.critic_params),
@@ -915,7 +966,7 @@ class PPOTrainer:
         path = Path(path)
         with path.open("rb") as file:
             payload = pickle.load(file)
-        validate_checkpoint_actions(payload)
+        validate_checkpoint_actions(payload, self.config.controller, self.env.reference.fingerprint if self.config.controller == "residual_mpc" else None)
         required = ("actor_params", "critic_params", "actor_opt_state", "critic_opt_state")
         missing = [name for name in required if name not in payload]
         if missing:
@@ -947,6 +998,7 @@ class PPOTrainer:
         self.state.actor_opt_state = jax.device_put(payload["actor_opt_state"])
         self.state.critic_opt_state = jax.device_put(payload["critic_opt_state"])
         self.state.env_steps = int(payload.get("env_steps", 0))
+        self.state.physics_steps = int(payload.get("physics_steps", self.state.env_steps))
         self.state.updates = int(payload.get("updates", 0))
         self.state.episodes_completed = int(payload.get("episodes_completed", 0))
         if "schedule_steps" in payload:
@@ -1068,6 +1120,8 @@ class PPOTrainer:
             "update": update,
             "total_updates": total_updates,
             "env_steps": self.state.env_steps,
+            "physics_steps": self.state.physics_steps,
+            "controller": self.config.controller,
             "detailed": detailed,
             "timing": timing_metrics,
             "ppo": {
@@ -1135,12 +1189,24 @@ class PPOTrainer:
                 sensor_noise_scale=0.0,
                 pnp_dropout_prob=0.0,
             )
-            self._eval_env = CrazyflowRacingEnv(
+            self._eval_env = self._make_env(
                 env_config,
                 obs_config,
                 course=self.env.course,
             )
         return self._eval_env
+
+    def _make_env(self, env_config, obs_config, course=None):
+        if self.config.controller == "residual_mpc":
+            from a2rl_drone_training.hierarchical.environment import ResidualMPCEnv
+            return ResidualMPCEnv(self.config, env_config=env_config, course=course)
+        return CrazyflowRacingEnv(env_config, obs_config, course=course)
+
+    def _action_space(self):
+        if self.config.controller == "residual_mpc":
+            from a2rl_drone_training.hierarchical.environment import RESIDUAL_ACTION_SPACE
+            return RESIDUAL_ACTION_SPACE
+        return ACTION_SPACE
 
     def _get_skill_evaluation_env(self) -> CrazyflowRacingEnv:
         if self._skill_eval_env is None:
@@ -1269,7 +1335,7 @@ class PPOTrainer:
                     "training",
                     [
                         ("algorithm", "PPO"),
-                        ("action_space", ACTION_SPACE),
+                        ("action_space", self._action_space()),
                         ("num_envs", f"{self.config.env.num_envs:,}"),
                         ("rollout_length", f"{self.config.ppo.horizon:,}"),
                         ("batch_size", f"{steps_per_update:,}"),
