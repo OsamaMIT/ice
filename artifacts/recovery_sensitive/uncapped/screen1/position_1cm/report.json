@@ -1,0 +1,58 @@
+{
+  "noisy_state": {
+    "baseline": {
+      "peak_speed_m_s": 10.740971565246582,
+      "termination_counts": {
+        "crashed": 0,
+        "out_of_bounds": 0,
+        "missed_gate": 0,
+        "deadline": 0
+      },
+      "trials": 8,
+      "completion_rate": 1.0,
+      "collision_rate": 0.0,
+      "mean_lap_time_s": 13.888500571250916,
+      "median_lap_time_s": 13.87100076675415,
+      "lap_time_std_s": 0.0885368361085891,
+      "minimum_clearance_m": 0.09831871092319489,
+      "mean_tracking_error_m": 0.007737266975340187,
+      "fallbacks": 0,
+      "mpc_latency_median_s": 0.05926633799981573,
+      "mpc_latency_p95_s": 0.07549509104969729,
+      "physics_steps_per_second": 88.63583500150536
+    },
+    "learned": {
+      "peak_speed_m_s": 10.744670867919922,
+      "termination_counts": {
+        "crashed": 0,
+        "out_of_bounds": 0,
+        "missed_gate": 0,
+        "deadline": 0
+      },
+      "trials": 8,
+      "completion_rate": 1.0,
+      "collision_rate": 0.0,
+      "mean_lap_time_s": 13.884000897407532,
+      "median_lap_time_s": 13.861000537872314,
+      "lap_time_std_s": 0.08221311810224352,
+      "minimum_clearance_m": 0.09433144330978394,
+      "mean_tracking_error_m": 0.01574863428184118,
+      "fallbacks": 0,
+      "mpc_latency_median_s": 0.05983965850009554,
+      "mpc_latency_p95_s": 0.07339400419996307,
+      "physics_steps_per_second": 102.52218889287188
+    },
+    "paired_successes": 8,
+    "mean_improvement_s": 0.004499673843383789,
+    "improvement_95pct_ci_s": [
+      -0.0065004825592041016,
+      0.015749812126159668
+    ],
+    "accepted": false,
+    "failures": {
+      "baseline": [],
+      "learned": []
+    }
+  },
+  "accepted": false
+}

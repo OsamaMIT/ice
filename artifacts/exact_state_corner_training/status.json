@@ -1,0 +1,298 @@
+{
+  "spec": {
+    "version": 2,
+    "caps": [
+      6.0,
+      12.0,
+      24.0,
+      null
+    ],
+    "initial_reference": "36a1d4e00f4e59b9829e7b3dac0c1b9db86fad4052c1ebc0338def6986de1c10",
+    "updates_per_block": 32,
+    "max_blocks": 4,
+    "conditions": {
+      "exact_state": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "position_1cm": [
+        0.01,
+        0.0,
+        0.0
+      ],
+      "position_3cm": [
+        0.03,
+        0.0,
+        0.0
+      ],
+      "velocity_2cms": [
+        0.0,
+        0.02,
+        0.0
+      ],
+      "velocity_5cms": [
+        0.0,
+        0.05,
+        0.0
+      ],
+      "delay_10ms": [
+        0.0,
+        0.0,
+        0.01
+      ],
+      "delay_30ms": [
+        0.0,
+        0.0,
+        0.03
+      ]
+    },
+    "screening_trials": 8,
+    "final_trials": 100,
+    "max_lap_ratio": 1.02,
+    "source": {
+      "src/a2rl_drone_training/__init__.py": "8b72b4fc844447710c7afcf047fc1d61713de8c2c6a9c641174e422a67817494",
+      "src/a2rl_drone_training/actions.py": "93e9308696b7f981dee1aaec0c399a8b9474d2d1ab7d798c198c6b2a820a8735",
+      "src/a2rl_drone_training/config.py": "5a4d66ceda6d4dd26fc4db35d5ddc7f1f5f740005da2331f1a8d267199c6085b",
+      "src/a2rl_drone_training/console.py": "5eb82d8119db6bc0a8c1012ee4fd40244a1211ef1f6ba6f16bc196789a68c7a3",
+      "src/a2rl_drone_training/course.py": "c7a30c3578df1dcbd278e16cecc79440e457067927d452d1494e4f50eb66d1cc",
+      "src/a2rl_drone_training/curriculum.py": "4ef92efcfaef99b091a83b169dfadfc9c620fc92fd9f5604393394c7ad0a27f8",
+      "src/a2rl_drone_training/env.py": "6ae0a4db12f068ec0cf4be4173774e8ba457cef27ad6b2df708edf7705333901",
+      "src/a2rl_drone_training/hierarchical/__init__.py": "02006ad818eb8cf76bef2f43bd3f5487024d88a8a61737d3d0ccc9e2b02a3820",
+      "src/a2rl_drone_training/hierarchical/cli.py": "9cf5be6b98126b50a851f8513159752279610697b576a08ebe66959677c675ed",
+      "src/a2rl_drone_training/hierarchical/diagnostics.py": "d6d22c8c5679ca1e4ccc458a86fab9864296183c399178a7ca6f2acff01c5f9f",
+      "src/a2rl_drone_training/hierarchical/dynamics.py": "fcf48094fc3ff517c74a76bd4026d2e6dd7646c6d5a76589ab1032727eea9678",
+      "src/a2rl_drone_training/hierarchical/environment.py": "f42ac8235f80543d36981846e57e7db4a3342699de300b01fc32666ceecade5e",
+      "src/a2rl_drone_training/hierarchical/evaluation.py": "695605c18972ab79a58c7b2e504c24ff1da6ae2025861f1298ecd35a029c45b0",
+      "src/a2rl_drone_training/hierarchical/geometry.py": "b07172aa06eccf6547c189e2f2e12ec17f2cefb1a793fa8628988f10d5f3e818",
+      "src/a2rl_drone_training/hierarchical/mpc.py": "0c4be6f27335c4b2cb58c654b0b53e3e9271b1f1f3ef7afe1e9bff09a69a36bf",
+      "src/a2rl_drone_training/hierarchical/planner.py": "1e018b63eac96e281dd6559d93b6f830a240397b5b5adb8d0c4016fa6320b384",
+      "src/a2rl_drone_training/hierarchical/reference.py": "bbffb376d3f8981232275299637a50a45fa8f6ffcc5f97cb063ecceaa317d3f2",
+      "src/a2rl_drone_training/hierarchical/sensors.py": "2da5016c3a092960e57ced9a62c46caa3cb43225f3e3b1063338890ad548bbed",
+      "src/a2rl_drone_training/networks.py": "4ba3d2f9f74871c78beb2e32e2f09451f5e637f35daccbd79938710e6503bb13",
+      "src/a2rl_drone_training/normalization.py": "e52a0ee11e99b108029826fac1370f8d292b2fe41d70345db82dbf1581ed1234",
+      "src/a2rl_drone_training/observations.py": "a3b9d93b8329aa86410a40caad9db7d66ab31b1410f8cd801367eca361619c54",
+      "src/a2rl_drone_training/optim.py": "6677c933d8d7e74d0d6639f4a23e801819945d5b1d323a8c39e1d65e15525180",
+      "src/a2rl_drone_training/ppo.py": "078be9fbb3f171d83ba0865fb61c8bc7dafd75dc769756e7e69bebf234c21f78",
+      "src/a2rl_drone_training/rewards.py": "dcdc917feb925c6e10bc9d9b720a05fd398579c3a59e565fd3159cbbe2f26a0d",
+      "src/a2rl_drone_training/runtime.py": "35b31631b42064bf93f666bb81ea5ae6eb40dc451ee1886e2fef949292afec49",
+      "src/a2rl_drone_training/train.py": "707577f7e0746532890b848564a71a017e7f62bdcdea5f846cdbb6accc59664f",
+      "src/a2rl_drone_training/trainer.py": "ea4916880e65163342d4f4842aceedf17b0d3d7d802dc66e3b32d1a2c59302f2"
+    },
+    "runner": "00ccfee71bc2202afe8fd28c570a45964aceb90f16f4fa073c4d61257f466c80",
+    "staging_helper": "e2659de52ffb27c5459a55b23903819890d6a35b17bc96efee35675e442033cd",
+    "dependencies": "4df88c33b6e3cdebdd2fa052df09f31fb53aa0e37926071bbfc75ca12dd614dd",
+    "evaluation_worker": "46ea5960865e20c5ff45175a5f94079216d7d4c4e0a0cc5ccb69cea8b8daae36",
+    "reference_only": true,
+    "exact_state_only": true,
+    "new_budget": true,
+    "racing_runner": "b6f885ab7490b63ad56423e1a1fefdd2531aae84df6d537b22d79fe83bf6e280",
+    "paired_worker": "9af3325c05185d0ee08eee5d229d9fe5af250dcbc2a289d0be715a5b60e4ddbf",
+    "incumbent_checkpoint": "1888c2bc6636e7f4c268ecff2eaba17420acc236ecaf881ec00598e6e2a06582",
+    "risk_schedule": [
+      [
+        0.1,
+        0.8
+      ],
+      [
+        0.075,
+        0.8
+      ],
+      [
+        0.075,
+        0.85
+      ],
+      [
+        0.05,
+        0.9
+      ]
+    ],
+    "prior_run": null
+  },
+  "tasks": {
+    "attempt1_seed0/nominal": {
+      "completed": true,
+      "attempt": 2,
+      "inputs": {
+        "artifacts/recovery_sensitive/uncapped/reference.npz": "36a1d4e00f4e59b9829e7b3dac0c1b9db86fad4052c1ebc0338def6986de1c10"
+      },
+      "outputs": {
+        "artifacts/exact_state_corner_training/attempt1_seed0/nominal/report.json": "f889d746e5c4d35c106ed26be81fc27ea4bd6d4f36bc87d9fdd5d54f2e6daa9a",
+        "artifacts/exact_state_corner_training/attempt1_seed0/nominal/exact_state_baseline.npz": "48bc5ee87a2d0aa248fa521c9a36fa2d2c7de1b61c7face9d29cf274741cfd46"
+      },
+      "recovered": true
+    },
+    "attempt1_seed0/perturbed": {
+      "completed": true,
+      "attempt": 2,
+      "inputs": {
+        "artifacts/recovery_sensitive/uncapped/reference.npz": "36a1d4e00f4e59b9829e7b3dac0c1b9db86fad4052c1ebc0338def6986de1c10"
+      },
+      "outputs": {
+        "artifacts/exact_state_corner_training/attempt1_seed0/perturbed/report.json": "6c8d350d54c4b4abcacc81d6117550c5c03f74687053ebb48bab8c700c090c5d",
+        "artifacts/exact_state_corner_training/attempt1_seed0/perturbed/exact_state_baseline.npz": "b0c4863b46bdd10cba14d504d5965bb8589dddb2b77fd5bf618ad212dd71580a"
+      },
+      "recovered": true
+    },
+    "attempt1_seed0/train1": {
+      "completed": true,
+      "attempt": 2,
+      "inputs": {
+        "artifacts/recovery_sensitive/uncapped/reference.npz": "36a1d4e00f4e59b9829e7b3dac0c1b9db86fad4052c1ebc0338def6986de1c10"
+      },
+      "outputs": {
+        "artifacts/exact_state_corner_training/attempt1_seed0/checkpoints/checkpoint_000016.pkl": "413b062d2e1655ced4f6cdd87af93b9265372c63432861a069c3acc6bd9035fa"
+      },
+      "recovered": true
+    },
+    "attempt1_seed0/screen1/exact_state": {
+      "completed": true,
+      "attempt": 2,
+      "inputs": {
+        "artifacts/recovery_sensitive/uncapped/reference.npz": "36a1d4e00f4e59b9829e7b3dac0c1b9db86fad4052c1ebc0338def6986de1c10",
+        "artifacts/exact_state_corner_training/attempt1_seed0/checkpoints/checkpoint_000016.pkl": "413b062d2e1655ced4f6cdd87af93b9265372c63432861a069c3acc6bd9035fa",
+        "artifacts/reference_racing_policy_15pct_active/attempt1_seed0/checkpoints/checkpoint_000032.pkl": "1888c2bc6636e7f4c268ecff2eaba17420acc236ecaf881ec00598e6e2a06582"
+      },
+      "outputs": {
+        "artifacts/exact_state_corner_training/attempt1_seed0/screen1/exact_state/completed.json": "b054f6ab5889852adbb59829e041ebf8f3bdf23a3ea8180d3c85b9fbc40108d1"
+      },
+      "recovered": true
+    },
+    "attempt1_seed0/train2": {
+      "completed": true,
+      "attempt": 2,
+      "inputs": {
+        "artifacts/recovery_sensitive/uncapped/reference.npz": "36a1d4e00f4e59b9829e7b3dac0c1b9db86fad4052c1ebc0338def6986de1c10"
+      },
+      "outputs": {
+        "artifacts/exact_state_corner_training/attempt1_seed0/checkpoints/checkpoint_000032.pkl": "2a2fc5027e8a181cc5c44ddfc21407e35441be2136f557834b890e5ddbac4d8c"
+      },
+      "recovered": true
+    },
+    "attempt1_seed0/screen2/exact_state": {
+      "completed": true,
+      "attempt": 2,
+      "inputs": {
+        "artifacts/recovery_sensitive/uncapped/reference.npz": "36a1d4e00f4e59b9829e7b3dac0c1b9db86fad4052c1ebc0338def6986de1c10",
+        "artifacts/exact_state_corner_training/attempt1_seed0/checkpoints/checkpoint_000032.pkl": "2a2fc5027e8a181cc5c44ddfc21407e35441be2136f557834b890e5ddbac4d8c",
+        "artifacts/reference_racing_policy_15pct_active/attempt1_seed0/checkpoints/checkpoint_000032.pkl": "1888c2bc6636e7f4c268ecff2eaba17420acc236ecaf881ec00598e6e2a06582"
+      },
+      "outputs": {
+        "artifacts/exact_state_corner_training/attempt1_seed0/screen2/exact_state/completed.json": "19de48ca56874b2f5013d64c329d63f47d2299519b27619670d45fb7fb6f4245"
+      },
+      "recovered": true
+    },
+    "attempt1_seed0/train3": {
+      "inputs": {
+        "artifacts/recovery_sensitive/uncapped/reference.npz": "36a1d4e00f4e59b9829e7b3dac0c1b9db86fad4052c1ebc0338def6986de1c10"
+      },
+      "attempt": 2,
+      "completed": true,
+      "outputs": {
+        "artifacts/exact_state_corner_training/attempt1_seed0/checkpoints/checkpoint_000048.pkl": "97264815a5cb6ac0da5547165293edf68043c77750996760dde9c3e17065c283"
+      }
+    },
+    "attempt1_seed0/screen3/exact_state": {
+      "inputs": {
+        "artifacts/recovery_sensitive/uncapped/reference.npz": "36a1d4e00f4e59b9829e7b3dac0c1b9db86fad4052c1ebc0338def6986de1c10",
+        "artifacts/exact_state_corner_training/attempt1_seed0/checkpoints/checkpoint_000048.pkl": "97264815a5cb6ac0da5547165293edf68043c77750996760dde9c3e17065c283",
+        "artifacts/reference_racing_policy_15pct_active/attempt1_seed0/checkpoints/checkpoint_000032.pkl": "1888c2bc6636e7f4c268ecff2eaba17420acc236ecaf881ec00598e6e2a06582"
+      },
+      "attempt": 1,
+      "completed": true,
+      "outputs": {
+        "artifacts/exact_state_corner_training/attempt1_seed0/screen3/exact_state/completed.json": "a10fcd4eac4d20b1710bd432ab4623fc2459d5bac6acb6fdc87c88227b0ef9cf"
+      }
+    },
+    "attempt1_seed0/train4": {
+      "inputs": {
+        "artifacts/recovery_sensitive/uncapped/reference.npz": "36a1d4e00f4e59b9829e7b3dac0c1b9db86fad4052c1ebc0338def6986de1c10"
+      },
+      "attempt": 2,
+      "completed": true,
+      "outputs": {
+        "artifacts/exact_state_corner_training/attempt1_seed0/checkpoints/checkpoint_000064.pkl": "d7ed1fd71579225f99039655c7f029dff83261cc24d39f74f06008f78b365d90"
+      }
+    },
+    "attempt1_seed0/screen4/exact_state": {
+      "inputs": {
+        "artifacts/recovery_sensitive/uncapped/reference.npz": "36a1d4e00f4e59b9829e7b3dac0c1b9db86fad4052c1ebc0338def6986de1c10",
+        "artifacts/exact_state_corner_training/attempt1_seed0/checkpoints/checkpoint_000064.pkl": "d7ed1fd71579225f99039655c7f029dff83261cc24d39f74f06008f78b365d90",
+        "artifacts/reference_racing_policy_15pct_active/attempt1_seed0/checkpoints/checkpoint_000032.pkl": "1888c2bc6636e7f4c268ecff2eaba17420acc236ecaf881ec00598e6e2a06582"
+      },
+      "attempt": 1,
+      "completed": true,
+      "outputs": {
+        "artifacts/exact_state_corner_training/attempt1_seed0/screen4/exact_state/completed.json": "37184da14cd298d8ef29942d452860b9cdc08e51b55d47abc34db06b84897b92"
+      }
+    }
+  },
+  "stages": {},
+  "elapsed_seconds": 42064.31076587728,
+  "remaining_seconds": 1135.689234955721,
+  "search_elapsed_limit": 38879.9775737721,
+  "stage": "paused",
+  "process_alive": false,
+  "child_pid": null,
+  "update_count": 32,
+  "completed_final_trials": 8,
+  "evaluation_scope": "exact_state",
+  "reference": {
+    "duration_s": 13.817079254997214,
+    "peak_speed_m_s": 10.738753297891806,
+    "model_fingerprint": "e05e42ec260bc3f2811008ac30b77dc53d07d4a5ae50e57f7257e9eb5e00ed8c",
+    "planner_cap_m_s": null,
+    "fingerprint": "d5e9f368be7db13b43aa2dc3486dd134ff6da7c4b2e0ce75059e09c40abb6986",
+    "sha256": "36a1d4e00f4e59b9829e7b3dac0c1b9db86fad4052c1ebc0338def6986de1c10"
+  },
+  "recovery": {
+    "reason": "Status file contained only NUL bytes; reconstructed from validated checkpoints and paired artifacts",
+    "source_spec_reconstructed": true,
+    "budget_method": "Last observed active elapsed plus wall time to corrupted status modification (conservative)",
+    "elapsed_seconds": 22071.77586983428,
+    "remaining_seconds": 21128.22413016572,
+    "verified_completed_tasks": [
+      "attempt1_seed0/nominal",
+      "attempt1_seed0/perturbed",
+      "attempt1_seed0/train1",
+      "attempt1_seed0/screen1/exact_state",
+      "attempt1_seed0/train2",
+      "attempt1_seed0/screen2/exact_state"
+    ]
+  },
+  "pid": 434,
+  "updated_at": 1791458877.3885837,
+  "candidate": "attempt1_seed0",
+  "current_log": "artifacts/exact_state_corner_training/attempt1_seed0_screen4_exact_state.attempt1.log",
+  "command": [
+    "/mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/.venv/bin/python",
+    "/mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/scripts/evaluate_racing_pair.py",
+    "--reference",
+    "artifacts/recovery_sensitive/uncapped/reference.npz",
+    "--checkpoint",
+    "artifacts/exact_state_corner_training/attempt1_seed0/checkpoints/checkpoint_000064.pkl",
+    "--incumbent-reference",
+    "artifacts/recovery_sensitive/uncapped/reference.npz",
+    "--incumbent-checkpoint",
+    "artifacts/reference_racing_policy_15pct_active/attempt1_seed0/checkpoints/checkpoint_000032.pkl",
+    "--condition",
+    "exact_state",
+    "--trials",
+    "8",
+    "--seed-start",
+    "20000400",
+    "--output-dir",
+    "artifacts/exact_state_corner_training/attempt1_seed0/screen4/exact_state"
+  ],
+  "reason": "User rolled back active checkpoint to update 32; training remains stopped",
+  "paused_from_stage": "attempt1_seed0/train3",
+  "completed_condition_trials": 8,
+  "active_checkpoint": "artifacts/exact_state_corner_training/attempt1_seed0/checkpoints/checkpoint_000032.pkl",
+  "rollback": {
+    "from_update": 64,
+    "to_update": 32,
+    "later_checkpoints_preserved": true,
+    "backup": "artifacts/exact_state_corner_training/rollback_backup_1791459496342633500",
+    "updated_at": 1791459496.8488512
+  }
+}

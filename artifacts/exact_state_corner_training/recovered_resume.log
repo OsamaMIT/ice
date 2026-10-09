@@ -1,0 +1,19 @@
+Traceback (most recent call last):
+  File "/mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/scripts/run_racing_optimization.py", line 178, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/scripts/run_racing_optimization.py", line 172, in main
+    try:pipeline(runner,args.incumbent_reference,args.incumbent_checkpoint,schedule,reference_only=args.reference_only,exact_state_only=args.exact_state_only)
+        ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/scripts/run_racing_optimization.py", line 101, in pipeline
+    runner.run(name+f'/train{block}',racing_training(reference,checkpoints,target,latest if latest.exists() else None,racing_objective=reference_only,exact_state_only=exact_state_only),
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        [checkpoint],inputs=[reference],checkpoints=checkpoints)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/scripts/run_speed_curriculum.py", line 184, in run
+    time.sleep(min(2., self.remaining()))
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/scripts/run_racing_optimization.py", line 170, in stop
+    def stop(signum,frame):raise KeyboardInterrupt()
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

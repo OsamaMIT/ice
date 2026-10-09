@@ -1,0 +1,30 @@
+Traceback (most recent call last):
+  File "/mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/scripts/run_speed_curriculum.py", line 438, in <module>
+    main()
+    ~~~~^^
+  File "/mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/scripts/run_speed_curriculum.py", line 425, in main
+    pipeline(runner, args.previous_reference, caps=args.caps,
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+             train_before_qualification=args.train_before_qualification,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+             motor_command_limit=args.motor_command_limit, screen_every=args.screen_every, recovery_only=args.recovery_only)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/scripts/run_speed_curriculum.py", line 312, in pipeline
+    final_validate(runner, previous_path, checkpoint)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/scripts/run_speed_curriculum.py", line 325, in final_validate
+    runner.run(f'final/{condition}', [sys.executable, str(ROOT / 'scripts/evaluate_seeded_condition.py'),
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        '--reference-path', str(previous_path), '--checkpoint', str(checkpoint),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        [condition_dir / 'completed.json'], inputs=[previous_path, checkpoint],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        progress_file=condition_dir / 'progress.json', completed_before=condition_index * 100)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/scripts/run_speed_curriculum.py", line 177, in run
+    time.sleep(min(2., self.remaining()))
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/scripts/run_speed_curriculum.py", line 422, in interrupted
+    raise KeyboardInterrupt()
+KeyboardInterrupt

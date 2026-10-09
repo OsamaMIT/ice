@@ -1,0 +1,210 @@
+{
+  "spec": {
+    "version": 2,
+    "caps": [
+      12.0,
+      24.0,
+      null
+    ],
+    "initial_reference": "5266fa4e631788f27aac30b885f24940fc3fbafb95eb3d2fa98e19ca1626b582",
+    "updates_per_block": 16,
+    "max_blocks": 8,
+    "conditions": {
+      "exact_state": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "position_1cm": [
+        0.01,
+        0.0,
+        0.0
+      ],
+      "position_3cm": [
+        0.03,
+        0.0,
+        0.0
+      ],
+      "velocity_2cms": [
+        0.0,
+        0.02,
+        0.0
+      ],
+      "velocity_5cms": [
+        0.0,
+        0.05,
+        0.0
+      ],
+      "delay_10ms": [
+        0.0,
+        0.0,
+        0.01
+      ],
+      "delay_30ms": [
+        0.0,
+        0.0,
+        0.03
+      ]
+    },
+    "screening_trials": 8,
+    "final_trials": 100,
+    "max_lap_ratio": 1.02,
+    "source": {
+      "src/a2rl_drone_training/__init__.py": "8b72b4fc844447710c7afcf047fc1d61713de8c2c6a9c641174e422a67817494",
+      "src/a2rl_drone_training/actions.py": "93e9308696b7f981dee1aaec0c399a8b9474d2d1ab7d798c198c6b2a820a8735",
+      "src/a2rl_drone_training/config.py": "bd617008806c516d8e037ae39b9c094fe7e3833c7d7af09c2daf9560c546af66",
+      "src/a2rl_drone_training/console.py": "5eb82d8119db6bc0a8c1012ee4fd40244a1211ef1f6ba6f16bc196789a68c7a3",
+      "src/a2rl_drone_training/course.py": "c7a30c3578df1dcbd278e16cecc79440e457067927d452d1494e4f50eb66d1cc",
+      "src/a2rl_drone_training/curriculum.py": "4ef92efcfaef99b091a83b169dfadfc9c620fc92fd9f5604393394c7ad0a27f8",
+      "src/a2rl_drone_training/env.py": "6ae0a4db12f068ec0cf4be4173774e8ba457cef27ad6b2df708edf7705333901",
+      "src/a2rl_drone_training/hierarchical/__init__.py": "02006ad818eb8cf76bef2f43bd3f5487024d88a8a61737d3d0ccc9e2b02a3820",
+      "src/a2rl_drone_training/hierarchical/cli.py": "00e86e9d4a7929318d1c6594ed777a24ebfd3b1f78511e7bb065ebd3d72bf405",
+      "src/a2rl_drone_training/hierarchical/diagnostics.py": "d6d22c8c5679ca1e4ccc458a86fab9864296183c399178a7ca6f2acff01c5f9f",
+      "src/a2rl_drone_training/hierarchical/dynamics.py": "fcf48094fc3ff517c74a76bd4026d2e6dd7646c6d5a76589ab1032727eea9678",
+      "src/a2rl_drone_training/hierarchical/environment.py": "9a19f11770cf4f9ad97d5d257d5797d56f16e6b0fa305c1b226ea98260ba546b",
+      "src/a2rl_drone_training/hierarchical/evaluation.py": "695605c18972ab79a58c7b2e504c24ff1da6ae2025861f1298ecd35a029c45b0",
+      "src/a2rl_drone_training/hierarchical/geometry.py": "b07172aa06eccf6547c189e2f2e12ec17f2cefb1a793fa8628988f10d5f3e818",
+      "src/a2rl_drone_training/hierarchical/mpc.py": "0c4be6f27335c4b2cb58c654b0b53e3e9271b1f1f3ef7afe1e9bff09a69a36bf",
+      "src/a2rl_drone_training/hierarchical/planner.py": "708c6fac5d36a83ca1635f26a132eb869856d9e7073491c1642ac8bc33810922",
+      "src/a2rl_drone_training/hierarchical/reference.py": "bbffb376d3f8981232275299637a50a45fa8f6ffcc5f97cb063ecceaa317d3f2",
+      "src/a2rl_drone_training/hierarchical/sensors.py": "2da5016c3a092960e57ced9a62c46caa3cb43225f3e3b1063338890ad548bbed",
+      "src/a2rl_drone_training/networks.py": "4ba3d2f9f74871c78beb2e32e2f09451f5e637f35daccbd79938710e6503bb13",
+      "src/a2rl_drone_training/normalization.py": "e52a0ee11e99b108029826fac1370f8d292b2fe41d70345db82dbf1581ed1234",
+      "src/a2rl_drone_training/observations.py": "a3b9d93b8329aa86410a40caad9db7d66ab31b1410f8cd801367eca361619c54",
+      "src/a2rl_drone_training/optim.py": "6677c933d8d7e74d0d6639f4a23e801819945d5b1d323a8c39e1d65e15525180",
+      "src/a2rl_drone_training/ppo.py": "078be9fbb3f171d83ba0865fb61c8bc7dafd75dc769756e7e69bebf234c21f78",
+      "src/a2rl_drone_training/rewards.py": "aa2090f53e72df23c8eea22f69d25fa68e742272231d06c5241986efe8fd3bf3",
+      "src/a2rl_drone_training/runtime.py": "35b31631b42064bf93f666bb81ea5ae6eb40dc451ee1886e2fef949292afec49",
+      "src/a2rl_drone_training/train.py": "1f766c465b39d4ca8a7d3de1368a51915879370187da463797370a91c14eb603",
+      "src/a2rl_drone_training/trainer.py": "07c170d8f8a5aa9cf563881561b886357883dbdb3e9032864cb806e36c22a4ce"
+    },
+    "runner": "05104c039d1eea46432108550849985a13a60bf31e17fc84df7640bc14874fe8",
+    "staging_helper": "e2659de52ffb27c5459a55b23903819890d6a35b17bc96efee35675e442033cd",
+    "dependencies": "4df88c33b6e3cdebdd2fa052df09f31fb53aa0e37926071bbfc75ca12dd614dd",
+    "evaluation_worker": "46ea5960865e20c5ff45175a5f94079216d7d4c4e0a0cc5ccb69cea8b8daae36",
+    "recovery_only": true,
+    "train_before_qualification": true,
+    "motor_command_limit": 0.8,
+    "prior_run": "fac3c29d879b0c25b563e379f55923e7af661225415edf2b085a1fbf1813f6e6",
+    "initial_elapsed_seconds": 12473.735953205
+  },
+  "tasks": {
+    "12mps/planning": {
+      "inputs": {
+        "artifacts/rl_speed_curriculum/12mps/reference.npz": "5266fa4e631788f27aac30b885f24940fc3fbafb95eb3d2fa98e19ca1626b582"
+      },
+      "attempt": 1,
+      "completed": true,
+      "outputs": {
+        "artifacts/recovery_assistant/12mps/reference.npz": "fcbb8008d0e04de3769abbc4a1b2aaea4d831cd57687638967fa21a29bafc1ae"
+      }
+    },
+    "12mps/train1": {
+      "inputs": {
+        "artifacts/recovery_assistant/12mps/reference.npz": "fcbb8008d0e04de3769abbc4a1b2aaea4d831cd57687638967fa21a29bafc1ae"
+      },
+      "attempt": 1,
+      "completed": false
+    }
+  },
+  "stages": {
+    "12mps": {
+      "reference": {
+        "duration_s": 13.680238779656987,
+        "peak_speed_m_s": 10.939725514304667,
+        "model_fingerprint": "e05e42ec260bc3f2811008ac30b77dc53d07d4a5ae50e57f7257e9eb5e00ed8c",
+        "planner_cap_m_s": 12.0,
+        "fingerprint": "a901458aa1a4c373cd07125e2dd9c34928b7754d49890c606dc21d14ccb4cc45",
+        "sha256": "fcbb8008d0e04de3769abbc4a1b2aaea4d831cd57687638967fa21a29bafc1ae"
+      },
+      "pretraining_qualification": "deferred_by_user"
+    }
+  },
+  "elapsed_seconds": 13476.512736155,
+  "completed_final_trials": 0,
+  "pid": 439,
+  "child_pid": null,
+  "process_alive": false,
+  "stage": "interrupted",
+  "updated_at": 1790751711.520355,
+  "remaining_seconds": 72923.487264625,
+  "budget_carried_from": "artifacts/rl_speed_curriculum/status.json",
+  "speed_cap_m_s": 12.0,
+  "update_count": 0,
+  "current_log": "artifacts/recovery_assistant/12mps_train1.attempt1.log",
+  "command": [
+    "/mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/.venv/bin/python",
+    "-m",
+    "a2rl_drone_training.train",
+    "--controller",
+    "residual_mpc",
+    "--reference-path",
+    "artifacts/recovery_assistant/12mps/reference.npz",
+    "--device",
+    "gpu",
+    "--gpu-memory-fraction",
+    "0.5",
+    "--num-envs",
+    "4",
+    "--physics",
+    "first_principles",
+    "--sim-hz",
+    "500",
+    "--policy-hz",
+    "20",
+    "--mpc-hz",
+    "100",
+    "--mpc-horizon",
+    "0.5",
+    "--mpc-prediction-dt",
+    "0.02",
+    "--mpc-iterations",
+    "5",
+    "--spawn-position-std",
+    ".08",
+    "--spawn-velocity-std",
+    ".15",
+    "--max-episode-time",
+    "120",
+    "--horizon",
+    "256",
+    "--minibatches",
+    "4",
+    "--update-epochs",
+    "4",
+    "--total-env-steps",
+    "16384",
+    "--schedule-env-steps",
+    "131072",
+    "--log-interval",
+    "1",
+    "--checkpoint-interval",
+    "1",
+    "--no-evaluation",
+    "--checkpoint-dir",
+    "artifacts/recovery_assistant/12mps/checkpoints",
+    "--seed",
+    "20260929",
+    "--estimator-position-noise-std",
+    ".01",
+    "--estimator-velocity-noise-std",
+    "0",
+    "--residual-recovery-only",
+    "--residual-position-limit",
+    ".1",
+    "--residual-speed-fraction",
+    ".15",
+    "--residual-speedup-fraction",
+    "0"
+  ],
+  "reference": {
+    "duration_s": 13.680238779656987,
+    "peak_speed_m_s": 10.939725514304667,
+    "model_fingerprint": "e05e42ec260bc3f2811008ac30b77dc53d07d4a5ae50e57f7257e9eb5e00ed8c",
+    "planner_cap_m_s": 12.0,
+    "fingerprint": "a901458aa1a4c373cd07125e2dd9c34928b7754d49890c606dc21d14ccb4cc45",
+    "sha256": "fcbb8008d0e04de3769abbc4a1b2aaea4d831cd57687638967fa21a29bafc1ae"
+  },
+  "qualification_note": "Training allowed before MPC qualification; promotion checks remain mandatory",
+  "reason": ""
+}

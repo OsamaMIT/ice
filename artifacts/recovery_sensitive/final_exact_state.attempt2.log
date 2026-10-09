@@ -1,0 +1,95 @@
+exact_state: 1/20 pairs complete
+exact_state: 2/20 pairs complete
+exact_state: 3/20 pairs complete
+exact_state: 4/20 pairs complete
+exact_state: 5/20 pairs complete
+exact_state: 6/20 pairs complete
+exact_state: 7/20 pairs complete
+exact_state: 8/20 pairs complete
+exact_state: 9/20 pairs complete
+exact_state: 10/20 pairs complete
+exact_state: 11/20 pairs complete
+exact_state: 12/20 pairs complete
+exact_state: 13/20 pairs complete
+exact_state: 14/20 pairs complete
+exact_state: 15/20 pairs complete
+exact_state: 16/20 pairs complete
+exact_state: 17/20 pairs complete
+exact_state: 18/20 pairs complete
+exact_state: 19/20 pairs complete
+-------------------------------------------------------------------------------
+| checkpoint/           |                                                     |
+|     status            | restored                                            |
+|     path              | artifacts/recovery_sensitive/uncapped/checkpoint... |
+|     total_timesteps   | 16,384                                              |
+|     updates           | 16                                                  |
+|     episodes          | 56                                                  |
+|     schedule_steps    | 16,384                                              |
+|     schedule_progress | 12.5%                                               |
+|     curriculum_phase  | A                                                   |
+|     migrated_schedule | no                                                  |
+|     pre_correction_v2 | no                                                  |
+-------------------------------------------------------------------------------
+Flight diagnostics: artifacts/recovery_sensitive/final/exact_state/seed10000019/baseline_live (initializing; first step includes compilation)
+Flight 1-1 | sim 0.1s | wall 44s | passed 0-0/12
+  error max 0.04m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 1.1s | wall 64s | passed 0-0/12
+  error max 0.04m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 2.1s | wall 83s | passed 1-1/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 3.1s | wall 101s | passed 3-3/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 4.1s | wall 120s | passed 4-4/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 5.1s | wall 138s | passed 4-4/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 6.1s | wall 157s | passed 5-5/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 7.1s | wall 175s | passed 5-5/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 8.1s | wall 192s | passed 6-6/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 9.1s | wall 210s | passed 6-6/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 10.1s | wall 227s | passed 8-8/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 11.1s | wall 246s | passed 8-8/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 12.1s | wall 264s | passed 10-10/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.1s | wall 282s | passed 10-10/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 14.0s | wall 301s | passed 12-12/12
+  error max 0.03m | collisions 0 | fallbacks 0
+Flight diagnostics completed: artifacts/recovery_sensitive/final/exact_state/seed10000019/baseline_live/progress.json
+Flight diagnostics: artifacts/recovery_sensitive/final/exact_state/seed10000019/learned_live (initializing; first step includes compilation)
+Flight 1-1 | sim 1.0s | wall 28s | passed 0-0/12
+  error max 0.05m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 2.0s | wall 46s | passed 1-1/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 3.0s | wall 64s | passed 3-3/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 4.0s | wall 82s | passed 4-4/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 5.0s | wall 100s | passed 4-4/12
+  error max 0.02m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 6.0s | wall 117s | passed 5-5/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 7.0s | wall 135s | passed 5-5/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 8.0s | wall 153s | passed 6-6/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 9.0s | wall 171s | passed 6-6/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 10.0s | wall 188s | passed 8-8/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 11.0s | wall 206s | passed 8-8/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 12.0s | wall 224s | passed 10-10/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.0s | wall 241s | passed 10-10/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 14.0s | wall 259s | passed 12-12/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight diagnostics completed: artifacts/recovery_sensitive/final/exact_state/seed10000019/learned_live/progress.json
+exact_state: 20/20 pairs complete

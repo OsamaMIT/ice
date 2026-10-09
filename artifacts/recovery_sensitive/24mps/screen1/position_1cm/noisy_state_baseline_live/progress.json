@@ -1,0 +1,113 @@
+{
+  "status": "completed",
+  "wall_seconds": 529.954103217,
+  "profiling_enabled": false,
+  "trials": [
+    {
+      "trial": 0,
+      "simulated_seconds": 14.010000228881836,
+      "gates_passed": 12,
+      "total_gates": 12,
+      "next_gate": null,
+      "tracking_error_m": 0.027434999123215675,
+      "collision": false,
+      "fallbacks": 0,
+      "success": true,
+      "active": false
+    },
+    {
+      "trial": 1,
+      "simulated_seconds": 13.692000389099121,
+      "gates_passed": 12,
+      "total_gates": 12,
+      "next_gate": null,
+      "tracking_error_m": 0.030916502699255943,
+      "collision": false,
+      "fallbacks": 0,
+      "success": true,
+      "active": false
+    },
+    {
+      "trial": 2,
+      "simulated_seconds": 13.670001029968262,
+      "gates_passed": 12,
+      "total_gates": 12,
+      "next_gate": null,
+      "tracking_error_m": 0.028854940086603165,
+      "collision": false,
+      "fallbacks": 0,
+      "success": true,
+      "active": false
+    },
+    {
+      "trial": 3,
+      "simulated_seconds": 14.076000213623047,
+      "gates_passed": 12,
+      "total_gates": 12,
+      "next_gate": null,
+      "tracking_error_m": 0.029341086745262146,
+      "collision": false,
+      "fallbacks": 0,
+      "success": true,
+      "active": false
+    },
+    {
+      "trial": 4,
+      "simulated_seconds": 13.736001014709473,
+      "gates_passed": 12,
+      "total_gates": 12,
+      "next_gate": null,
+      "tracking_error_m": 0.02972381003201008,
+      "collision": false,
+      "fallbacks": 0,
+      "success": true,
+      "active": false
+    },
+    {
+      "trial": 5,
+      "simulated_seconds": 13.85400104522705,
+      "gates_passed": 12,
+      "total_gates": 12,
+      "next_gate": null,
+      "tracking_error_m": 0.028345292434096336,
+      "collision": false,
+      "fallbacks": 0,
+      "success": true,
+      "active": false
+    },
+    {
+      "trial": 6,
+      "simulated_seconds": 14.066000938415527,
+      "gates_passed": 12,
+      "total_gates": 12,
+      "next_gate": null,
+      "tracking_error_m": 0.02725277468562126,
+      "collision": false,
+      "fallbacks": 0,
+      "success": true,
+      "active": false
+    },
+    {
+      "trial": 7,
+      "simulated_seconds": 14.316000938415527,
+      "gates_passed": 12,
+      "total_gates": 12,
+      "next_gate": null,
+      "tracking_error_m": 0.028374649584293365,
+      "collision": false,
+      "fallbacks": 0,
+      "success": true,
+      "active": false
+    }
+  ],
+  "timing": {
+    "mpc_seconds": 0.0,
+    "physics_seconds": 0.0,
+    "other_seconds": 529.877357177,
+    "gate_reward_seconds": 0.0,
+    "observation_seconds": 0.0,
+    "reference_seconds": 0.0,
+    "bookkeeping_seconds": 0.0,
+    "unclassified_seconds": 529.877357177
+  }
+}

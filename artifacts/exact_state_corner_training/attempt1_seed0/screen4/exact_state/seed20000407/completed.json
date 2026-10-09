@@ -1,0 +1,20 @@
+{
+  "signature": {
+    "reference": "36a1d4e00f4e59b9829e7b3dac0c1b9db86fad4052c1ebc0338def6986de1c10",
+    "checkpoint": "d7ed1fd71579225f99039655c7f029dff83261cc24d39f74f06008f78b365d90",
+    "incumbent_reference": "36a1d4e00f4e59b9829e7b3dac0c1b9db86fad4052c1ebc0338def6986de1c10",
+    "incumbent_checkpoint": "1888c2bc6636e7f4c268ecff2eaba17420acc236ecaf881ec00598e6e2a06582",
+    "condition": "exact_state",
+    "settings": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "seed": 20000407,
+    "implementation": "racing-pairs-v1"
+  },
+  "hashes": {
+    "baseline": "7c4a92ce3dcaf224348b5803d0307d217283f340da622f6ea95998987dcb9fff",
+    "learned": "d857334a903ede5bb1eccc3bab4fa46bf7a57c7a851f06956e2f3cd2cd9e843f"
+  }
+}

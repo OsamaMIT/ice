@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/scripts/run_speed_curriculum.py", line 431, in <module>
+    main()
+    ~~~~^^
+  File "/mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/scripts/run_speed_curriculum.py", line 396, in main
+    raise RuntimeError(f'Another simulation pipeline is active: PID {proc.name}')
+RuntimeError: Another simulation pipeline is active: PID 432

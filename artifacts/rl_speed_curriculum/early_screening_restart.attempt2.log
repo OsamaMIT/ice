@@ -1,0 +1,20 @@
+Traceback (most recent call last):
+  File "/mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/scripts/run_speed_curriculum.py", line 431, in <module>
+    main()
+    ~~~~^^
+  File "/mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/scripts/run_speed_curriculum.py", line 418, in main
+    pipeline(runner, args.previous_reference, caps=args.caps,
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+             train_before_qualification=args.train_before_qualification,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+             motor_command_limit=args.motor_command_limit, screen_every=args.screen_every)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/scripts/run_speed_curriculum.py", line 283, in pipeline
+    runner.run(f'{name}/train{block}', command, [checkpoint], [reference], checkpoints=checkpoints)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/scripts/run_speed_curriculum.py", line 177, in run
+    time.sleep(min(2., self.remaining()))
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/scripts/run_speed_curriculum.py", line 415, in interrupted
+    raise KeyboardInterrupt()
+KeyboardInterrupt

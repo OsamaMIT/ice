@@ -1,0 +1,71 @@
+Building trajectory problem: 288 intervals, refinement 0
+Solving for a dynamically feasible reference...
+
+******************************************************************************
+This program contains Ipopt, a library for large-scale nonlinear optimization.
+ Ipopt is released as open source code under the Eclipse Public License (EPL).
+         For more information visit https://github.com/coin-or/Ipopt
+******************************************************************************
+
+      solver  :   t_proc      (avg)   t_wall      (avg)    n_eval
+       nlp_f  |  98.07ms ( 20.79us)  93.03ms ( 19.72us)      4718
+       nlp_g  |   9.61 s (  2.04ms)   9.62 s (  2.04ms)      4718
+  nlp_grad_f  |  73.00ms ( 42.52us)  68.45ms ( 39.86us)      1717
+   nlp_jac_g  |  61.06 s ( 35.56ms)  61.09 s ( 35.58ms)      1717
+       total  | 175.79 s (175.79 s) 289.95 s (289.95 s)         1
+Validating feasibility candidate at physics rate...
+Validated feasible reference saved: artifacts/racing_optimization/attempt1_seed0/reference_feasible.npz
+Solving minimum-time trajectory...
+      solver  :   t_proc      (avg)   t_wall      (avg)    n_eval
+       nlp_f  |  10.42ms ( 10.63us)   9.76ms (  9.96us)       980
+       nlp_g  |   1.67 s (  1.71ms)   1.67 s (  1.71ms)       981
+  nlp_grad_f  |   9.74ms ( 31.03us)   9.16ms ( 29.18us)       314
+   nlp_jac_g  |   9.51 s ( 30.28ms)   9.51 s ( 30.30ms)       314
+       total  |  29.85 s ( 29.85 s)  29.87 s ( 29.87 s)         1
+Validating minimum_time candidate at physics rate...
+Refining speed candidate: 10 invalid intervals; maximum defect 0.06087
+Building trajectory problem: 576 intervals, refinement 1
+Solving for a dynamically feasible reference...
+      solver  :   t_proc      (avg)   t_wall      (avg)    n_eval
+       nlp_f  | 160.08ms ( 37.92us) 152.85ms ( 36.20us)      4222
+       nlp_g  |  17.11 s (  4.05ms)  17.11 s (  4.05ms)      4222
+  nlp_grad_f  | 149.44ms ( 74.65us) 143.77ms ( 71.81us)      2002
+   nlp_jac_g  | 134.96 s ( 67.41ms) 135.00 s ( 67.43ms)      2002
+       total  | 416.68 s (416.68 s) 416.74 s (416.74 s)         1
+Validating feasibility candidate at physics rate...
+Refining feasibility: 8 invalid intervals; maximum defect 0.007417
+{
+  "reference": "artifacts/racing_optimization/attempt1_seed0/reference.npz",
+  "duration_s": 13.817079254997214,
+  "fingerprint": "d5e9f368be7db13b43aa2dc3486dd134ff6da7c4b2e0ce75059e09c40abb6986",
+  "course_fingerprint": "d7616d8a532cdd107f20dfd7f21c5a6e6c0e2ac4fa08a2b40caaa5c77866417b",
+  "invalid_intervals": [],
+  "maximum_dynamics_defect": 0.021759863472360697,
+  "minimum_clearance_m": 0.002560555934906006,
+  "model_fingerprint": "e05e42ec260bc3f2811008ac30b77dc53d07d4a5ae50e57f7257e9eb5e00ed8c",
+  "objective": "feasibility",
+  "planner": {
+    "curvature_seed": false,
+    "dynamics_tolerance": 0.05,
+    "feasibility_only": false,
+    "frame_depth_m": 0.1,
+    "integration_substeps": 10,
+    "max_body_rate_rad_s": 12.0,
+    "max_iterations": 2000,
+    "max_refinements": 1,
+    "max_speed_m_s": null,
+    "motor_command_limit": 0.8,
+    "nodes_per_segment": 24,
+    "tracking_margin_m": 0.1,
+    "validation_hz": 500
+  },
+  "planner_fingerprint": "12527188001c6fee34189aa188c5d1e55b8d4082aaaa0f4b5078861dad632969",
+  "refinement": 0,
+  "schema": 1,
+  "solver": "ipopt",
+  "solver_converged": true,
+  "solver_iterations": 1329,
+  "solver_status": "Solved_To_Acceptable_Level",
+  "validated": true,
+  "vehicle_radius_m": 0.15
+}

@@ -1,0 +1,36 @@
+Traceback (most recent call last):
+  File "/mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/scripts/run_racing_optimization.py", line 170, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/scripts/run_racing_optimization.py", line 164, in main
+    try:pipeline(runner,args.incumbent_reference,args.incumbent_checkpoint,schedule,reference_only=args.reference_only)
+        ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/scripts/run_racing_optimization.py", line 101, in pipeline
+    old,new=paired(runner,name+f'/screen{block}/'+condition,reference,checkpoint,
+            ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        inc_ref,inc_ckpt,condition,8,seed)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/scripts/run_racing_optimization.py", line 35, in paired
+    runner.run(key,[sys.executable,str(ROOT/'scripts/evaluate_racing_pair.py'),
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        '--reference',str(reference),'--checkpoint',str(checkpoint),'--incumbent-reference',str(inc_ref),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        '--incumbent-checkpoint',str(inc_ckpt),'--condition',condition,'--trials',str(count),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        '--seed-start',str(seed),'--output-dir',str(folder)], [folder/'completed.json'],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        inputs=[reference,checkpoint,inc_ref,inc_ckpt],progress_file=folder/'progress.json',completed_before=completed_before)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/scripts/run_speed_curriculum.py", line 179, in run
+    if progress_file and Path(progress_file).exists():
+                         ~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3.13/pathlib/_abc.py", line 450, in exists
+    self.stat(follow_symlinks=follow_symlinks)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/pathlib/_local.py", line 515, in stat
+    return os.stat(self, follow_symlinks=follow_symlinks)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/scripts/run_racing_optimization.py", line 162, in stop
+    def stop(signum,frame):raise KeyboardInterrupt()
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

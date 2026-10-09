@@ -1,0 +1,6 @@
+Validating zero-offset MPC before residual training...
+Flight diagnostics: artifacts/recovery_assistant/12mps/checkpoints/baseline_diagnostics (initializing; first step includes compilation)
+Flight 1-1 | sim 0.1s | wall 191s | passed 0-0/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 1.1s | wall 211s | passed 1-1/12
+  error max 0.00m | collisions 0 | fallbacks 0

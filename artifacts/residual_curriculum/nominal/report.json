@@ -1,0 +1,22 @@
+{
+  "exact_state": {
+    "baseline": {
+      "peak_speed_m_s": 12.415162086486816,
+      "trials": 1,
+      "completion_rate": 0.0,
+      "collision_rate": 0.0,
+      "mean_lap_time_s": null,
+      "median_lap_time_s": null,
+      "lap_time_std_s": null,
+      "minimum_clearance_m": 0.01078808307647705,
+      "mean_tracking_error_m": 0.34499510814458806,
+      "fallbacks": 0,
+      "mpc_latency_median_s": 0.06815246299993305,
+      "mpc_latency_p95_s": 0.08938115320006546,
+      "physics_steps_per_second": 8.079967060152136
+    },
+    "accepted": false,
+    "reason": "No learned checkpoint supplied"
+  },
+  "accepted": false
+}

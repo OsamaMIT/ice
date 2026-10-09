@@ -1,0 +1,45 @@
+{
+  "failures": [
+    {
+      "interval": 145,
+      "gate": 4,
+      "time_start_s": 2.7510695361356725,
+      "time_end_s": 2.770630904456912,
+      "reason": "frame_collision",
+      "measured": true,
+      "limit": false
+    },
+    {
+      "interval": 289,
+      "gate": 7,
+      "time_start_s": 7.224117502863835,
+      "time_end_s": 7.265958349459216,
+      "reason": "frame_collision",
+      "measured": true,
+      "limit": false
+    },
+    {
+      "interval": 433,
+      "gate": 10,
+      "time_start_s": 11.090546798676044,
+      "time_end_s": 11.111530238905702,
+      "reason": "frame_collision",
+      "measured": true,
+      "limit": false
+    }
+  ],
+  "validated": false,
+  "invalid_intervals": [
+    145,
+    289,
+    433
+  ],
+  "maximum_dynamics_defect": 0.007255150306348351,
+  "minimum_clearance_m": 0.005522549152374268,
+  "stage": "feasibility",
+  "refinement": 1,
+  "solver_status": "Maximum_Iterations_Exceeded",
+  "duration_s": 14.068284560291529,
+  "peak_speed_m_s": 10.412668274550942,
+  "gate_offset_fraction": 0.5
+}

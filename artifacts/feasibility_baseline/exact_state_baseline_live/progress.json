@@ -1,0 +1,24 @@
+{
+  "status": "interrupted",
+  "wall_seconds": 1153.639618909,
+  "trials": [
+    {
+      "trial": 0,
+      "simulated_seconds": 7.90000057220459,
+      "gates_passed": 2,
+      "total_gates": 12,
+      "next_gate": 3,
+      "tracking_error_m": 0.00030983638134784997,
+      "collision": false,
+      "fallbacks": 0,
+      "success": false,
+      "active": true
+    }
+  ],
+  "timing": {
+    "mpc_seconds": 87.93813739898997,
+    "physics_seconds": 6.439217643007396,
+    "other_seconds": 1054.3765693470023
+  },
+  "error": ""
+}

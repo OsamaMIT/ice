@@ -1,0 +1,237 @@
+{
+  "reproduction": true,
+  "candidates": [
+    {
+      "file": "artifacts/racing_optimization/attempt1_seed0/diagnostics/mesh0_feasibility.json",
+      "report": {
+        "failures": [],
+        "validated": true,
+        "invalid_intervals": [],
+        "maximum_dynamics_defect": 0.020942793330161524,
+        "minimum_clearance_m": 0.002670884132385254,
+        "stage": "feasibility",
+        "refinement": 0,
+        "solver_status": "Solved_To_Acceptable_Level",
+        "duration_s": 13.853289691479048,
+        "peak_speed_m_s": 10.678948787087574,
+        "gate_offset_fraction": 0.0
+      }
+    },
+    {
+      "file": "artifacts/racing_optimization/attempt1_seed0/diagnostics/mesh0_minimum_time.json",
+      "report": {
+        "failures": [
+          {
+            "interval": 0,
+            "gate": 1,
+            "time_start_s": 0.0,
+            "time_end_s": 0.03387977021303736,
+            "reason": "dynamics_defect",
+            "measured": 0.060865957455351616,
+            "limit": 0.05
+          },
+          {
+            "interval": 49,
+            "gate": 3,
+            "time_start_s": 1.9800652921525075,
+            "time_end_s": 2.001510645479439,
+            "reason": "frame_collision",
+            "measured": true,
+            "limit": false
+          },
+          {
+            "interval": 72,
+            "gate": 4,
+            "time_start_s": 2.4733084186719254,
+            "time_end_s": 2.5078724132120462,
+            "reason": "frame_collision",
+            "measured": true,
+            "limit": false
+          },
+          {
+            "interval": 119,
+            "gate": 5,
+            "time_start_s": 4.7614841231961496,
+            "time_end_s": 4.8249032464814245,
+            "reason": "frame_collision",
+            "measured": true,
+            "limit": false
+          },
+          {
+            "interval": 120,
+            "gate": 6,
+            "time_start_s": 4.8249032464814245,
+            "time_end_s": 4.896141625208663,
+            "reason": "frame_collision",
+            "measured": true,
+            "limit": false
+          },
+          {
+            "interval": 143,
+            "gate": 6,
+            "time_start_s": 6.463385957207902,
+            "time_end_s": 6.53462433593514,
+            "reason": "frame_collision",
+            "measured": true,
+            "limit": false
+          },
+          {
+            "interval": 144,
+            "gate": 7,
+            "time_start_s": 6.53462433593514,
+            "time_end_s": 6.6123039737597376,
+            "reason": "frame_collision",
+            "measured": true,
+            "limit": false
+          },
+          {
+            "interval": 167,
+            "gate": 7,
+            "time_start_s": 8.321256005900885,
+            "time_end_s": 8.398935643725483,
+            "reason": "frame_collision",
+            "measured": true,
+            "limit": false
+          },
+          {
+            "interval": 216,
+            "gate": 10,
+            "time_start_s": 10.15473177440727,
+            "time_end_s": 10.19179875542101,
+            "reason": "frame_collision",
+            "measured": true,
+            "limit": false
+          },
+          {
+            "interval": 238,
+            "gate": 10,
+            "time_start_s": 10.970205356709528,
+            "time_end_s": 11.007272337723267,
+            "reason": "frame_collision",
+            "measured": true,
+            "limit": false
+          }
+        ],
+        "validated": false,
+        "invalid_intervals": [
+          0,
+          49,
+          72,
+          119,
+          120,
+          143,
+          144,
+          167,
+          216,
+          238
+        ],
+        "maximum_dynamics_defect": 0.060865957455351616,
+        "minimum_clearance_m": -0.02247573435306549,
+        "stage": "minimum_time",
+        "refinement": 0,
+        "solver_status": "Solved_To_Acceptable_Level",
+        "duration_s": 12.95244761695999,
+        "peak_speed_m_s": 11.702521449813723,
+        "gate_offset_fraction": 0.0
+      }
+    },
+    {
+      "file": "artifacts/racing_optimization/attempt1_seed0/diagnostics/mesh1_feasibility.json",
+      "report": {
+        "failures": [
+          {
+            "interval": 98,
+            "gate": 3,
+            "time_start_s": 2.1129740282940523,
+            "time_end_s": 2.1243061625480726,
+            "reason": "frame_collision",
+            "measured": true,
+            "limit": false
+          },
+          {
+            "interval": 145,
+            "gate": 4,
+            "time_start_s": 2.65276099842264,
+            "time_end_s": 2.6712697928662963,
+            "reason": "frame_collision",
+            "measured": true,
+            "limit": false
+          },
+          {
+            "interval": 241,
+            "gate": 6,
+            "time_start_s": 5.154797789322955,
+            "time_end_s": 5.192270583781482,
+            "reason": "frame_collision",
+            "measured": true,
+            "limit": false
+          },
+          {
+            "interval": 286,
+            "gate": 6,
+            "time_start_s": 6.841073539956696,
+            "time_end_s": 6.878546334415224,
+            "reason": "frame_collision",
+            "measured": true,
+            "limit": false
+          },
+          {
+            "interval": 289,
+            "gate": 7,
+            "time_start_s": 6.957295496721883,
+            "time_end_s": 6.998571864570016,
+            "reason": "frame_collision",
+            "measured": true,
+            "limit": false
+          },
+          {
+            "interval": 334,
+            "gate": 7,
+            "time_start_s": 8.814732049887835,
+            "time_end_s": 8.856008417735968,
+            "reason": "frame_collision",
+            "measured": true,
+            "limit": false
+          },
+          {
+            "interval": 433,
+            "gate": 10,
+            "time_start_s": 10.766375636098559,
+            "time_end_s": 10.786658832174544,
+            "reason": "frame_collision",
+            "measured": true,
+            "limit": false
+          },
+          {
+            "interval": 477,
+            "gate": 10,
+            "time_start_s": 11.658836263441891,
+            "time_end_s": 11.679119459517876,
+            "reason": "frame_collision",
+            "measured": true,
+            "limit": false
+          }
+        ],
+        "validated": false,
+        "invalid_intervals": [
+          98,
+          145,
+          241,
+          286,
+          289,
+          334,
+          433,
+          477
+        ],
+        "maximum_dynamics_defect": 0.007416663757362135,
+        "minimum_clearance_m": 0.0013374090194702148,
+        "stage": "feasibility",
+        "refinement": 1,
+        "solver_status": "Maximum_Iterations_Exceeded",
+        "duration_s": 13.7471507200467,
+        "peak_speed_m_s": 10.93393162798119,
+        "gate_offset_fraction": 0.0
+      }
+    }
+  ]
+}

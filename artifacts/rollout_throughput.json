@@ -1,0 +1,35 @@
+{
+  "4": {
+    "seconds": {
+      "profiled": 7.364668171999995,
+      "normal": 5.524469143000005
+    },
+    "policy_transitions_per_second": 4.344308815700445,
+    "profiling_speedup": 1.3330997026803357,
+    "equivalent": true,
+    "max_abs_difference": 0.0,
+    "peak_bytes_in_use": 184668416
+  },
+  "8": {
+    "seconds": {
+      "profiled": 10.317575169000008,
+      "normal": 8.238326091999966
+    },
+    "policy_transitions_per_second": 5.826426323013799,
+    "profiling_speedup": 1.2523873240486498,
+    "equivalent": true,
+    "max_abs_difference": 0.0,
+    "peak_bytes_in_use": 201482240
+  },
+  "16": {
+    "seconds": {
+      "profiled": 10.934528756999953,
+      "normal": 8.50541406299999
+    },
+    "policy_transitions_per_second": 11.286928453914603,
+    "profiling_speedup": 1.2855962891409403,
+    "equivalent": true,
+    "max_abs_difference": 0.0,
+    "peak_bytes_in_use": 201578240
+  }
+}

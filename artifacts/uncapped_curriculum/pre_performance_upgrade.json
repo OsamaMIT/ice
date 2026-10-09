@@ -1,0 +1,158 @@
+{
+  "spec": {
+    "version": 2,
+    "caps": [
+      6.0,
+      12.0,
+      24.0,
+      null
+    ],
+    "initial_reference": "7a01e3afa077fdb429d860eff1d88e5ab549e4a313b2bba68dcde9329142ba2e",
+    "updates_per_block": 32,
+    "max_blocks": 4,
+    "conditions": {
+      "exact_state": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "position_1cm": [
+        0.01,
+        0.0,
+        0.0
+      ],
+      "position_3cm": [
+        0.03,
+        0.0,
+        0.0
+      ],
+      "velocity_2cms": [
+        0.0,
+        0.02,
+        0.0
+      ],
+      "velocity_5cms": [
+        0.0,
+        0.05,
+        0.0
+      ],
+      "delay_10ms": [
+        0.0,
+        0.0,
+        0.01
+      ],
+      "delay_30ms": [
+        0.0,
+        0.0,
+        0.03
+      ]
+    },
+    "screening_trials": 8,
+    "final_trials": 100,
+    "max_lap_ratio": 1.02,
+    "source": {
+      "src/a2rl_drone_training/__init__.py": "8b72b4fc844447710c7afcf047fc1d61713de8c2c6a9c641174e422a67817494",
+      "src/a2rl_drone_training/actions.py": "93e9308696b7f981dee1aaec0c399a8b9474d2d1ab7d798c198c6b2a820a8735",
+      "src/a2rl_drone_training/config.py": "36e491e608d95688977212c852ee93d96f664b5f402321f2436e206da577254d",
+      "src/a2rl_drone_training/console.py": "5eb82d8119db6bc0a8c1012ee4fd40244a1211ef1f6ba6f16bc196789a68c7a3",
+      "src/a2rl_drone_training/course.py": "c7a30c3578df1dcbd278e16cecc79440e457067927d452d1494e4f50eb66d1cc",
+      "src/a2rl_drone_training/curriculum.py": "4ef92efcfaef99b091a83b169dfadfc9c620fc92fd9f5604393394c7ad0a27f8",
+      "src/a2rl_drone_training/env.py": "6ae0a4db12f068ec0cf4be4173774e8ba457cef27ad6b2df708edf7705333901",
+      "src/a2rl_drone_training/hierarchical/__init__.py": "02006ad818eb8cf76bef2f43bd3f5487024d88a8a61737d3d0ccc9e2b02a3820",
+      "src/a2rl_drone_training/hierarchical/cli.py": "f77e2a0376c6f70c50c6f46f2af1589aecb71b4275c10c40f362db11dc53c13f",
+      "src/a2rl_drone_training/hierarchical/diagnostics.py": "a1f99280d56ad9f4b5bed9625fd92a70766b9bd0170bfd78544eac2f4c15d6b3",
+      "src/a2rl_drone_training/hierarchical/dynamics.py": "fcf48094fc3ff517c74a76bd4026d2e6dd7646c6d5a76589ab1032727eea9678",
+      "src/a2rl_drone_training/hierarchical/environment.py": "2a48e3c2ed9f9ff59ff15e4cafe1916cacc2d95e81c59af661e9cab82c28973c",
+      "src/a2rl_drone_training/hierarchical/evaluation.py": "4979399b9d34e58d6304dbf3b255843f4f2d41d1c391b877b98f17f5ce1f5a47",
+      "src/a2rl_drone_training/hierarchical/geometry.py": "b07172aa06eccf6547c189e2f2e12ec17f2cefb1a793fa8628988f10d5f3e818",
+      "src/a2rl_drone_training/hierarchical/mpc.py": "0c4be6f27335c4b2cb58c654b0b53e3e9271b1f1f3ef7afe1e9bff09a69a36bf",
+      "src/a2rl_drone_training/hierarchical/planner.py": "727724a107bec3ba7ee818a581e94ad8798ff822e2a8ae8b8d7370bab468f863",
+      "src/a2rl_drone_training/hierarchical/reference.py": "bbffb376d3f8981232275299637a50a45fa8f6ffcc5f97cb063ecceaa317d3f2",
+      "src/a2rl_drone_training/hierarchical/sensors.py": "2da5016c3a092960e57ced9a62c46caa3cb43225f3e3b1063338890ad548bbed",
+      "src/a2rl_drone_training/networks.py": "4ba3d2f9f74871c78beb2e32e2f09451f5e637f35daccbd79938710e6503bb13",
+      "src/a2rl_drone_training/normalization.py": "e52a0ee11e99b108029826fac1370f8d292b2fe41d70345db82dbf1581ed1234",
+      "src/a2rl_drone_training/observations.py": "a3b9d93b8329aa86410a40caad9db7d66ab31b1410f8cd801367eca361619c54",
+      "src/a2rl_drone_training/optim.py": "6677c933d8d7e74d0d6639f4a23e801819945d5b1d323a8c39e1d65e15525180",
+      "src/a2rl_drone_training/ppo.py": "078be9fbb3f171d83ba0865fb61c8bc7dafd75dc769756e7e69bebf234c21f78",
+      "src/a2rl_drone_training/rewards.py": "aa2090f53e72df23c8eea22f69d25fa68e742272231d06c5241986efe8fd3bf3",
+      "src/a2rl_drone_training/runtime.py": "35b31631b42064bf93f666bb81ea5ae6eb40dc451ee1886e2fef949292afec49",
+      "src/a2rl_drone_training/train.py": "cb885d34c513aca73c58622b2a1a58ef9bf5c77a5739c4e752e4a67df5eda78a",
+      "src/a2rl_drone_training/trainer.py": "bf6025aa7ec8350a99f64388fea56a77f0ccc43c29910aea407517a56d027c22"
+    },
+    "runner": "83a94dab61a22b1a1d80901590c15e29d03a170365b586fd0ac53acdc2742fd9",
+    "staging_helper": "e2659de52ffb27c5459a55b23903819890d6a35b17bc96efee35675e442033cd",
+    "dependencies": "4df88c33b6e3cdebdd2fa052df09f31fb53aa0e37926071bbfc75ca12dd614dd"
+  },
+  "tasks": {
+    "6mps/planning": {
+      "inputs": {
+        "artifacts/arena_reference.npz": "7a01e3afa077fdb429d860eff1d88e5ab549e4a313b2bba68dcde9329142ba2e"
+      },
+      "attempt": 1,
+      "completed": true,
+      "outputs": {
+        "artifacts/uncapped_curriculum/6mps/reference.npz": "60307010cdeadf7fca454440349177901de3938fdc8911fec8a4ff2f522a3bd5"
+      }
+    },
+    "6mps/nominal": {
+      "inputs": {
+        "artifacts/uncapped_curriculum/6mps/reference.npz": "60307010cdeadf7fca454440349177901de3938fdc8911fec8a4ff2f522a3bd5"
+      },
+      "attempt": 1,
+      "completed": false
+    }
+  },
+  "stages": {
+    "6mps": {
+      "reference": {
+        "duration_s": 53.37465856293674,
+        "peak_speed_m_s": 3.0134398724008076,
+        "model_fingerprint": "e05e42ec260bc3f2811008ac30b77dc53d07d4a5ae50e57f7257e9eb5e00ed8c",
+        "planner_cap_m_s": 6.0,
+        "fingerprint": "e14c48962dc87ee604e2a3fb65a47211cf07f3d9caac39d6ea65f561ec833846",
+        "sha256": "60307010cdeadf7fca454440349177901de3938fdc8911fec8a4ff2f522a3bd5"
+      }
+    }
+  },
+  "elapsed_seconds": 1216.882055985,
+  "completed_final_trials": 0,
+  "pid": 341,
+  "child_pid": null,
+  "process_alive": false,
+  "stage": "interrupted",
+  "updated_at": 1790661157.3610308,
+  "remaining_seconds": 85183.11794452,
+  "speed_cap_m_s": 6.0,
+  "update_count": 0,
+  "current_log": "artifacts/uncapped_curriculum/6mps_nominal.attempt1.log",
+  "command": [
+    "/mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/.venv/bin/a2rl-drone-evaluate",
+    "--reference-path",
+    "artifacts/uncapped_curriculum/6mps/reference.npz",
+    "--device",
+    "gpu",
+    "--num-envs",
+    "1",
+    "--trials",
+    "1",
+    "--seed",
+    "929",
+    "--spawn-position-std",
+    "0",
+    "--spawn-velocity-std",
+    "0",
+    "--max-episode-time",
+    "120",
+    "--output-dir",
+    "artifacts/uncapped_curriculum/6mps/nominal",
+    "--suite",
+    "exact_state",
+    "--position-noise-std",
+    "0.0",
+    "--velocity-noise-std",
+    "0.0",
+    "--sensor-delay",
+    "0.0"
+  ],
+  "reason": ""
+}

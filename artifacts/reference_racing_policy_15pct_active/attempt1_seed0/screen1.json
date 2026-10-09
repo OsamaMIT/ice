@@ -1,0 +1,95 @@
+{
+  "passed": false,
+  "conditions": {
+    "exact_state": {
+      "incumbent": {
+        "peak_speed_m_s": 10.745115280151367,
+        "termination_counts": {
+          "crashed": 0,
+          "out_of_bounds": 0,
+          "missed_gate": 0,
+          "deadline": 0
+        },
+        "trials": 8,
+        "completion_rate": 1.0,
+        "collision_rate": 0.0,
+        "mean_lap_time_s": 13.874250531196594,
+        "median_lap_time_s": 13.889000415802002,
+        "lap_time_std_s": 0.11383516362969337,
+        "minimum_clearance_m": 0.09810155630111694,
+        "mean_tracking_error_m": 0.011831398790243627,
+        "fallbacks": 0,
+        "mpc_latency_median_s": 0.06253020400004061,
+        "mpc_latency_p95_s": 0.07864866399995663,
+        "physics_steps_per_second": 26.679264050751097
+      },
+      "candidate": {
+        "peak_speed_m_s": 10.74641227722168,
+        "termination_counts": {
+          "crashed": 0,
+          "out_of_bounds": 0,
+          "missed_gate": 0,
+          "deadline": 0
+        },
+        "trials": 8,
+        "completion_rate": 1.0,
+        "collision_rate": 0.0,
+        "mean_lap_time_s": 13.843000650405884,
+        "median_lap_time_s": 13.867000579833984,
+        "lap_time_std_s": 0.11740522545985499,
+        "minimum_clearance_m": 0.09341055154800415,
+        "mean_tracking_error_m": 0.013544382965505346,
+        "fallbacks": 0,
+        "mpc_latency_median_s": 0.06188731549991644,
+        "mpc_latency_p95_s": 0.08146277370001369,
+        "physics_steps_per_second": 25.906686079494545
+      },
+      "failure": "Candidate lap time exceeds permitted incumbent ratio 0.99"
+    },
+    "position_1cm": {
+      "incumbent": {
+        "peak_speed_m_s": 10.743367195129395,
+        "termination_counts": {
+          "crashed": 0,
+          "out_of_bounds": 0,
+          "missed_gate": 0,
+          "deadline": 0
+        },
+        "trials": 8,
+        "completion_rate": 1.0,
+        "collision_rate": 0.0,
+        "mean_lap_time_s": 13.853250861167908,
+        "median_lap_time_s": 13.788000583648682,
+        "lap_time_std_s": 0.14308714944874426,
+        "minimum_clearance_m": 0.09658406674861908,
+        "mean_tracking_error_m": 0.015000006739139756,
+        "fallbacks": 0,
+        "mpc_latency_median_s": 0.062195561999942583,
+        "mpc_latency_p95_s": 0.14540554230015912,
+        "physics_steps_per_second": 21.379099442183918
+      },
+      "candidate": {
+        "peak_speed_m_s": 10.741617202758789,
+        "termination_counts": {
+          "crashed": 0,
+          "out_of_bounds": 0,
+          "missed_gate": 0,
+          "deadline": 0
+        },
+        "trials": 8,
+        "completion_rate": 1.0,
+        "collision_rate": 0.0,
+        "mean_lap_time_s": 13.832500576972961,
+        "median_lap_time_s": 13.765000820159912,
+        "lap_time_std_s": 0.13959855366921042,
+        "minimum_clearance_m": 0.09063166379928589,
+        "mean_tracking_error_m": 0.016527323511642072,
+        "fallbacks": 0,
+        "mpc_latency_median_s": 0.06252492599969628,
+        "mpc_latency_p95_s": 0.1491460904499263,
+        "physics_steps_per_second": 20.53839494295251
+      },
+      "failure": "Candidate lap time exceeds permitted incumbent ratio 0.99"
+    }
+  }
+}

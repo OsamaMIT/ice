@@ -1,0 +1,25 @@
+Traceback (most recent call last):
+  File "/mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/scripts/run_racing_optimization.py", line 160, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/scripts/run_racing_optimization.py", line 154, in main
+    try:pipeline(runner,args.incumbent_reference,args.incumbent_checkpoint,schedule)
+        ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/scripts/run_racing_optimization.py", line 60, in pipeline
+    runner.run(name+'/planning',[str(ROOT/'.venv/bin/a2rl-drone-plan'),'--max-speed','none',
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        '--warm-start',str(inc_ref),'--motor-command-limit',str(motor),'--tracking-margin',str(margin),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        '--gate-offset-fraction',str(fraction),'--diagnostics-dir',str(folder/'diagnostics'),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        '--nodes-per-segment','24','--max-refinements','1','--max-iterations','2000',
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        '--output',str(reference)],[reference],inputs=[inc_ref],cpu=True)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/scripts/run_speed_curriculum.py", line 184, in run
+    time.sleep(min(2., self.remaining()))
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/scripts/run_racing_optimization.py", line 152, in stop
+    def stop(signum,frame):raise KeyboardInterrupt()
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

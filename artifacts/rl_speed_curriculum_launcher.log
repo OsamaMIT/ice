@@ -1,0 +1,20 @@
+Traceback (most recent call last):
+  File "/mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/scripts/run_speed_curriculum.py", line 427, in <module>
+    runner.save(process_alive=False, child_pid=None)
+    
+  File "/mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/scripts/run_speed_curriculum.py", line 414, in main
+    def interrupted(signum, frame):
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        raise KeyboardInterrupt()
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+    signal.signal(signal.SIGTERM, interrupted)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/scripts/run_speed_curriculum.py", line 282, in pipeline
+    command += ['--restore-checkpoint', str(latest)]
+  File "/mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/scripts/run_speed_curriculum.py", line 177, in run
+    time.sleep(min(2., self.remaining()))
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/scripts/run_speed_curriculum.py", line 411, in interrupted
+    if carried and not args.resume:
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

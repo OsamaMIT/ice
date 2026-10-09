@@ -1,0 +1,65 @@
+{
+  "failures": [
+    {
+      "interval": 0,
+      "gate": 1,
+      "time_start_s": 0.0,
+      "time_end_s": 0.03371332385264789,
+      "reason": "dynamics_defect",
+      "measured": 0.06246288627784713,
+      "limit": 0.05
+    },
+    {
+      "interval": 72,
+      "gate": 4,
+      "time_start_s": 2.4831372095727398,
+      "time_end_s": 2.518916113769591,
+      "reason": "frame_collision",
+      "measured": true,
+      "limit": false
+    },
+    {
+      "interval": 144,
+      "gate": 7,
+      "time_start_s": 6.624238950218274,
+      "time_end_s": 6.701890070660149,
+      "reason": "frame_collision",
+      "measured": true,
+      "limit": false
+    },
+    {
+      "interval": 216,
+      "gate": 10,
+      "time_start_s": 10.202804612628102,
+      "time_end_s": 10.24143426231631,
+      "reason": "frame_collision",
+      "measured": true,
+      "limit": false
+    },
+    {
+      "interval": 262,
+      "gate": 11,
+      "time_start_s": 12.332969094845557,
+      "time_end_s": 12.387653317104668,
+      "reason": "frame_collision",
+      "measured": true,
+      "limit": false
+    }
+  ],
+  "validated": false,
+  "invalid_intervals": [
+    0,
+    72,
+    144,
+    216,
+    262
+  ],
+  "maximum_dynamics_defect": 0.06246288627784713,
+  "minimum_clearance_m": -0.010460451245307922,
+  "stage": "minimum_time",
+  "refinement": 0,
+  "solver_status": "Maximum_Iterations_Exceeded",
+  "duration_s": 12.952061769494422,
+  "peak_speed_m_s": 11.382174629631765,
+  "gate_offset_fraction": 0.5
+}

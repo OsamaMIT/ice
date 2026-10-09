@@ -1,0 +1,61 @@
+Building trajectory problem: 288 intervals, refinement 0
+Solving for a dynamically feasible reference...
+
+******************************************************************************
+This program contains Ipopt, a library for large-scale nonlinear optimization.
+ Ipopt is released as open source code under the Eclipse Public License (EPL).
+         For more information visit https://github.com/coin-or/Ipopt
+******************************************************************************
+
+      solver  :   t_proc      (avg)   t_wall      (avg)    n_eval
+       nlp_f  |  64.35ms ( 16.52us)  60.47ms ( 15.52us)      3896
+       nlp_g  |   6.60 s (  1.69ms)   6.61 s (  1.70ms)      3896
+  nlp_grad_f  |  50.77ms ( 38.14us)  47.59ms ( 35.75us)      1331
+   nlp_jac_g  |  38.61 s ( 29.01ms)  38.64 s ( 29.03ms)      1331
+       total  | 110.80 s (110.80 s) 110.90 s (110.90 s)         1
+Validating feasibility candidate at physics rate...
+Validated feasible reference saved: artifacts/recovery_sensitive/uncapped/reference_feasible.npz
+Solving minimum-time trajectory...
+      solver  :   t_proc      (avg)   t_wall      (avg)    n_eval
+       nlp_f  |  34.57ms ( 11.31us)  30.85ms ( 10.10us)      3056
+       nlp_g  |   5.50 s (  1.80ms)   5.50 s (  1.80ms)      3056
+  nlp_grad_f  |  23.24ms ( 30.87us)  21.06ms ( 27.97us)       753
+   nlp_jac_g  |  23.25 s ( 30.88ms)   2.33ks (  3.10 s)       753
+       total  |  78.86 s ( 78.86 s)   2.39ks (  2.39ks)         1
+Validating minimum_time candidate at physics rate...
+Speed candidate failed dense validation; retaining validated feasible reference.
+{
+  "reference": "artifacts/recovery_sensitive/uncapped/reference.npz",
+  "duration_s": 13.817079254997214,
+  "fingerprint": "d5e9f368be7db13b43aa2dc3486dd134ff6da7c4b2e0ce75059e09c40abb6986",
+  "schema": 1,
+  "course_fingerprint": "d7616d8a532cdd107f20dfd7f21c5a6e6c0e2ac4fa08a2b40caaa5c77866417b",
+  "model_fingerprint": "e05e42ec260bc3f2811008ac30b77dc53d07d4a5ae50e57f7257e9eb5e00ed8c",
+  "planner_fingerprint": "12527188001c6fee34189aa188c5d1e55b8d4082aaaa0f4b5078861dad632969",
+  "planner": {
+    "feasibility_only": false,
+    "curvature_seed": false,
+    "tracking_margin_m": 0.1,
+    "frame_depth_m": 0.1,
+    "nodes_per_segment": 24,
+    "max_refinements": 1,
+    "max_iterations": 2000,
+    "motor_command_limit": 0.8,
+    "max_speed_m_s": null,
+    "max_body_rate_rad_s": 12.0,
+    "validation_hz": 500,
+    "integration_substeps": 10,
+    "dynamics_tolerance": 0.05
+  },
+  "vehicle_radius_m": 0.15,
+  "solver": "ipopt",
+  "solver_status": "Solved_To_Acceptable_Level",
+  "solver_converged": true,
+  "solver_iterations": 1329,
+  "objective": "feasibility",
+  "refinement": 0,
+  "validated": true,
+  "invalid_intervals": [],
+  "maximum_dynamics_defect": 0.021759863472360697,
+  "minimum_clearance_m": 0.002560555934906006
+}

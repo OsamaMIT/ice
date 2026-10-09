@@ -1,0 +1,29 @@
+{
+  "exact_state": {
+    "baseline": {
+      "diagnostic_mpc_seconds": 389.2990730069887,
+      "diagnostic_physics_seconds": 34.17052454799614,
+      "diagnostic_other_seconds": 759.0486841470156,
+      "diagnostic_gate_reward_seconds": 39.48458769205536,
+      "diagnostic_observation_seconds": 140.47276698204496,
+      "diagnostic_reference_seconds": 18.261781163993874,
+      "diagnostic_bookkeeping_seconds": 71.10981748907398,
+      "diagnostic_unclassified_seconds": 489.7197308198474,
+      "trials": 1,
+      "completion_rate": 1.0,
+      "collision_rate": 0.0,
+      "mean_lap_time_s": 53.0780029296875,
+      "median_lap_time_s": 53.0780029296875,
+      "lap_time_std_s": 0.0,
+      "minimum_clearance_m": 0.5917409658432007,
+      "mean_tracking_error_m": 0.0007612884727799346,
+      "fallbacks": 0,
+      "mpc_latency_median_s": 0.05874396400031401,
+      "mpc_latency_p95_s": 0.0749723734496456,
+      "physics_steps_per_second": 22.442123322834046
+    },
+    "accepted": false,
+    "reason": "No learned checkpoint supplied"
+  },
+  "accepted": false
+}

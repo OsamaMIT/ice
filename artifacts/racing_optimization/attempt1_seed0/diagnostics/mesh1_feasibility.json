@@ -1,0 +1,95 @@
+{
+  "failures": [
+    {
+      "interval": 98,
+      "gate": 3,
+      "time_start_s": 2.1129740282940523,
+      "time_end_s": 2.1243061625480726,
+      "reason": "frame_collision",
+      "measured": true,
+      "limit": false
+    },
+    {
+      "interval": 145,
+      "gate": 4,
+      "time_start_s": 2.65276099842264,
+      "time_end_s": 2.6712697928662963,
+      "reason": "frame_collision",
+      "measured": true,
+      "limit": false
+    },
+    {
+      "interval": 241,
+      "gate": 6,
+      "time_start_s": 5.154797789322955,
+      "time_end_s": 5.192270583781482,
+      "reason": "frame_collision",
+      "measured": true,
+      "limit": false
+    },
+    {
+      "interval": 286,
+      "gate": 6,
+      "time_start_s": 6.841073539956696,
+      "time_end_s": 6.878546334415224,
+      "reason": "frame_collision",
+      "measured": true,
+      "limit": false
+    },
+    {
+      "interval": 289,
+      "gate": 7,
+      "time_start_s": 6.957295496721883,
+      "time_end_s": 6.998571864570016,
+      "reason": "frame_collision",
+      "measured": true,
+      "limit": false
+    },
+    {
+      "interval": 334,
+      "gate": 7,
+      "time_start_s": 8.814732049887835,
+      "time_end_s": 8.856008417735968,
+      "reason": "frame_collision",
+      "measured": true,
+      "limit": false
+    },
+    {
+      "interval": 433,
+      "gate": 10,
+      "time_start_s": 10.766375636098559,
+      "time_end_s": 10.786658832174544,
+      "reason": "frame_collision",
+      "measured": true,
+      "limit": false
+    },
+    {
+      "interval": 477,
+      "gate": 10,
+      "time_start_s": 11.658836263441891,
+      "time_end_s": 11.679119459517876,
+      "reason": "frame_collision",
+      "measured": true,
+      "limit": false
+    }
+  ],
+  "validated": false,
+  "invalid_intervals": [
+    98,
+    145,
+    241,
+    286,
+    289,
+    334,
+    433,
+    477
+  ],
+  "maximum_dynamics_defect": 0.007416663757362135,
+  "minimum_clearance_m": 0.0013374090194702148,
+  "stage": "feasibility",
+  "refinement": 1,
+  "solver_status": "Maximum_Iterations_Exceeded",
+  "duration_s": 13.7471507200467,
+  "peak_speed_m_s": 10.93393162798119,
+  "gate_offset_fraction": 0.0
+}

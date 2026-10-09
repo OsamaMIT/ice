@@ -1,0 +1,202 @@
+-------------------------------------------------------------------------------
+| checkpoint/           |                                                     |
+|     status            | restored                                            |
+|     path              | artifacts/recovery_sensitive/12mps/checkpoints/c... |
+|     total_timesteps   | 16,384                                              |
+|     updates           | 16                                                  |
+|     episodes          | 60                                                  |
+|     schedule_steps    | 16,384                                              |
+|     schedule_progress | 12.5%                                               |
+|     curriculum_phase  | A                                                   |
+|     migrated_schedule | no                                                  |
+|     pre_correction_v2 | no                                                  |
+-------------------------------------------------------------------------------
+Flight diagnostics: artifacts/recovery_sensitive/12mps/screen1/exact_state/exact_state_baseline_live (initializing; first step includes compilation)
+Flight 1-4 | sim 0.1s | wall 39s | passed 0-0/12
+  error max 0.05m | collisions 0 | fallbacks 0
+Flight 1-4 | sim 1.1s | wall 56s | passed 0-1/12
+  error max 0.04m | collisions 0 | fallbacks 0
+Flight 1-4 | sim 2.1s | wall 73s | passed 1-1/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-4 | sim 3.1s | wall 90s | passed 2-3/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-4 | sim 4.1s | wall 107s | passed 4-4/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-4 | sim 5.1s | wall 124s | passed 4-4/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-4 | sim 6.1s | wall 140s | passed 5-5/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-4 | sim 7.1s | wall 157s | passed 5-6/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-4 | sim 8.1s | wall 173s | passed 6-6/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-4 | sim 9.1s | wall 190s | passed 6-7/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-4 | sim 10.1s | wall 207s | passed 8-8/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-4 | sim 11.1s | wall 223s | passed 8-9/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-4 | sim 12.1s | wall 239s | passed 9-10/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-4 | sim 13.1s | wall 256s | passed 10-11/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-4 | sim 14.1s | wall 272s | passed 11-12/12
+  error max 0.03m | collisions 0 | fallbacks 0
+Flight 1-4 | sim 14.1s | wall 273s | passed 12-12/12
+  error max 0.03m | collisions 0 | fallbacks 0
+E0930 14:29:59.043803    6877 slow_operation_alarm.cc:73] 
+********************************
+[Compiling module jit_arctan2 for GPU] Very slow compile? If you want to file a bug, run with envvar XLA_FLAGS=--xla_dump_to=/tmp/foo and attach the results.
+********************************
+E0930 14:29:59.809021    6792 slow_operation_alarm.cc:140] The operation took 44m49.9682463s
+
+********************************
+[Compiling module jit_arctan2 for GPU] Very slow compile? If you want to file a bug, run with envvar XLA_FLAGS=--xla_dump_to=/tmp/foo and attach the results.
+********************************
+Flight 5-8 | sim 0.9s | wall 303s | passed 0-1/12
+  error max 0.05m | collisions 0 | fallbacks 0
+Flight 5-8 | sim 1.9s | wall 321s | passed 1-1/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 5-8 | sim 2.9s | wall 338s | passed 3-3/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 5-8 | sim 3.9s | wall 355s | passed 4-4/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 5-8 | sim 4.9s | wall 372s | passed 4-4/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 5-8 | sim 5.9s | wall 390s | passed 5-5/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 5-8 | sim 6.9s | wall 408s | passed 5-5/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 5-8 | sim 7.9s | wall 426s | passed 6-6/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 5-8 | sim 8.9s | wall 443s | passed 6-7/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 5-8 | sim 9.9s | wall 461s | passed 8-8/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 5-8 | sim 10.9s | wall 480s | passed 8-9/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 5-8 | sim 11.9s | wall 499s | passed 10-10/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 5-8 | sim 12.9s | wall 518s | passed 10-10/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 5-8 | sim 13.8s | wall 537s | passed 12-12/12
+  error max 0.03m | collisions 0 | fallbacks 0
+Flight diagnostics completed: artifacts/recovery_sensitive/12mps/screen1/exact_state/exact_state_baseline_live/progress.json
+Flight diagnostics: artifacts/recovery_sensitive/12mps/screen1/exact_state/exact_state_learned_live (initializing; first step includes compilation)
+Flight 1-4 | sim 1.0s | wall 28s | passed 0-1/12
+  error max 0.08m | collisions 0 | fallbacks 0
+Flight 1-4 | sim 2.0s | wall 46s | passed 1-1/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-4 | sim 3.0s | wall 64s | passed 2-3/12
+  error max 0.02m | collisions 0 | fallbacks 0
+Flight 1-4 | sim 4.0s | wall 81s | passed 4-4/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-4 | sim 5.0s | wall 99s | passed 4-4/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-4 | sim 6.0s | wall 117s | passed 5-5/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-4 | sim 7.0s | wall 136s | passed 5-5/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-4 | sim 8.0s | wall 154s | passed 6-6/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-4 | sim 9.0s | wall 172s | passed 6-7/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-4 | sim 10.0s | wall 191s | passed 8-8/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-4 | sim 11.0s | wall 210s | passed 8-9/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-4 | sim 12.0s | wall 230s | passed 9-10/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-4 | sim 13.0s | wall 249s | passed 10-11/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-4 | sim 14.0s | wall 268s | passed 11-12/12
+  error max 0.03m | collisions 0 | fallbacks 0
+Flight 1-4 | sim 14.1s | wall 269s | passed 12-12/12
+  error max 0.03m | collisions 0 | fallbacks 0
+Flight 5-8 | sim 1.0s | wall 288s | passed 0-1/12
+  error max 0.05m | collisions 0 | fallbacks 0
+Flight 5-8 | sim 2.0s | wall 307s | passed 1-1/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 5-8 | sim 3.0s | wall 325s | passed 3-3/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 5-8 | sim 4.0s | wall 343s | passed 4-4/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 5-8 | sim 5.0s | wall 361s | passed 4-4/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 5-8 | sim 6.0s | wall 380s | passed 5-5/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 5-8 | sim 7.0s | wall 398s | passed 5-6/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 5-8 | sim 8.0s | wall 415s | passed 6-6/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 5-8 | sim 9.0s | wall 433s | passed 7-7/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 5-8 | sim 10.0s | wall 451s | passed 8-8/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 5-8 | sim 11.0s | wall 469s | passed 9-9/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 5-8 | sim 12.0s | wall 487s | passed 10-10/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 5-8 | sim 13.0s | wall 506s | passed 10-11/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 5-8 | sim 13.8s | wall 522s | passed 12-12/12
+  error max 0.02m | collisions 0 | fallbacks 0
+Flight diagnostics completed: artifacts/recovery_sensitive/12mps/screen1/exact_state/exact_state_learned_live/progress.json
+{
+  "exact_state": {
+    "baseline": {
+      "peak_speed_m_s": 10.867198944091797,
+      "termination_counts": {
+        "crashed": 0,
+        "out_of_bounds": 0,
+        "missed_gate": 0,
+        "deadline": 0
+      },
+      "trials": 8,
+      "completion_rate": 1.0,
+      "collision_rate": 0.0,
+      "mean_lap_time_s": 13.798250555992126,
+      "median_lap_time_s": 13.766000270843506,
+      "lap_time_std_s": 0.12712769257225648,
+      "minimum_clearance_m": 0.1009034514427185,
+      "mean_tracking_error_m": 0.005251566283483712,
+      "fallbacks": 0,
+      "mpc_latency_median_s": 0.06098893999978827,
+      "mpc_latency_p95_s": 0.07427972235000198,
+      "physics_steps_per_second": 102.7138958744987
+    },
+    "learned": {
+      "peak_speed_m_s": 10.867700576782227,
+      "termination_counts": {
+        "crashed": 0,
+        "out_of_bounds": 0,
+        "missed_gate": 0,
+        "deadline": 0
+      },
+      "trials": 8,
+      "completion_rate": 1.0,
+      "collision_rate": 0.0,
+      "mean_lap_time_s": 13.804000735282898,
+      "median_lap_time_s": 13.772000312805176,
+      "lap_time_std_s": 0.11725181809211697,
+      "minimum_clearance_m": 0.09657761454582214,
+      "mean_tracking_error_m": 0.010250651503145932,
+      "fallbacks": 0,
+      "mpc_latency_median_s": 0.06099466199975723,
+      "mpc_latency_p95_s": 0.07523406779982907,
+      "physics_steps_per_second": 105.75271176193677
+    },
+    "paired_successes": 8,
+    "mean_improvement_s": -0.005750179290771484,
+    "improvement_95pct_ci_s": [
+      -0.01425015926361084,
+      0.0042498111724853516
+    ],
+    "accepted": false,
+    "failures": {
+      "baseline": [],
+      "learned": []
+    }
+  },
+  "accepted": false
+}

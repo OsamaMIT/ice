@@ -1,0 +1,177 @@
+{
+  "reference_sha256": "7a01e3afa077fdb429d860eff1d88e5ab549e4a313b2bba68dcde9329142ba2e",
+  "seed": 20260928,
+  "trials_per_case": 2,
+  "scope": "Synthetic position/velocity estimator errors; known map/gate index and exact attitude, rates, acceleration and rotor states. No opponents or wind.",
+  "cases": {
+    "clean": {
+      "settings": {
+        "reference_path": "artifacts/arena_reference.npz",
+        "policy_hz": 20,
+        "position_limit_m": 0.5,
+        "speed_fraction": 0.3,
+        "smoothing_time_s": 0.2,
+        "discount_per_second": 0.98,
+        "gae_lambda_per_second": 0.9,
+        "change_penalty": 0.01,
+        "estimation_noise_std": 0.0,
+        "position_noise_std_m": 0.0,
+        "velocity_noise_std_m_s": 0.0,
+        "sensor_delay_s": 0.0,
+        "sensor_dropout_prob": 0.0,
+        "position_bias_m": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "velocity_bias_m_s": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "spawn_position_std_m": 0.0,
+        "spawn_velocity_std_m_s": 0.0
+      },
+      "summary": {
+        "diagnostic_mpc_seconds": 388.35356800200134,
+        "diagnostic_physics_seconds": 37.5506363210136,
+        "diagnostic_other_seconds": 893.5341239059851,
+        "diagnostic_gate_reward_seconds": 31.1072719260128,
+        "diagnostic_observation_seconds": 142.85623472897714,
+        "diagnostic_reference_seconds": 19.725662938000596,
+        "diagnostic_bookkeeping_seconds": 54.55063946001087,
+        "diagnostic_unclassified_seconds": 645.2943148529837,
+        "trials": 2,
+        "completion_rate": 1.0,
+        "collision_rate": 0.0,
+        "mean_lap_time_s": 53.0780029296875,
+        "median_lap_time_s": 53.0780029296875,
+        "lap_time_std_s": 0.0,
+        "minimum_clearance_m": 0.5917408466339111,
+        "mean_tracking_error_m": 0.0007612554476639276,
+        "fallbacks": 0,
+        "mpc_latency_median_s": 0.0577429584999436,
+        "mpc_latency_p95_s": 0.06860757684994497,
+        "physics_steps_per_second": 40.22832655504073
+      },
+      "gates_passed": [
+        12.0,
+        12.0
+      ]
+    },
+    "position_1cm": {
+      "settings": {
+        "reference_path": "artifacts/arena_reference.npz",
+        "policy_hz": 20,
+        "position_limit_m": 0.5,
+        "speed_fraction": 0.3,
+        "smoothing_time_s": 0.2,
+        "discount_per_second": 0.98,
+        "gae_lambda_per_second": 0.9,
+        "change_penalty": 0.01,
+        "estimation_noise_std": 0.0,
+        "position_noise_std_m": 0.01,
+        "velocity_noise_std_m_s": 0.0,
+        "sensor_delay_s": 0.0,
+        "sensor_dropout_prob": 0.0,
+        "position_bias_m": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "velocity_bias_m_s": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "spawn_position_std_m": 0.0,
+        "spawn_velocity_std_m_s": 0.0
+      },
+      "summary": {
+        "diagnostic_mpc_seconds": 402.52680915598467,
+        "diagnostic_physics_seconds": 40.906179623014395,
+        "diagnostic_other_seconds": 922.3819254820012,
+        "diagnostic_gate_reward_seconds": 32.766831090008054,
+        "diagnostic_observation_seconds": 190.89247154599843,
+        "diagnostic_reference_seconds": 50.95259264400602,
+        "diagnostic_bookkeeping_seconds": 64.46232116005422,
+        "diagnostic_unclassified_seconds": 583.3077090419345,
+        "trials": 2,
+        "completion_rate": 1.0,
+        "collision_rate": 0.0,
+        "mean_lap_time_s": 53.08700370788574,
+        "median_lap_time_s": 53.08700370788574,
+        "lap_time_std_s": 0.010999679565429688,
+        "minimum_clearance_m": 0.5532312393188477,
+        "mean_tracking_error_m": 0.0036425819737124633,
+        "fallbacks": 0,
+        "mpc_latency_median_s": 0.06030870649988174,
+        "mpc_latency_p95_s": 0.07504398784994919,
+        "physics_steps_per_second": 38.86043869243598
+      },
+      "gates_passed": [
+        12.0,
+        12.0
+      ]
+    },
+    "position_3cm": {
+      "settings": {
+        "reference_path": "artifacts/arena_reference.npz",
+        "policy_hz": 20,
+        "position_limit_m": 0.5,
+        "speed_fraction": 0.3,
+        "smoothing_time_s": 0.2,
+        "discount_per_second": 0.98,
+        "gae_lambda_per_second": 0.9,
+        "change_penalty": 0.01,
+        "estimation_noise_std": 0.0,
+        "position_noise_std_m": 0.03,
+        "velocity_noise_std_m_s": 0.0,
+        "sensor_delay_s": 0.0,
+        "sensor_dropout_prob": 0.0,
+        "position_bias_m": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "velocity_bias_m_s": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "spawn_position_std_m": 0.0,
+        "spawn_velocity_std_m_s": 0.0
+      },
+      "summary": {
+        "diagnostic_mpc_seconds": 411.9792615069873,
+        "diagnostic_physics_seconds": 40.468794519994844,
+        "diagnostic_other_seconds": 860.554337110018,
+        "diagnostic_gate_reward_seconds": 30.913503946034325,
+        "diagnostic_observation_seconds": 161.00477571795636,
+        "diagnostic_reference_seconds": 46.85549159502625,
+        "diagnostic_bookkeeping_seconds": 59.82158330600214,
+        "diagnostic_unclassified_seconds": 561.9589825449989,
+        "trials": 2,
+        "completion_rate": 1.0,
+        "collision_rate": 0.0,
+        "mean_lap_time_s": 53.12600326538086,
+        "median_lap_time_s": 53.12600326538086,
+        "lap_time_std_s": 0.01200103759765625,
+        "minimum_clearance_m": 0.5501443147659302,
+        "mean_tracking_error_m": 0.008058940846890399,
+        "fallbacks": 0,
+        "mpc_latency_median_s": 0.06108187900008488,
+        "mpc_latency_p95_s": 0.07634228530002929,
+        "physics_steps_per_second": 40.46265804781655
+      },
+      "gates_passed": [
+        12.0,
+        12.0
+      ]
+    }
+  },
+  "status": "running",
+  "current_case": "velocity_2cms",
+  "error": null,
+  "updated_at": 1790600113.0663793
+}

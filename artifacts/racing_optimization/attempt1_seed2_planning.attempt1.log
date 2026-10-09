@@ -1,0 +1,28 @@
+Building trajectory problem: 288 intervals, refinement 0
+Solving for a dynamically feasible reference...
+
+******************************************************************************
+This program contains Ipopt, a library for large-scale nonlinear optimization.
+ Ipopt is released as open source code under the Eclipse Public License (EPL).
+         For more information visit https://github.com/coin-or/Ipopt
+******************************************************************************
+
+      solver  :   t_proc      (avg)   t_wall      (avg)    n_eval
+       nlp_f  |  88.82ms ( 19.41us)  84.85ms ( 18.55us)      4575
+       nlp_g  |   9.32 s (  2.04ms)   9.33 s (  2.04ms)      4575
+  nlp_grad_f  |  84.68ms ( 42.30us)  79.04ms ( 39.48us)      2002
+   nlp_jac_g  |  68.29 s ( 34.11ms)  68.33 s ( 34.13ms)      2002
+       total  | 196.93 s (196.93 s) 197.05 s (197.05 s)         1
+Validating feasibility candidate at physics rate...
+Validated feasible reference saved: artifacts/racing_optimization/attempt1_seed2/reference_feasible.npz
+Solving minimum-time trajectory...
+      solver  :   t_proc      (avg)   t_wall      (avg)    n_eval
+       nlp_f  |  78.30ms ( 11.71us)  72.02ms ( 10.77us)      6685
+       nlp_g  |  12.94 s (  1.94ms)  12.95 s (  1.94ms)      6685
+  nlp_grad_f  |  71.53ms ( 35.73us)  64.62ms ( 32.28us)      2002
+   nlp_jac_g  |  65.14 s ( 32.52ms)  65.17 s ( 32.54ms)      2003
+       total  | 207.98 s (207.98 s) 518.57 s (518.57 s)         1
+Validating minimum_time candidate at physics rate...
+Refining speed candidate: 7 invalid intervals; maximum defect 0.06223
+Building trajectory problem: 576 intervals, refinement 1
+Solving for a dynamically feasible reference...

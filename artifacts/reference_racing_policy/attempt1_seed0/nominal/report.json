@@ -1,0 +1,28 @@
+{
+  "exact_state": {
+    "baseline": {
+      "peak_speed_m_s": 10.738289833068848,
+      "termination_counts": {
+        "crashed": 0,
+        "out_of_bounds": 0,
+        "missed_gate": 0,
+        "deadline": 0
+      },
+      "trials": 1,
+      "completion_rate": 1.0,
+      "collision_rate": 0.0,
+      "mean_lap_time_s": 13.842000961303711,
+      "median_lap_time_s": 13.842000961303711,
+      "lap_time_std_s": 0.0,
+      "minimum_clearance_m": 0.1009577214717865,
+      "mean_tracking_error_m": 0.002475014535614814,
+      "fallbacks": 0,
+      "mpc_latency_median_s": 0.06297259299998359,
+      "mpc_latency_p95_s": 0.08922526160000643,
+      "physics_steps_per_second": 18.742241553346457
+    },
+    "accepted": false,
+    "reason": "No learned checkpoint supplied"
+  },
+  "accepted": false
+}

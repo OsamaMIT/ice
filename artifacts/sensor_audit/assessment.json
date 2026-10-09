@@ -1,0 +1,53 @@
+{
+  "source_status": "running",
+  "current_case": "velocity_2cms",
+  "source_updated_at": 1790600113.0663793,
+  "error": null,
+  "cases": [
+    {
+      "case": "clean",
+      "all_trials_passed": true,
+      "trials": 2,
+      "completion_rate": 1.0,
+      "collision_rate": 0.0,
+      "fallbacks": 0,
+      "mean_lap_time_s": 53.0780029296875,
+      "mean_lap_time_s_delta_from_clean": 0.0,
+      "mean_tracking_error_m": 0.0007612554476639276,
+      "mean_tracking_error_m_delta_from_clean": 0.0,
+      "minimum_clearance_m": 0.5917408466339111,
+      "minimum_clearance_m_delta_from_clean": 0.0
+    },
+    {
+      "case": "position_1cm",
+      "all_trials_passed": true,
+      "trials": 2,
+      "completion_rate": 1.0,
+      "collision_rate": 0.0,
+      "fallbacks": 0,
+      "mean_lap_time_s": 53.08700370788574,
+      "mean_lap_time_s_delta_from_clean": 0.009000778198242188,
+      "mean_tracking_error_m": 0.0036425819737124633,
+      "mean_tracking_error_m_delta_from_clean": 0.0028813265260485355,
+      "minimum_clearance_m": 0.5532312393188477,
+      "minimum_clearance_m_delta_from_clean": -0.03850960731506348
+    },
+    {
+      "case": "position_3cm",
+      "all_trials_passed": true,
+      "trials": 2,
+      "completion_rate": 1.0,
+      "collision_rate": 0.0,
+      "fallbacks": 0,
+      "mean_lap_time_s": 53.12600326538086,
+      "mean_lap_time_s_delta_from_clean": 0.048000335693359375,
+      "mean_tracking_error_m": 0.008058940846890399,
+      "mean_tracking_error_m_delta_from_clean": 0.007297685399226471,
+      "minimum_clearance_m": 0.5501443147659302,
+      "minimum_clearance_m_delta_from_clean": -0.04159653186798096
+    }
+  ],
+  "failing_cases": [],
+  "next_action": "Finish the existing sweep. Disturbance results are incomplete; defer controller changes and RL training.",
+  "limitations": "Synthetic errors, nominal starts, and few trials. Clean trials are deterministic duplicates; they do not establish statistical reliability. No real-world sensor calibration, wind or opponents."
+}

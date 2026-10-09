@@ -1,0 +1,236 @@
+-------------------------------------------------------------------------------
+| checkpoint/           |                                                     |
+|     status            | restored                                            |
+|     path              | artifacts/exact_state_corner_training/attempt1_s... |
+|     total_timesteps   | 49,152                                              |
+|     updates           | 48                                                  |
+|     episodes          | 180                                                 |
+|     schedule_steps    | 49,152                                              |
+|     schedule_progress | 37.5%                                               |
+|     curriculum_phase  | A                                                   |
+|     migrated_schedule | no                                                  |
+|     pre_correction_v2 | no                                                  |
+-------------------------------------------------------------------------------
+Validating zero-offset MPC before residual training...
+Flight diagnostics: artifacts/exact_state_corner_training/attempt1_seed0/checkpoints/baseline_diagnostics (initializing; first step includes compilation)
+Flight 1-1 | sim 0.1s | wall 93s | passed 0-0/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 1.1s | wall 112s | passed 1-1/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 2.1s | wall 130s | passed 1-1/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 3.1s | wall 148s | passed 3-3/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 4.1s | wall 166s | passed 4-4/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 5.1s | wall 184s | passed 4-4/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 6.1s | wall 202s | passed 5-5/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 7.1s | wall 221s | passed 5-5/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 8.1s | wall 239s | passed 6-6/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 9.1s | wall 258s | passed 7-7/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 10.1s | wall 276s | passed 8-8/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 11.1s | wall 294s | passed 9-9/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 12.1s | wall 312s | passed 10-10/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.1s | wall 330s | passed 10-10/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.8s | wall 344s | passed 12-12/12
+  error max 0.03m | collisions 0 | fallbacks 0
+Flight diagnostics completed: artifacts/exact_state_corner_training/attempt1_seed0/checkpoints/baseline_diagnostics/progress.json
+-------------------------------------------------------------------------------
+| system/                 |                                                   |
+|     device              | gpu                                               |
+|     jax_backend         | gpu                                               |
+|     parameter_devices   | cuda:0                                            |
+|     physics             | first_principles                                  |
+|     sim_frequency       | 500 Hz                                            |
+|     control_frequency   | 20 Hz                                             |
+| training/               |                                                   |
+|     algorithm           | PPO                                               |
+|     action_space        | world_position_speed_residual_v1                  |
+|     num_envs            | 4                                                 |
+|     rollout_length      | 256                                               |
+|     batch_size          | 1,024                                             |
+|     start_timesteps     | 49,152                                            |
+|     target_timesteps    | 65,536                                            |
+|     schedule_timesteps  | 131,072                                           |
+|     schedule_consumed   | 49,152                                            |
+|     total_iterations    | 64                                                |
+|     actor_obs_dim       | 82                                                |
+|     critic_obs_dim      | 50                                                |
+|     reward_version      | v2                                                |
+|     curriculum          | no                                                |
+|     strict_evaluation   | no                                                |
+|     skill_attempts_gate | 8                                                 |
+|     checkpoint_dir      | artifacts/exact_state_corner_training/attempt1... |
+|     checkpoint_interval | 1                                                 |
+|     metrics_file        | artifacts/exact_state_corner_training/attempt1... |
+-------------------------------------------------------------------------------
+[Update 49/64] Collecting flight experience...
+[Update 49] Learning from collected flights...
+-----------------------------------------------
+| Progress/               |                   |
+|     Update completed    | 49 / 64           |
+|     Steps               | 50,176 / 65,536   |
+|     Estimated remaining | 1h17m             |
+|     Training time       | 5m09s             |
+|     Evaluation time     | 0s                |
+| Training/               |                   |
+|     Gate opening        | 1.00x             |
+|     G1 start target     | 100%              |
+|     Mean episode reward | -491.99           |
+|     Status              | PPO values finite |
+|     Policy change (KL)  | 0.0078            |
+|     Clipped samples     | 10.3%             |
+| Course test/            |                   |
+|     Status              | Not evaluated yet |
+-----------------------------------------------
+[Update 49] Checkpoint saved: artifacts/exact_state_corner_training/attempt1_seed0/checkpoints/checkpoint_latest.pkl
+[Update 50/64] Collecting flight experience...
+[Update 50] Learning from collected flights...
+-----------------------------------------------
+| Progress/               |                   |
+|     Update completed    | 50 / 64           |
+|     Steps               | 51,200 / 65,536   |
+|     Estimated remaining | 1h00m             |
+|     Training time       | 3m32s             |
+|     Evaluation time     | 0s                |
+| Training/               |                   |
+|     Gate opening        | 1.00x             |
+|     G1 start target     | 100%              |
+|     Mean episode reward | 410.32            |
+|     Status              | PPO values finite |
+|     Policy change (KL)  | 0.0087            |
+|     Clipped samples     | 10.7%             |
+| Course test/            |                   |
+|     Status              | Not evaluated yet |
+-----------------------------------------------
+[Update 50] Checkpoint saved: artifacts/exact_state_corner_training/attempt1_seed0/checkpoints/checkpoint_latest.pkl
+[Update 51/64] Collecting flight experience...
+[Update 51] Learning from collected flights...
+-----------------------------------------------
+| Progress/               |                   |
+|     Update completed    | 51 / 64           |
+|     Steps               | 52,224 / 65,536   |
+|     Estimated remaining | 53m13s            |
+|     Training time       | 3m36s             |
+|     Evaluation time     | 0s                |
+| Training/               |                   |
+|     Gate opening        | 1.00x             |
+|     G1 start target     | 100%              |
+|     Mean episode reward | 412.99            |
+|     Status              | PPO values finite |
+|     Policy change (KL)  | 0.0086            |
+|     Clipped samples     | 10.7%             |
+| Course test/            |                   |
+|     Status              | Not evaluated yet |
+-----------------------------------------------
+[Update 51] Checkpoint saved: artifacts/exact_state_corner_training/attempt1_seed0/checkpoints/checkpoint_latest.pkl
+[Update 52/64] Collecting flight experience...
+[Update 52] Learning from collected flights...
+-----------------------------------------------
+| Progress/               |                   |
+|     Update completed    | 52 / 64           |
+|     Steps               | 53,248 / 65,536   |
+|     Estimated remaining | 47m23s            |
+|     Training time       | 3m30s             |
+|     Evaluation time     | 0s                |
+| Training/               |                   |
+|     Gate opening        | 1.00x             |
+|     G1 start target     | 100%              |
+|     Mean episode reward | 409.30            |
+|     Status              | PPO values finite |
+|     Policy change (KL)  | 0.0100            |
+|     Clipped samples     | 13.2%             |
+| Course test/            |                   |
+|     Status              | Not evaluated yet |
+-----------------------------------------------
+[Update 52] Checkpoint saved: artifacts/exact_state_corner_training/attempt1_seed0/checkpoints/checkpoint_latest.pkl
+[Update 53/64] Collecting flight experience...
+[Update 53] Learning from collected flights...
+-----------------------------------------------
+| Progress/               |                   |
+|     Update completed    | 53 / 64           |
+|     Steps               | 54,272 / 65,536   |
+|     Estimated remaining | 42m32s            |
+|     Training time       | 3m32s             |
+|     Evaluation time     | 0s                |
+| Training/               |                   |
+|     Gate opening        | 1.00x             |
+|     G1 start target     | 100%              |
+|     Mean episode reward | 235.82            |
+|     Status              | PPO values finite |
+|     Policy change (KL)  | 0.0085            |
+|     Clipped samples     | 11.4%             |
+| Course test/            |                   |
+|     Status              | Not evaluated yet |
+-----------------------------------------------
+[Update 53] Checkpoint saved: artifacts/exact_state_corner_training/attempt1_seed0/checkpoints/checkpoint_latest.pkl
+[Update 54/64] Collecting flight experience...
+[Update 54] Learning from collected flights...
+-----------------------------------------------
+| Progress/               |                   |
+|     Update completed    | 54 / 64           |
+|     Steps               | 55,296 / 65,536   |
+|     Estimated remaining | 38m04s            |
+|     Training time       | 3m30s             |
+|     Evaluation time     | 0s                |
+| Training/               |                   |
+|     Gate opening        | 1.00x             |
+|     G1 start target     | 100%              |
+|     Mean episode reward | 411.11            |
+|     Status              | PPO values finite |
+|     Policy change (KL)  | 0.0091            |
+|     Clipped samples     | 11.5%             |
+| Course test/            |                   |
+|     Status              | Not evaluated yet |
+-----------------------------------------------
+[Update 54] Checkpoint saved: artifacts/exact_state_corner_training/attempt1_seed0/checkpoints/checkpoint_latest.pkl
+[Update 55/64] Collecting flight experience...
+[Update 55] Learning from collected flights...
+-----------------------------------------------
+| Progress/               |                   |
+|     Update completed    | 55 / 64           |
+|     Steps               | 56,320 / 65,536   |
+|     Estimated remaining | 33m51s            |
+|     Training time       | 3m29s             |
+|     Evaluation time     | 0s                |
+| Training/               |                   |
+|     Gate opening        | 1.00x             |
+|     G1 start target     | 100%              |
+|     Mean episode reward | 411.34            |
+|     Status              | PPO values finite |
+|     Policy change (KL)  | 0.0080            |
+|     Clipped samples     | 9.5%              |
+| Course test/            |                   |
+|     Status              | Not evaluated yet |
+-----------------------------------------------
+[Update 55] Checkpoint saved: artifacts/exact_state_corner_training/attempt1_seed0/checkpoints/checkpoint_latest.pkl
+[Update 56/64] Collecting flight experience...
+[Update 56] Learning from collected flights...
+-----------------------------------------------
+| Progress/               |                   |
+|     Update completed    | 56 / 64           |
+|     Steps               | 57,344 / 65,536   |
+|     Estimated remaining | 29m51s            |
+|     Training time       | 3m30s             |
+|     Evaluation time     | 0s                |
+| Training/               |                   |
+|     Gate opening        | 1.00x             |
+|     G1 start target     | 100%              |
+|     Mean episode reward | 411.09            |
+|     Status              | PPO values finite |
+|     Policy change (KL)  | 0.0090            |
+|     Clipped samples     | 12.2%             |
+| Course test/            |                   |
+|     Status              | Not evaluated yet |
+-----------------------------------------------
+[Update 56] Checkpoint saved: artifacts/exact_state_corner_training/attempt1_seed0/checkpoints/checkpoint_latest.pkl
+[Update 57/64] Collecting flight experience...

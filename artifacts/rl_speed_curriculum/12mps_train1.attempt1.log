@@ -1,0 +1,323 @@
+Validating zero-offset MPC before residual training...
+Flight diagnostics: artifacts/rl_speed_curriculum/12mps/checkpoints/baseline_diagnostics (initializing; first step includes compilation)
+Flight 1-1 | sim 0.1s | wall 81s | passed 0-0/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 1.1s | wall 101s | passed 1-1/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 2.1s | wall 122s | passed 1-1/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 3.1s | wall 144s | passed 3-3/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 4.1s | wall 166s | passed 4-4/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 5.1s | wall 188s | passed 4-4/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 6.1s | wall 210s | passed 5-5/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 7.1s | wall 230s | passed 6-6/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 8.1s | wall 250s | passed 6-6/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 9.1s | wall 271s | passed 7-7/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 10.1s | wall 293s | passed 8-8/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 11.1s | wall 314s | passed 9-9/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 12.1s | wall 336s | passed 10-10/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.1s | wall 355s | passed 11-11/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.6s | wall 367s | passed 12-12/12
+  error max 0.03m | collisions 0 | fallbacks 0
+Flight diagnostics completed: artifacts/rl_speed_curriculum/12mps/checkpoints/baseline_diagnostics/progress.json
+-------------------------------------------------------------------------------
+| system/                 |                                                   |
+|     device              | gpu                                               |
+|     jax_backend         | gpu                                               |
+|     parameter_devices   | cuda:0                                            |
+|     physics             | first_principles                                  |
+|     sim_frequency       | 500 Hz                                            |
+|     control_frequency   | 20 Hz                                             |
+| training/               |                                                   |
+|     algorithm           | PPO                                               |
+|     action_space        | world_position_speed_residual_v1                  |
+|     num_envs            | 4                                                 |
+|     rollout_length      | 256                                               |
+|     batch_size          | 1,024                                             |
+|     start_timesteps     | 0                                                 |
+|     target_timesteps    | 32,768                                            |
+|     schedule_timesteps  | 131,072                                           |
+|     schedule_consumed   | 0                                                 |
+|     total_iterations    | 32                                                |
+|     actor_obs_dim       | 82                                                |
+|     critic_obs_dim      | 50                                                |
+|     reward_version      | v2                                                |
+|     curriculum          | no                                                |
+|     strict_evaluation   | no                                                |
+|     skill_attempts_gate | 8                                                 |
+|     checkpoint_dir      | artifacts/rl_speed_curriculum/12mps/checkpoints   |
+|     checkpoint_interval | 1                                                 |
+|     metrics_file        | artifacts/rl_speed_curriculum/12mps/checkpoint... |
+-------------------------------------------------------------------------------
+[Update 1/32] Collecting flight experience...
+[Update 1] Learning from collected flights...
+-----------------------------------------------
+| Progress/               |                   |
+|     Update completed    | 1 / 32            |
+|     Steps               | 1,024 / 32,768    |
+|     Estimated remaining | 3h15m             |
+|     Training time       | 6m19s             |
+|     Evaluation time     | 0s                |
+| Training/               |                   |
+|     Gate opening        | 1.00x             |
+|     G1 start target     | 100%              |
+|     Mean episode reward | -9.79             |
+|     Status              | PPO values finite |
+|     Policy change (KL)  | 0.0045            |
+|     Clipped samples     | 4.8%              |
+| Course test/            |                   |
+|     Status              | Not evaluated yet |
+-----------------------------------------------
+[Update 1] Checkpoint saved: artifacts/rl_speed_curriculum/12mps/checkpoints/checkpoint_latest.pkl
+[Update 2/32] Collecting flight experience...
+[Update 2] Learning from collected flights...
+-----------------------------------------------
+| Progress/               |                   |
+|     Update completed    | 2 / 32            |
+|     Steps               | 2,048 / 32,768    |
+|     Estimated remaining | 3h02m             |
+|     Training time       | 5m49s             |
+|     Evaluation time     | 0s                |
+| Training/               |                   |
+|     Gate opening        | 1.00x             |
+|     G1 start target     | 100%              |
+|     Mean episode reward | -10.73            |
+|     Status              | PPO values finite |
+|     Policy change (KL)  | 0.0038            |
+|     Clipped samples     | 4.5%              |
+| Course test/            |                   |
+|     Status              | Not evaluated yet |
+-----------------------------------------------
+[Update 2] Checkpoint saved: artifacts/rl_speed_curriculum/12mps/checkpoints/checkpoint_latest.pkl
+[Update 3/32] Collecting flight experience...
+[Update 3] Learning from collected flights...
+-----------------------------------------------
+| Progress/               |                   |
+|     Update completed    | 3 / 32            |
+|     Steps               | 3,072 / 32,768    |
+|     Estimated remaining | 2h49m             |
+|     Training time       | 5m24s             |
+|     Evaluation time     | 0s                |
+| Training/               |                   |
+|     Gate opening        | 1.00x             |
+|     G1 start target     | 100%              |
+|     Mean episode reward | -10.34            |
+|     Status              | PPO values finite |
+|     Policy change (KL)  | 0.0048            |
+|     Clipped samples     | 6.1%              |
+| Course test/            |                   |
+|     Status              | Not evaluated yet |
+-----------------------------------------------
+[Update 3] Checkpoint saved: artifacts/rl_speed_curriculum/12mps/checkpoints/checkpoint_latest.pkl
+[Update 4/32] Collecting flight experience...
+[Update 4] Learning from collected flights...
+-----------------------------------------------
+| Progress/               |                   |
+|     Update completed    | 4 / 32            |
+|     Steps               | 4,096 / 32,768    |
+|     Estimated remaining | 2h28m             |
+|     Training time       | 3m41s             |
+|     Evaluation time     | 0s                |
+| Training/               |                   |
+|     Gate opening        | 1.00x             |
+|     G1 start target     | 100%              |
+|     Mean episode reward | -10.36            |
+|     Status              | PPO values finite |
+|     Policy change (KL)  | 0.0081            |
+|     Clipped samples     | 11.0%             |
+| Course test/            |                   |
+|     Status              | Not evaluated yet |
+-----------------------------------------------
+[Update 4] Checkpoint saved: artifacts/rl_speed_curriculum/12mps/checkpoints/checkpoint_latest.pkl
+[Update 5/32] Collecting flight experience...
+[Update 5] Learning from collected flights...
+-----------------------------------------------
+| Progress/               |                   |
+|     Update completed    | 5 / 32            |
+|     Steps               | 5,120 / 32,768    |
+|     Estimated remaining | 2h15m             |
+|     Training time       | 3m45s             |
+|     Evaluation time     | 0s                |
+| Training/               |                   |
+|     Gate opening        | 1.00x             |
+|     G1 start target     | 100%              |
+|     Mean episode reward | -8.96             |
+|     Status              | PPO values finite |
+|     Policy change (KL)  | 0.0054            |
+|     Clipped samples     | 6.9%              |
+| Course test/            |                   |
+|     Status              | Not evaluated yet |
+-----------------------------------------------
+[Update 5] Checkpoint saved: artifacts/rl_speed_curriculum/12mps/checkpoints/checkpoint_latest.pkl
+[Update 6/32] Collecting flight experience...
+[Update 6] Learning from collected flights...
+-----------------------------------------------
+| Progress/               |                   |
+|     Update completed    | 6 / 32            |
+|     Steps               | 6,144 / 32,768    |
+|     Estimated remaining | 2h05m             |
+|     Training time       | 4m04s             |
+|     Evaluation time     | 0s                |
+| Training/               |                   |
+|     Gate opening        | 1.00x             |
+|     G1 start target     | 100%              |
+|     Mean episode reward | -10.40            |
+|     Status              | PPO values finite |
+|     Policy change (KL)  | 0.0053            |
+|     Clipped samples     | 6.5%              |
+| Course test/            |                   |
+|     Status              | Not evaluated yet |
+-----------------------------------------------
+[Update 6] Checkpoint saved: artifacts/rl_speed_curriculum/12mps/checkpoints/checkpoint_latest.pkl
+[Update 7/32] Collecting flight experience...
+[Update 7] Learning from collected flights...
+-----------------------------------------------
+| Progress/               |                   |
+|     Update completed    | 7 / 32            |
+|     Steps               | 7,168 / 32,768    |
+|     Estimated remaining | 2h00m             |
+|     Training time       | 4m41s             |
+|     Evaluation time     | 0s                |
+| Training/               |                   |
+|     Gate opening        | 1.00x             |
+|     G1 start target     | 100%              |
+|     Mean episode reward | -10.15            |
+|     Status              | PPO values finite |
+|     Policy change (KL)  | 0.0068            |
+|     Clipped samples     | 9.2%              |
+| Course test/            |                   |
+|     Status              | Not evaluated yet |
+-----------------------------------------------
+[Update 7] Checkpoint saved: artifacts/rl_speed_curriculum/12mps/checkpoints/checkpoint_latest.pkl
+[Update 8/32] Collecting flight experience...
+[Update 8] Learning from collected flights...
+-----------------------------------------------
+| Progress/               |                   |
+|     Update completed    | 8 / 32            |
+|     Steps               | 8,192 / 32,768    |
+|     Estimated remaining | 1h53m             |
+|     Training time       | 3m57s             |
+|     Evaluation time     | 0s                |
+| Training/               |                   |
+|     Gate opening        | 1.00x             |
+|     G1 start target     | 100%              |
+|     Mean episode reward | -9.77             |
+|     Status              | PPO values finite |
+|     Policy change (KL)  | 0.0061            |
+|     Clipped samples     | 8.5%              |
+| Course test/            |                   |
+|     Status              | Not evaluated yet |
+-----------------------------------------------
+[Update 8] Checkpoint saved: artifacts/rl_speed_curriculum/12mps/checkpoints/checkpoint_latest.pkl
+[Update 9/32] Collecting flight experience...
+[Update 9] Learning from collected flights...
+-----------------------------------------------
+| Progress/               |                   |
+|     Update completed    | 9 / 32            |
+|     Steps               | 9,216 / 32,768    |
+|     Estimated remaining | 1h46m             |
+|     Training time       | 4m04s             |
+|     Evaluation time     | 0s                |
+| Training/               |                   |
+|     Gate opening        | 1.00x             |
+|     G1 start target     | 100%              |
+|     Mean episode reward | -9.45             |
+|     Status              | PPO values finite |
+|     Policy change (KL)  | 0.0085            |
+|     Clipped samples     | 11.0%             |
+| Course test/            |                   |
+|     Status              | Not evaluated yet |
+-----------------------------------------------
+[Update 9] Checkpoint saved: artifacts/rl_speed_curriculum/12mps/checkpoints/checkpoint_latest.pkl
+[Update 10/32] Collecting flight experience...
+[Update 10] Learning from collected flights...
+-----------------------------------------------
+| Progress/               |                   |
+|     Update completed    | 10 / 32           |
+|     Steps               | 10,240 / 32,768   |
+|     Estimated remaining | 1h42m             |
+|     Training time       | 4m35s             |
+|     Evaluation time     | 0s                |
+| Training/               |                   |
+|     Gate opening        | 1.00x             |
+|     G1 start target     | 100%              |
+|     Mean episode reward | -9.09             |
+|     Status              | PPO values finite |
+|     Policy change (KL)  | 0.0071            |
+|     Clipped samples     | 9.3%              |
+| Course test/            |                   |
+|     Status              | Not evaluated yet |
+-----------------------------------------------
+[Update 10] Checkpoint saved: artifacts/rl_speed_curriculum/12mps/checkpoints/checkpoint_latest.pkl
+[Update 11/32] Collecting flight experience...
+[Update 11] Learning from collected flights...
+-----------------------------------------------
+| Progress/               |                   |
+|     Update completed    | 11 / 32           |
+|     Steps               | 11,264 / 32,768   |
+|     Estimated remaining | 1h36m             |
+|     Training time       | 4m19s             |
+|     Evaluation time     | 0s                |
+| Training/               |                   |
+|     Gate opening        | 1.00x             |
+|     G1 start target     | 100%              |
+|     Mean episode reward | -9.92             |
+|     Status              | PPO values finite |
+|     Policy change (KL)  | 0.0072            |
+|     Clipped samples     | 10.0%             |
+| Course test/            |                   |
+|     Status              | Not evaluated yet |
+-----------------------------------------------
+[Update 11] Checkpoint saved: artifacts/rl_speed_curriculum/12mps/checkpoints/checkpoint_latest.pkl
+[Update 12/32] Collecting flight experience...
+[Update 12] Learning from collected flights...
+-----------------------------------------------
+| Progress/               |                   |
+|     Update completed    | 12 / 32           |
+|     Steps               | 12,288 / 32,768   |
+|     Estimated remaining | 1h33m             |
+|     Training time       | 5m33s             |
+|     Evaluation time     | 0s                |
+| Training/               |                   |
+|     Gate opening        | 1.00x             |
+|     G1 start target     | 100%              |
+|     Mean episode reward | -8.41             |
+|     Status              | PPO values finite |
+|     Policy change (KL)  | 0.0068            |
+|     Clipped samples     | 9.0%              |
+| Course test/            |                   |
+|     Status              | Not evaluated yet |
+-----------------------------------------------
+[Update 12] Checkpoint saved: artifacts/rl_speed_curriculum/12mps/checkpoints/checkpoint_latest.pkl
+[Update 13/32] Collecting flight experience...
+[Update 13] Learning from collected flights...
+-----------------------------------------------
+| Progress/               |                   |
+|     Update completed    | 13 / 32           |
+|     Steps               | 13,312 / 32,768   |
+|     Estimated remaining | 1h30m             |
+|     Training time       | 5m49s             |
+|     Evaluation time     | 0s                |
+| Training/               |                   |
+|     Gate opening        | 1.00x             |
+|     G1 start target     | 100%              |
+|     Mean episode reward | -9.39             |
+|     Status              | PPO values finite |
+|     Policy change (KL)  | 0.0060            |
+|     Clipped samples     | 7.9%              |
+| Course test/            |                   |
+|     Status              | Not evaluated yet |
+-----------------------------------------------
+[Update 13] Checkpoint saved: artifacts/rl_speed_curriculum/12mps/checkpoints/checkpoint_latest.pkl
+[Update 14/32] Collecting flight experience...

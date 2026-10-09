@@ -1,0 +1,18 @@
+{
+  "signature": {
+    "reference": "36a1d4e00f4e59b9829e7b3dac0c1b9db86fad4052c1ebc0338def6986de1c10",
+    "checkpoint": "671b072f0ae9f0e3256e5e1c19789cab656f7845e5e0142410e3fd0793521ef7",
+    "condition": "exact_state",
+    "settings": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "implementation": "persistent-pairs-v1",
+    "seed": 10000007
+  },
+  "hashes": {
+    "baseline": "35dcdaee23e05c21803af227dbcdf08fa9f056172ec3d6d5472688ccef6e8577",
+    "learned": "bb82b657b1a56863dba67842cbe993d88bd8353eed444c2ae5713298d3bef4ee"
+  }
+}

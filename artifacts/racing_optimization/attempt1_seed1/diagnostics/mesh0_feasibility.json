@@ -1,0 +1,13 @@
+{
+  "failures": [],
+  "validated": true,
+  "invalid_intervals": [],
+  "maximum_dynamics_defect": 0.011408244847737503,
+  "minimum_clearance_m": 0.019791841506958008,
+  "stage": "feasibility",
+  "refinement": 0,
+  "solver_status": "Solved_To_Acceptable_Level",
+  "duration_s": 14.660486262517786,
+  "peak_speed_m_s": 10.119586195523826,
+  "gate_offset_fraction": 0.5
+}

@@ -1,0 +1,382 @@
+Validating zero-offset MPC before residual training...
+Flight diagnostics: artifacts/reference_racing_policy_15pct_active/attempt1_seed0/checkpoints/baseline_diagnostics (initializing; first step includes compilation)
+Flight 1-1 | sim 0.1s | wall 68s | passed 0-0/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 1.1s | wall 91s | passed 1-1/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 2.1s | wall 112s | passed 1-1/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 3.1s | wall 135s | passed 3-3/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 4.1s | wall 156s | passed 4-4/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 5.1s | wall 178s | passed 4-4/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 6.1s | wall 200s | passed 5-5/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 7.1s | wall 221s | passed 5-5/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 8.1s | wall 241s | passed 6-6/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 9.1s | wall 261s | passed 7-7/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 10.1s | wall 281s | passed 8-8/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 11.1s | wall 301s | passed 9-9/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 12.1s | wall 321s | passed 10-10/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.1s | wall 341s | passed 10-10/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.8s | wall 356s | passed 12-12/12
+  error max 0.03m | collisions 0 | fallbacks 0
+Flight diagnostics completed: artifacts/reference_racing_policy_15pct_active/attempt1_seed0/checkpoints/baseline_diagnostics/progress.json
+-------------------------------------------------------------------------------
+| system/                 |                                                   |
+|     device              | gpu                                               |
+|     jax_backend         | gpu                                               |
+|     parameter_devices   | cuda:0                                            |
+|     physics             | first_principles                                  |
+|     sim_frequency       | 500 Hz                                            |
+|     control_frequency   | 20 Hz                                             |
+| training/               |                                                   |
+|     algorithm           | PPO                                               |
+|     action_space        | world_position_speed_residual_v1                  |
+|     num_envs            | 4                                                 |
+|     rollout_length      | 256                                               |
+|     batch_size          | 1,024                                             |
+|     start_timesteps     | 0                                                 |
+|     target_timesteps    | 16,384                                            |
+|     schedule_timesteps  | 131,072                                           |
+|     schedule_consumed   | 0                                                 |
+|     total_iterations    | 16                                                |
+|     actor_obs_dim       | 82                                                |
+|     critic_obs_dim      | 50                                                |
+|     reward_version      | v2                                                |
+|     curriculum          | no                                                |
+|     strict_evaluation   | no                                                |
+|     skill_attempts_gate | 8                                                 |
+|     checkpoint_dir      | artifacts/reference_racing_policy_15pct_active... |
+|     checkpoint_interval | 1                                                 |
+|     metrics_file        | artifacts/reference_racing_policy_15pct_active... |
+-------------------------------------------------------------------------------
+[Update 1/16] Collecting flight experience...
+[Update 1] Learning from collected flights...
+-----------------------------------------------
+| Progress/               |                   |
+|     Update completed    | 1 / 16            |
+|     Steps               | 1,024 / 16,384    |
+|     Estimated remaining | 1h27m             |
+|     Training time       | 5m48s             |
+|     Evaluation time     | 0s                |
+| Training/               |                   |
+|     Gate opening        | 1.00x             |
+|     G1 start target     | 100%              |
+|     Mean episode reward | 0.00              |
+|     Status              | PPO values finite |
+|     Policy change (KL)  | 0.0049            |
+|     Clipped samples     | 5.8%              |
+| Course test/            |                   |
+|     Status              | Not evaluated yet |
+-----------------------------------------------
+[Update 1] Checkpoint saved: artifacts/reference_racing_policy_15pct_active/attempt1_seed0/checkpoints/checkpoint_latest.pkl
+[Update 2/16] Collecting flight experience...
+[Update 2] Learning from collected flights...
+-----------------------------------------------
+| Progress/               |                   |
+|     Update completed    | 2 / 16            |
+|     Steps               | 2,048 / 16,384    |
+|     Estimated remaining | 1h11m             |
+|     Training time       | 4m20s             |
+|     Evaluation time     | 0s                |
+| Training/               |                   |
+|     Gate opening        | 1.00x             |
+|     G1 start target     | 100%              |
+|     Mean episode reward | 413.01            |
+|     Status              | PPO values finite |
+|     Policy change (KL)  | 0.0031            |
+|     Clipped samples     | 3.3%              |
+| Course test/            |                   |
+|     Status              | Not evaluated yet |
+-----------------------------------------------
+[Update 2] Checkpoint saved: artifacts/reference_racing_policy_15pct_active/attempt1_seed0/checkpoints/checkpoint_latest.pkl
+[Update 3/16] Collecting flight experience...
+[Update 3] Learning from collected flights...
+-----------------------------------------------
+| Progress/               |                   |
+|     Update completed    | 3 / 16            |
+|     Steps               | 3,072 / 16,384    |
+|     Estimated remaining | 1h03m             |
+|     Training time       | 4m23s             |
+|     Evaluation time     | 0s                |
+| Training/               |                   |
+|     Gate opening        | 1.00x             |
+|     G1 start target     | 100%              |
+|     Mean episode reward | 411.78            |
+|     Status              | PPO values finite |
+|     Policy change (KL)  | 0.0034            |
+|     Clipped samples     | 4.0%              |
+| Course test/            |                   |
+|     Status              | Not evaluated yet |
+-----------------------------------------------
+[Update 3] Checkpoint saved: artifacts/reference_racing_policy_15pct_active/attempt1_seed0/checkpoints/checkpoint_latest.pkl
+[Update 4/16] Collecting flight experience...
+[Update 4] Learning from collected flights...
+-----------------------------------------------
+| Progress/               |                   |
+|     Update completed    | 4 / 16            |
+|     Steps               | 4,096 / 16,384    |
+|     Estimated remaining | 56m39s            |
+|     Training time       | 4m20s             |
+|     Evaluation time     | 0s                |
+| Training/               |                   |
+|     Gate opening        | 1.00x             |
+|     G1 start target     | 100%              |
+|     Mean episode reward | 410.25            |
+|     Status              | PPO values finite |
+|     Policy change (KL)  | 0.0046            |
+|     Clipped samples     | 5.7%              |
+| Course test/            |                   |
+|     Status              | Not evaluated yet |
+-----------------------------------------------
+[Update 4] Checkpoint saved: artifacts/reference_racing_policy_15pct_active/attempt1_seed0/checkpoints/checkpoint_latest.pkl
+[Update 5/16] Collecting flight experience...
+[Update 5] Learning from collected flights...
+-----------------------------------------------
+| Progress/               |                   |
+|     Update completed    | 5 / 16            |
+|     Steps               | 5,120 / 16,384    |
+|     Estimated remaining | 50m55s            |
+|     Training time       | 4m15s             |
+|     Evaluation time     | 0s                |
+| Training/               |                   |
+|     Gate opening        | 1.00x             |
+|     G1 start target     | 100%              |
+|     Mean episode reward | 410.67            |
+|     Status              | PPO values finite |
+|     Policy change (KL)  | 0.0043            |
+|     Clipped samples     | 5.2%              |
+| Course test/            |                   |
+|     Status              | Not evaluated yet |
+-----------------------------------------------
+[Update 5] Checkpoint saved: artifacts/reference_racing_policy_15pct_active/attempt1_seed0/checkpoints/checkpoint_latest.pkl
+[Update 6/16] Collecting flight experience...
+[Update 6] Learning from collected flights...
+-----------------------------------------------
+| Progress/               |                   |
+|     Update completed    | 6 / 16            |
+|     Steps               | 6,144 / 16,384    |
+|     Estimated remaining | 45m43s            |
+|     Training time       | 4m17s             |
+|     Evaluation time     | 0s                |
+| Training/               |                   |
+|     Gate opening        | 1.00x             |
+|     G1 start target     | 100%              |
+|     Mean episode reward | 409.56            |
+|     Status              | PPO values finite |
+|     Policy change (KL)  | 0.0051            |
+|     Clipped samples     | 6.2%              |
+| Course test/            |                   |
+|     Status              | Not evaluated yet |
+-----------------------------------------------
+[Update 6] Checkpoint saved: artifacts/reference_racing_policy_15pct_active/attempt1_seed0/checkpoints/checkpoint_latest.pkl
+[Update 7/16] Collecting flight experience...
+[Update 7] Learning from collected flights...
+-----------------------------------------------
+| Progress/               |                   |
+|     Update completed    | 7 / 16            |
+|     Steps               | 7,168 / 16,384    |
+|     Estimated remaining | 40m48s            |
+|     Training time       | 4m18s             |
+|     Evaluation time     | 0s                |
+| Training/               |                   |
+|     Gate opening        | 1.00x             |
+|     G1 start target     | 100%              |
+|     Mean episode reward | 411.80            |
+|     Status              | PPO values finite |
+|     Policy change (KL)  | 0.0045            |
+|     Clipped samples     | 5.8%              |
+| Course test/            |                   |
+|     Status              | Not evaluated yet |
+-----------------------------------------------
+[Update 7] Checkpoint saved: artifacts/reference_racing_policy_15pct_active/attempt1_seed0/checkpoints/checkpoint_latest.pkl
+[Update 8/16] Collecting flight experience...
+[Update 8] Learning from collected flights...
+-----------------------------------------------
+| Progress/               |                   |
+|     Update completed    | 8 / 16            |
+|     Steps               | 8,192 / 16,384    |
+|     Estimated remaining | 36m13s            |
+|     Training time       | 4m29s             |
+|     Evaluation time     | 0s                |
+| Training/               |                   |
+|     Gate opening        | 1.00x             |
+|     G1 start target     | 100%              |
+|     Mean episode reward | 412.62            |
+|     Status              | PPO values finite |
+|     Policy change (KL)  | 0.0059            |
+|     Clipped samples     | 8.0%              |
+| Course test/            |                   |
+|     Status              | Not evaluated yet |
+-----------------------------------------------
+[Update 8] Checkpoint saved: artifacts/reference_racing_policy_15pct_active/attempt1_seed0/checkpoints/checkpoint_latest.pkl
+[Update 9/16] Collecting flight experience...
+[Update 9] Learning from collected flights...
+-----------------------------------------------
+| Progress/               |                   |
+|     Update completed    | 9 / 16            |
+|     Steps               | 9,216 / 16,384    |
+|     Estimated remaining | 31m37s            |
+|     Training time       | 4m25s             |
+|     Evaluation time     | 0s                |
+| Training/               |                   |
+|     Gate opening        | 1.00x             |
+|     G1 start target     | 100%              |
+|     Mean episode reward | 410.27            |
+|     Status              | PPO values finite |
+|     Policy change (KL)  | 0.0064            |
+|     Clipped samples     | 8.9%              |
+| Course test/            |                   |
+|     Status              | Not evaluated yet |
+-----------------------------------------------
+[Update 9] Checkpoint saved: artifacts/reference_racing_policy_15pct_active/attempt1_seed0/checkpoints/checkpoint_latest.pkl
+[Update 10/16] Collecting flight experience...
+[Update 10] Learning from collected flights...
+-----------------------------------------------
+| Progress/               |                   |
+|     Update completed    | 10 / 16           |
+|     Steps               | 10,240 / 16,384   |
+|     Estimated remaining | 27m04s            |
+|     Training time       | 4m29s             |
+|     Evaluation time     | 0s                |
+| Training/               |                   |
+|     Gate opening        | 1.00x             |
+|     G1 start target     | 100%              |
+|     Mean episode reward | 410.43            |
+|     Status              | PPO values finite |
+|     Policy change (KL)  | 0.0065            |
+|     Clipped samples     | 8.2%              |
+| Course test/            |                   |
+|     Status              | Not evaluated yet |
+-----------------------------------------------
+[Update 10] Checkpoint saved: artifacts/reference_racing_policy_15pct_active/attempt1_seed0/checkpoints/checkpoint_latest.pkl
+[Update 11/16] Collecting flight experience...
+[Update 11] Learning from collected flights...
+-----------------------------------------------
+| Progress/               |                   |
+|     Update completed    | 11 / 16           |
+|     Steps               | 11,264 / 16,384   |
+|     Estimated remaining | 22m31s            |
+|     Training time       | 4m25s             |
+|     Evaluation time     | 0s                |
+| Training/               |                   |
+|     Gate opening        | 1.00x             |
+|     G1 start target     | 100%              |
+|     Mean episode reward | 229.40            |
+|     Status              | PPO values finite |
+|     Policy change (KL)  | 0.0058            |
+|     Clipped samples     | 7.5%              |
+| Course test/            |                   |
+|     Status              | Not evaluated yet |
+-----------------------------------------------
+[Update 11] Checkpoint saved: artifacts/reference_racing_policy_15pct_active/attempt1_seed0/checkpoints/checkpoint_latest.pkl
+[Update 12/16] Collecting flight experience...
+[Update 12] Learning from collected flights...
+-----------------------------------------------
+| Progress/               |                   |
+|     Update completed    | 12 / 16           |
+|     Steps               | 12,288 / 16,384   |
+|     Estimated remaining | 17m59s            |
+|     Training time       | 4m24s             |
+|     Evaluation time     | 0s                |
+| Training/               |                   |
+|     Gate opening        | 1.00x             |
+|     G1 start target     | 100%              |
+|     Mean episode reward | 408.85            |
+|     Status              | PPO values finite |
+|     Policy change (KL)  | 0.0061            |
+|     Clipped samples     | 7.1%              |
+| Course test/            |                   |
+|     Status              | Not evaluated yet |
+-----------------------------------------------
+[Update 12] Checkpoint saved: artifacts/reference_racing_policy_15pct_active/attempt1_seed0/checkpoints/checkpoint_latest.pkl
+[Update 13/16] Collecting flight experience...
+[Update 13] Learning from collected flights...
+-----------------------------------------------
+| Progress/               |                   |
+|     Update completed    | 13 / 16           |
+|     Steps               | 13,312 / 16,384   |
+|     Estimated remaining | 13m23s            |
+|     Training time       | 4m03s             |
+|     Evaluation time     | 0s                |
+| Training/               |                   |
+|     Gate opening        | 1.00x             |
+|     G1 start target     | 100%              |
+|     Mean episode reward | 410.36            |
+|     Status              | PPO values finite |
+|     Policy change (KL)  | 0.0057            |
+|     Clipped samples     | 7.0%              |
+| Course test/            |                   |
+|     Status              | Not evaluated yet |
+-----------------------------------------------
+[Update 13] Checkpoint saved: artifacts/reference_racing_policy_15pct_active/attempt1_seed0/checkpoints/checkpoint_latest.pkl
+[Update 14/16] Collecting flight experience...
+[Update 14] Learning from collected flights...
+-----------------------------------------------
+| Progress/               |                   |
+|     Update completed    | 14 / 16           |
+|     Steps               | 14,336 / 16,384   |
+|     Estimated remaining | 8m51s             |
+|     Training time       | 3m58s             |
+|     Evaluation time     | 0s                |
+| Training/               |                   |
+|     Gate opening        | 1.00x             |
+|     G1 start target     | 100%              |
+|     Mean episode reward | 409.28            |
+|     Status              | PPO values finite |
+|     Policy change (KL)  | 0.0058            |
+|     Clipped samples     | 7.7%              |
+| Course test/            |                   |
+|     Status              | Not evaluated yet |
+-----------------------------------------------
+[Update 14] Checkpoint saved: artifacts/reference_racing_policy_15pct_active/attempt1_seed0/checkpoints/checkpoint_latest.pkl
+[Update 15/16] Collecting flight experience...
+[Update 15] Learning from collected flights...
+-----------------------------------------------
+| Progress/               |                   |
+|     Update completed    | 15 / 16           |
+|     Steps               | 15,360 / 16,384   |
+|     Estimated remaining | 4m24s             |
+|     Training time       | 4m04s             |
+|     Evaluation time     | 0s                |
+| Training/               |                   |
+|     Gate opening        | 1.00x             |
+|     G1 start target     | 100%              |
+|     Mean episode reward | 410.77            |
+|     Status              | PPO values finite |
+|     Policy change (KL)  | 0.0065            |
+|     Clipped samples     | 8.9%              |
+| Course test/            |                   |
+|     Status              | Not evaluated yet |
+-----------------------------------------------
+[Update 15] Checkpoint saved: artifacts/reference_racing_policy_15pct_active/attempt1_seed0/checkpoints/checkpoint_latest.pkl
+[Update 16/16] Collecting flight experience...
+[Update 16] Learning from collected flights...
+-----------------------------------------------
+| Progress/               |                   |
+|     Update completed    | 16 / 16           |
+|     Steps               | 16,384 / 16,384   |
+|     Estimated remaining | 0s                |
+|     Training time       | 4m00s             |
+|     Evaluation time     | 0s                |
+| Training/               |                   |
+|     Gate opening        | 1.00x             |
+|     G1 start target     | 100%              |
+|     Mean episode reward | 237.32            |
+|     Status              | PPO values finite |
+|     Policy change (KL)  | 0.0051            |
+|     Clipped samples     | 6.5%              |
+| Course test/            |                   |
+|     Status              | Not evaluated yet |
+-----------------------------------------------
+[Update 16] Checkpoint saved: artifacts/reference_racing_policy_15pct_active/attempt1_seed0/checkpoints/checkpoint_latest.pkl

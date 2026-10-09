@@ -1,0 +1,20 @@
+{
+  "previous": {
+    "duration_s": 13.817079254997214,
+    "peak_speed_m_s": 10.738753297891806,
+    "model_fingerprint": "e05e42ec260bc3f2811008ac30b77dc53d07d4a5ae50e57f7257e9eb5e00ed8c",
+    "planner_cap_m_s": null,
+    "fingerprint": "d5e9f368be7db13b43aa2dc3486dd134ff6da7c4b2e0ce75059e09c40abb6986",
+    "sha256": "36a1d4e00f4e59b9829e7b3dac0c1b9db86fad4052c1ebc0338def6986de1c10"
+  },
+  "candidate": {
+    "duration_s": 13.817079254997214,
+    "peak_speed_m_s": 10.738753297891806,
+    "model_fingerprint": "e05e42ec260bc3f2811008ac30b77dc53d07d4a5ae50e57f7257e9eb5e00ed8c",
+    "planner_cap_m_s": null,
+    "fingerprint": "d5e9f368be7db13b43aa2dc3486dd134ff6da7c4b2e0ce75059e09c40abb6986",
+    "sha256": "36a1d4e00f4e59b9829e7b3dac0c1b9db86fad4052c1ebc0338def6986de1c10"
+  },
+  "qualified": false,
+  "planned_time_improvement_s": 0.0
+}

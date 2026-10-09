@@ -1,0 +1,33 @@
+E0930 22:11:17.664221   20702 slow_operation_alarm.cc:73] 
+********************************
+[Compiling module jit_broadcast_in_dim for GPU] Very slow compile? If you want to file a bug, run with envvar XLA_FLAGS=--xla_dump_to=/tmp/foo and attach the results.
+********************************
+E1001 08:40:59.171833   20604 slow_operation_alarm.cc:140] The operation took 13h29m45.837788581s
+
+********************************
+[Compiling module jit_broadcast_in_dim for GPU] Very slow compile? If you want to file a bug, run with envvar XLA_FLAGS=--xla_dump_to=/tmp/foo and attach the results.
+********************************
+-------------------------------------------------------------------------------
+| checkpoint/           |                                                     |
+|     status            | restored                                            |
+|     path              | artifacts/recovery_sensitive/24mps/checkpoints/c... |
+|     total_timesteps   | 16,384                                              |
+|     updates           | 16                                                  |
+|     episodes          | 58                                                  |
+|     schedule_steps    | 16,384                                              |
+|     schedule_progress | 12.5%                                               |
+|     curriculum_phase  | A                                                   |
+|     migrated_schedule | no                                                  |
+|     pre_correction_v2 | no                                                  |
+-------------------------------------------------------------------------------
+Flight diagnostics: artifacts/recovery_sensitive/24mps/screen1/position_1cm/noisy_state_baseline_live (initializing; first step includes compilation)
+Flight 1-4 | sim 0.1s | wall 45s | passed 0-0/12
+  error max 0.06m | collisions 0 | fallbacks 0
+Flight 1-4 | sim 1.1s | wall 65s | passed 0-1/12
+  error max 0.17m | collisions 0 | fallbacks 0
+Flight 1-4 | sim 2.1s | wall 86s | passed 1-1/12
+  error max 0.03m | collisions 0 | fallbacks 0
+Flight 1-4 | sim 3.1s | wall 105s | passed 3-3/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-4 | sim 4.1s | wall 125s | passed 4-4/12
+  error max 0.00m | collisions 0 | fallbacks 0

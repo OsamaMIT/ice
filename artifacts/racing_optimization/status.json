@@ -1,0 +1,178 @@
+{
+  "spec": {
+    "version": 2,
+    "caps": [
+      6.0,
+      12.0,
+      24.0,
+      null
+    ],
+    "initial_reference": "36a1d4e00f4e59b9829e7b3dac0c1b9db86fad4052c1ebc0338def6986de1c10",
+    "updates_per_block": 32,
+    "max_blocks": 4,
+    "conditions": {
+      "exact_state": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "position_1cm": [
+        0.01,
+        0.0,
+        0.0
+      ],
+      "position_3cm": [
+        0.03,
+        0.0,
+        0.0
+      ],
+      "velocity_2cms": [
+        0.0,
+        0.02,
+        0.0
+      ],
+      "velocity_5cms": [
+        0.0,
+        0.05,
+        0.0
+      ],
+      "delay_10ms": [
+        0.0,
+        0.0,
+        0.01
+      ],
+      "delay_30ms": [
+        0.0,
+        0.0,
+        0.03
+      ]
+    },
+    "screening_trials": 8,
+    "final_trials": 100,
+    "max_lap_ratio": 1.02,
+    "source": {
+      "src/a2rl_drone_training/__init__.py": "8b72b4fc844447710c7afcf047fc1d61713de8c2c6a9c641174e422a67817494",
+      "src/a2rl_drone_training/actions.py": "93e9308696b7f981dee1aaec0c399a8b9474d2d1ab7d798c198c6b2a820a8735",
+      "src/a2rl_drone_training/config.py": "711bad9d8b6b21aa33699571d10da465f1c23115dfec777b270ae7db470816f1",
+      "src/a2rl_drone_training/console.py": "5eb82d8119db6bc0a8c1012ee4fd40244a1211ef1f6ba6f16bc196789a68c7a3",
+      "src/a2rl_drone_training/course.py": "c7a30c3578df1dcbd278e16cecc79440e457067927d452d1494e4f50eb66d1cc",
+      "src/a2rl_drone_training/curriculum.py": "4ef92efcfaef99b091a83b169dfadfc9c620fc92fd9f5604393394c7ad0a27f8",
+      "src/a2rl_drone_training/env.py": "6ae0a4db12f068ec0cf4be4173774e8ba457cef27ad6b2df708edf7705333901",
+      "src/a2rl_drone_training/hierarchical/__init__.py": "02006ad818eb8cf76bef2f43bd3f5487024d88a8a61737d3d0ccc9e2b02a3820",
+      "src/a2rl_drone_training/hierarchical/cli.py": "9cf5be6b98126b50a851f8513159752279610697b576a08ebe66959677c675ed",
+      "src/a2rl_drone_training/hierarchical/diagnostics.py": "d6d22c8c5679ca1e4ccc458a86fab9864296183c399178a7ca6f2acff01c5f9f",
+      "src/a2rl_drone_training/hierarchical/dynamics.py": "fcf48094fc3ff517c74a76bd4026d2e6dd7646c6d5a76589ab1032727eea9678",
+      "src/a2rl_drone_training/hierarchical/environment.py": "03a5b5c9ff2b5bd96f75c08bb4b291ef215e6961a411d36cd47dcbc2314a3013",
+      "src/a2rl_drone_training/hierarchical/evaluation.py": "695605c18972ab79a58c7b2e504c24ff1da6ae2025861f1298ecd35a029c45b0",
+      "src/a2rl_drone_training/hierarchical/geometry.py": "b07172aa06eccf6547c189e2f2e12ec17f2cefb1a793fa8628988f10d5f3e818",
+      "src/a2rl_drone_training/hierarchical/mpc.py": "0c4be6f27335c4b2cb58c654b0b53e3e9271b1f1f3ef7afe1e9bff09a69a36bf",
+      "src/a2rl_drone_training/hierarchical/planner.py": "1e018b63eac96e281dd6559d93b6f830a240397b5b5adb8d0c4016fa6320b384",
+      "src/a2rl_drone_training/hierarchical/reference.py": "bbffb376d3f8981232275299637a50a45fa8f6ffcc5f97cb063ecceaa317d3f2",
+      "src/a2rl_drone_training/hierarchical/sensors.py": "2da5016c3a092960e57ced9a62c46caa3cb43225f3e3b1063338890ad548bbed",
+      "src/a2rl_drone_training/networks.py": "4ba3d2f9f74871c78beb2e32e2f09451f5e637f35daccbd79938710e6503bb13",
+      "src/a2rl_drone_training/normalization.py": "e52a0ee11e99b108029826fac1370f8d292b2fe41d70345db82dbf1581ed1234",
+      "src/a2rl_drone_training/observations.py": "a3b9d93b8329aa86410a40caad9db7d66ab31b1410f8cd801367eca361619c54",
+      "src/a2rl_drone_training/optim.py": "6677c933d8d7e74d0d6639f4a23e801819945d5b1d323a8c39e1d65e15525180",
+      "src/a2rl_drone_training/ppo.py": "078be9fbb3f171d83ba0865fb61c8bc7dafd75dc769756e7e69bebf234c21f78",
+      "src/a2rl_drone_training/rewards.py": "aa2090f53e72df23c8eea22f69d25fa68e742272231d06c5241986efe8fd3bf3",
+      "src/a2rl_drone_training/runtime.py": "35b31631b42064bf93f666bb81ea5ae6eb40dc451ee1886e2fef949292afec49",
+      "src/a2rl_drone_training/train.py": "fceea5f837aa0cc70a86aef33e1c1b58816ba05b32656479579c9de3d4d8d4a4",
+      "src/a2rl_drone_training/trainer.py": "1b8a9955a823fbe718ccd9b5ceb931242bc1b192759e1a154b9df9f9498c90f0"
+    },
+    "runner": "00ccfee71bc2202afe8fd28c570a45964aceb90f16f4fa073c4d61257f466c80",
+    "staging_helper": "e2659de52ffb27c5459a55b23903819890d6a35b17bc96efee35675e442033cd",
+    "dependencies": "4df88c33b6e3cdebdd2fa052df09f31fb53aa0e37926071bbfc75ca12dd614dd",
+    "evaluation_worker": "46ea5960865e20c5ff45175a5f94079216d7d4c4e0a0cc5ccb69cea8b8daae36",
+    "racing_runner": "d3dffd03cc165957831c273724bacfb30e4ca28526235a1b3ca00c06d876fadf",
+    "paired_worker": "9af3325c05185d0ee08eee5d229d9fe5af250dcbc2a289d0be715a5b60e4ddbf",
+    "incumbent_checkpoint": "671b072f0ae9f0e3256e5e1c19789cab656f7845e5e0142410e3fd0793521ef7",
+    "risk_schedule": [
+      [
+        0.1,
+        0.8
+      ],
+      [
+        0.075,
+        0.8
+      ],
+      [
+        0.075,
+        0.85
+      ],
+      [
+        0.05,
+        0.9
+      ]
+    ],
+    "prior_run": "8e52e013f2ff0e14cccc453191fb7f10bcb01472ea161de79f36d7b6db8aa3c1"
+  },
+  "tasks": {
+    "attempt1_seed0/planning": {
+      "inputs": {
+        "artifacts/recovery_sensitive/uncapped/reference.npz": "36a1d4e00f4e59b9829e7b3dac0c1b9db86fad4052c1ebc0338def6986de1c10"
+      },
+      "attempt": 1,
+      "completed": true,
+      "outputs": {
+        "artifacts/racing_optimization/attempt1_seed0/reference.npz": "36a1d4e00f4e59b9829e7b3dac0c1b9db86fad4052c1ebc0338def6986de1c10"
+      }
+    },
+    "attempt1_seed1/planning": {
+      "inputs": {
+        "artifacts/recovery_sensitive/uncapped/reference.npz": "36a1d4e00f4e59b9829e7b3dac0c1b9db86fad4052c1ebc0338def6986de1c10"
+      },
+      "attempt": 1,
+      "completed": true,
+      "outputs": {
+        "artifacts/racing_optimization/attempt1_seed1/reference.npz": "36a1d4e00f4e59b9829e7b3dac0c1b9db86fad4052c1ebc0338def6986de1c10"
+      }
+    },
+    "attempt1_seed2/planning": {
+      "inputs": {
+        "artifacts/recovery_sensitive/uncapped/reference.npz": "36a1d4e00f4e59b9829e7b3dac0c1b9db86fad4052c1ebc0338def6986de1c10"
+      },
+      "attempt": 1,
+      "completed": false
+    }
+  },
+  "stages": {},
+  "elapsed_seconds": 56349.37886235501,
+  "completed_final_trials": 0,
+  "pid": 436,
+  "child_pid": null,
+  "process_alive": false,
+  "stage": "interrupted",
+  "updated_at": 1790974186.6346338,
+  "remaining_seconds": 30050.62113809399,
+  "search_elapsed_limit": 73535.7264755038,
+  "budget_carried_from": "artifacts/faster_reference/status.json",
+  "candidate": "attempt1_seed2",
+  "requested_margin_m": 0.1,
+  "requested_motor_limit": 0.8,
+  "gate_offset_fraction": -0.5,
+  "reason": "",
+  "current_log": "artifacts/racing_optimization/attempt1_seed2_planning.attempt1.log",
+  "command": [
+    "/mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/.venv/bin/a2rl-drone-plan",
+    "--max-speed",
+    "none",
+    "--warm-start",
+    "artifacts/recovery_sensitive/uncapped/reference.npz",
+    "--motor-command-limit",
+    "0.8",
+    "--tracking-margin",
+    "0.1",
+    "--gate-offset-fraction",
+    "-0.5",
+    "--diagnostics-dir",
+    "artifacts/racing_optimization/attempt1_seed2/diagnostics",
+    "--nodes-per-segment",
+    "24",
+    "--max-refinements",
+    "1",
+    "--max-iterations",
+    "2000",
+    "--output",
+    "artifacts/racing_optimization/attempt1_seed2/reference.npz"
+  ]
+}

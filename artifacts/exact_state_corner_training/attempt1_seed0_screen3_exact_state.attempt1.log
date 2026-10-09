@@ -1,0 +1,522 @@
+-------------------------------------------------------------------------------
+| checkpoint/           |                                                     |
+|     status            | restored                                            |
+|     path              | artifacts/reference_racing_policy_15pct_active/a... |
+|     total_timesteps   | 32,768                                              |
+|     updates           | 32                                                  |
+|     episodes          | 117                                                 |
+|     schedule_steps    | 32,768                                              |
+|     schedule_progress | 25.0%                                               |
+|     curriculum_phase  | A                                                   |
+|     migrated_schedule | no                                                  |
+|     pre_correction_v2 | no                                                  |
+-------------------------------------------------------------------------------
+Flight diagnostics: artifacts/exact_state_corner_training/attempt1_seed0/screen3/exact_state/seed20000300/incumbent_live (initializing; first step includes compilation)
+Flight 1-1 | sim 0.1s | wall 86s | passed 0-0/12
+  error max 0.03m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 1.0s | wall 116s | passed 0-0/12
+  error max 0.05m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 1.9s | wall 147s | passed 1-1/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 2.9s | wall 177s | passed 2-2/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 3.8s | wall 208s | passed 3-3/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 4.8s | wall 239s | passed 4-4/12
+  error max 0.02m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 5.7s | wall 269s | passed 5-5/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 6.5s | wall 300s | passed 5-5/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 7.5s | wall 326s | passed 6-6/12
+  error max 0.02m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 8.5s | wall 351s | passed 6-6/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 9.5s | wall 380s | passed 7-7/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 10.5s | wall 404s | passed 8-8/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 11.5s | wall 424s | passed 9-9/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 12.5s | wall 445s | passed 10-10/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.5s | wall 464s | passed 11-11/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.9s | wall 472s | passed 12-12/12
+  error max 0.02m | collisions 0 | fallbacks 0
+Flight diagnostics completed: artifacts/exact_state_corner_training/attempt1_seed0/screen3/exact_state/seed20000300/incumbent_live/progress.json
+-------------------------------------------------------------------------------
+| checkpoint/           |                                                     |
+|     status            | restored                                            |
+|     path              | artifacts/exact_state_corner_training/attempt1_s... |
+|     total_timesteps   | 49,152                                              |
+|     updates           | 48                                                  |
+|     episodes          | 180                                                 |
+|     schedule_steps    | 49,152                                              |
+|     schedule_progress | 37.5%                                               |
+|     curriculum_phase  | A                                                   |
+|     migrated_schedule | no                                                  |
+|     pre_correction_v2 | no                                                  |
+-------------------------------------------------------------------------------
+Flight diagnostics: artifacts/exact_state_corner_training/attempt1_seed0/screen3/exact_state/seed20000300/candidate_live (initializing; first step includes compilation)
+Flight 1-1 | sim 0.4s | wall 30s | passed 0-0/12
+  error max 0.02m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 1.4s | wall 51s | passed 1-1/12
+  error max 0.02m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 2.4s | wall 72s | passed 1-1/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 3.4s | wall 92s | passed 3-3/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 4.4s | wall 117s | passed 4-4/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 5.4s | wall 141s | passed 4-4/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 6.4s | wall 160s | passed 5-5/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 7.4s | wall 179s | passed 6-6/12
+  error max 0.02m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 8.4s | wall 199s | passed 6-6/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 9.4s | wall 219s | passed 7-7/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 10.4s | wall 239s | passed 8-8/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 11.4s | wall 259s | passed 9-9/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 12.4s | wall 279s | passed 10-10/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.4s | wall 300s | passed 11-11/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.9s | wall 311s | passed 12-12/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight diagnostics completed: artifacts/exact_state_corner_training/attempt1_seed0/screen3/exact_state/seed20000300/candidate_live/progress.json
+exact_state: 1/8 controller pairs recorded
+Flight diagnostics: artifacts/exact_state_corner_training/attempt1_seed0/screen3/exact_state/seed20000301/incumbent_live (initializing; first step includes compilation)
+Flight 1-1 | sim 1.0s | wall 27s | passed 0-0/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 2.0s | wall 47s | passed 1-1/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 3.0s | wall 66s | passed 3-3/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 4.0s | wall 85s | passed 4-4/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 5.0s | wall 104s | passed 4-4/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 6.0s | wall 124s | passed 5-5/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 7.0s | wall 145s | passed 5-5/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 8.0s | wall 165s | passed 6-6/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 9.0s | wall 188s | passed 6-6/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 10.0s | wall 211s | passed 8-8/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 11.0s | wall 231s | passed 9-9/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 12.0s | wall 251s | passed 10-10/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.0s | wall 270s | passed 10-10/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.9s | wall 287s | passed 12-12/12
+  error max 0.02m | collisions 0 | fallbacks 0
+Flight diagnostics completed: artifacts/exact_state_corner_training/attempt1_seed0/screen3/exact_state/seed20000301/incumbent_live/progress.json
+Flight diagnostics: artifacts/exact_state_corner_training/attempt1_seed0/screen3/exact_state/seed20000301/candidate_live (initializing; first step includes compilation)
+Flight 1-1 | sim 1.0s | wall 19s | passed 0-0/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 2.0s | wall 38s | passed 1-1/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 3.0s | wall 58s | passed 3-3/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 4.0s | wall 80s | passed 4-4/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 5.0s | wall 102s | passed 4-4/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 6.0s | wall 125s | passed 5-5/12
+  error max 0.02m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 7.0s | wall 145s | passed 5-5/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 8.0s | wall 164s | passed 6-6/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 9.0s | wall 184s | passed 6-6/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 10.0s | wall 205s | passed 8-8/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 11.0s | wall 225s | passed 9-9/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 12.0s | wall 245s | passed 10-10/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.0s | wall 266s | passed 10-10/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.9s | wall 284s | passed 12-12/12
+  error max 0.03m | collisions 0 | fallbacks 0
+Flight diagnostics completed: artifacts/exact_state_corner_training/attempt1_seed0/screen3/exact_state/seed20000301/candidate_live/progress.json
+exact_state: 2/8 controller pairs recorded
+Flight diagnostics: artifacts/exact_state_corner_training/attempt1_seed0/screen3/exact_state/seed20000302/incumbent_live (initializing; first step includes compilation)
+Flight 1-1 | sim 1.0s | wall 21s | passed 0-0/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 2.0s | wall 40s | passed 1-1/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 3.0s | wall 59s | passed 3-3/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 4.0s | wall 79s | passed 4-4/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 5.0s | wall 100s | passed 4-4/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 6.0s | wall 120s | passed 5-5/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 7.0s | wall 140s | passed 5-5/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 8.0s | wall 159s | passed 6-6/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 9.0s | wall 177s | passed 7-7/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 10.0s | wall 196s | passed 8-8/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 11.0s | wall 215s | passed 9-9/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 12.0s | wall 233s | passed 10-10/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.0s | wall 251s | passed 10-10/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.9s | wall 268s | passed 12-12/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight diagnostics completed: artifacts/exact_state_corner_training/attempt1_seed0/screen3/exact_state/seed20000302/incumbent_live/progress.json
+Flight diagnostics: artifacts/exact_state_corner_training/attempt1_seed0/screen3/exact_state/seed20000302/candidate_live (initializing; first step includes compilation)
+Flight 1-1 | sim 1.0s | wall 18s | passed 0-0/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 2.0s | wall 38s | passed 1-1/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 3.0s | wall 57s | passed 3-3/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 4.0s | wall 77s | passed 4-4/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 5.0s | wall 96s | passed 4-4/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 6.0s | wall 115s | passed 5-5/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 7.0s | wall 134s | passed 5-5/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 8.0s | wall 153s | passed 6-6/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 9.0s | wall 172s | passed 6-6/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 10.0s | wall 190s | passed 8-8/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 11.0s | wall 209s | passed 9-9/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 12.0s | wall 227s | passed 10-10/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.0s | wall 246s | passed 10-10/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.9s | wall 262s | passed 12-12/12
+  error max 0.02m | collisions 0 | fallbacks 0
+Flight diagnostics completed: artifacts/exact_state_corner_training/attempt1_seed0/screen3/exact_state/seed20000302/candidate_live/progress.json
+exact_state: 3/8 controller pairs recorded
+Flight diagnostics: artifacts/exact_state_corner_training/attempt1_seed0/screen3/exact_state/seed20000303/incumbent_live (initializing; first step includes compilation)
+Flight 1-1 | sim 1.0s | wall 19s | passed 1-1/12
+  error max 0.06m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 2.0s | wall 38s | passed 1-1/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 3.0s | wall 57s | passed 3-3/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 4.0s | wall 76s | passed 4-4/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 5.0s | wall 94s | passed 4-4/12
+  error max 0.02m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 6.0s | wall 113s | passed 5-5/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 7.0s | wall 132s | passed 6-6/12
+  error max 0.02m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 8.0s | wall 150s | passed 6-6/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 9.0s | wall 169s | passed 7-7/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 10.0s | wall 187s | passed 8-8/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 11.0s | wall 205s | passed 9-9/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 12.0s | wall 228s | passed 10-10/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.0s | wall 247s | passed 11-11/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.7s | wall 260s | passed 12-12/12
+  error max 0.02m | collisions 0 | fallbacks 0
+Flight diagnostics completed: artifacts/exact_state_corner_training/attempt1_seed0/screen3/exact_state/seed20000303/incumbent_live/progress.json
+Flight diagnostics: artifacts/exact_state_corner_training/attempt1_seed0/screen3/exact_state/seed20000303/candidate_live (initializing; first step includes compilation)
+Flight 1-1 | sim 1.0s | wall 19s | passed 1-1/12
+  error max 0.08m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 2.0s | wall 41s | passed 1-1/12
+  error max 0.02m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 3.0s | wall 63s | passed 3-3/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 4.0s | wall 83s | passed 4-4/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 5.0s | wall 103s | passed 4-4/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 6.0s | wall 123s | passed 5-5/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 7.0s | wall 147s | passed 6-6/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 8.0s | wall 166s | passed 6-6/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 9.0s | wall 185s | passed 7-7/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 10.0s | wall 203s | passed 8-8/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 11.0s | wall 221s | passed 9-9/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 12.0s | wall 238s | passed 10-10/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.0s | wall 256s | passed 11-11/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.7s | wall 270s | passed 12-12/12
+  error max 0.02m | collisions 0 | fallbacks 0
+Flight diagnostics completed: artifacts/exact_state_corner_training/attempt1_seed0/screen3/exact_state/seed20000303/candidate_live/progress.json
+exact_state: 4/8 controller pairs recorded
+Flight diagnostics: artifacts/exact_state_corner_training/attempt1_seed0/screen3/exact_state/seed20000304/incumbent_live (initializing; first step includes compilation)
+Flight 1-1 | sim 1.0s | wall 21s | passed 0-0/12
+  error max 0.04m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 2.0s | wall 40s | passed 1-1/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 3.0s | wall 59s | passed 2-2/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 4.0s | wall 77s | passed 4-4/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 5.0s | wall 95s | passed 4-4/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 6.0s | wall 112s | passed 5-5/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 7.0s | wall 129s | passed 5-5/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 8.0s | wall 147s | passed 6-6/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 9.0s | wall 164s | passed 6-6/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 10.0s | wall 181s | passed 8-8/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 11.0s | wall 199s | passed 8-8/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 12.0s | wall 217s | passed 10-10/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.0s | wall 235s | passed 10-10/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 14.0s | wall 253s | passed 11-11/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 14.0s | wall 253s | passed 12-12/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight diagnostics completed: artifacts/exact_state_corner_training/attempt1_seed0/screen3/exact_state/seed20000304/incumbent_live/progress.json
+Flight diagnostics: artifacts/exact_state_corner_training/attempt1_seed0/screen3/exact_state/seed20000304/candidate_live (initializing; first step includes compilation)
+Flight 1-1 | sim 1.0s | wall 18s | passed 0-0/12
+  error max 0.03m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 2.0s | wall 35s | passed 1-1/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 3.0s | wall 53s | passed 2-2/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 4.0s | wall 71s | passed 4-4/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 5.0s | wall 89s | passed 4-4/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 6.0s | wall 106s | passed 5-5/12
+  error max 0.02m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 7.0s | wall 123s | passed 5-5/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 8.0s | wall 140s | passed 6-6/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 9.0s | wall 157s | passed 6-6/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 10.0s | wall 174s | passed 8-8/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 11.0s | wall 191s | passed 8-8/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 12.0s | wall 208s | passed 10-10/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.0s | wall 227s | passed 10-10/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 14.0s | wall 245s | passed 12-12/12
+  error max 0.02m | collisions 0 | fallbacks 0
+Flight diagnostics completed: artifacts/exact_state_corner_training/attempt1_seed0/screen3/exact_state/seed20000304/candidate_live/progress.json
+exact_state: 5/8 controller pairs recorded
+Flight diagnostics: artifacts/exact_state_corner_training/attempt1_seed0/screen3/exact_state/seed20000305/incumbent_live (initializing; first step includes compilation)
+Flight 1-1 | sim 1.0s | wall 18s | passed 0-0/12
+  error max 0.03m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 2.0s | wall 36s | passed 1-1/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 3.0s | wall 52s | passed 3-3/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 4.0s | wall 69s | passed 4-4/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 5.0s | wall 86s | passed 4-4/12
+  error max 0.02m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 6.0s | wall 103s | passed 5-5/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 7.0s | wall 120s | passed 5-5/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 8.0s | wall 137s | passed 6-6/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 9.0s | wall 154s | passed 6-6/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 10.0s | wall 171s | passed 8-8/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 11.0s | wall 188s | passed 9-9/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 12.0s | wall 205s | passed 10-10/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.0s | wall 222s | passed 10-10/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.9s | wall 237s | passed 12-12/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight diagnostics completed: artifacts/exact_state_corner_training/attempt1_seed0/screen3/exact_state/seed20000305/incumbent_live/progress.json
+Flight diagnostics: artifacts/exact_state_corner_training/attempt1_seed0/screen3/exact_state/seed20000305/candidate_live (initializing; first step includes compilation)
+Flight 1-1 | sim 1.0s | wall 18s | passed 0-0/12
+  error max 0.02m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 2.0s | wall 37s | passed 1-1/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 3.0s | wall 56s | passed 3-3/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 4.0s | wall 74s | passed 4-4/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 5.0s | wall 92s | passed 4-4/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 6.0s | wall 110s | passed 5-5/12
+  error max 0.02m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 7.0s | wall 127s | passed 5-5/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 8.0s | wall 145s | passed 6-6/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 9.0s | wall 163s | passed 6-6/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 10.0s | wall 180s | passed 8-8/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 11.0s | wall 197s | passed 9-9/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 12.0s | wall 214s | passed 10-10/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.0s | wall 231s | passed 10-10/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.9s | wall 246s | passed 12-12/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight diagnostics completed: artifacts/exact_state_corner_training/attempt1_seed0/screen3/exact_state/seed20000305/candidate_live/progress.json
+exact_state: 6/8 controller pairs recorded
+Flight diagnostics: artifacts/exact_state_corner_training/attempt1_seed0/screen3/exact_state/seed20000306/incumbent_live (initializing; first step includes compilation)
+Flight 1-1 | sim 1.0s | wall 17s | passed 1-1/12
+  error max 0.02m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 2.0s | wall 34s | passed 1-1/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 3.0s | wall 50s | passed 3-3/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 4.0s | wall 67s | passed 4-4/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 5.0s | wall 84s | passed 4-4/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 6.0s | wall 102s | passed 5-5/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 7.0s | wall 119s | passed 6-6/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 8.0s | wall 138s | passed 6-6/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 9.0s | wall 157s | passed 7-7/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 10.0s | wall 175s | passed 8-8/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 11.0s | wall 193s | passed 9-9/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 12.0s | wall 212s | passed 10-10/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.0s | wall 230s | passed 11-11/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.7s | wall 242s | passed 12-12/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight diagnostics completed: artifacts/exact_state_corner_training/attempt1_seed0/screen3/exact_state/seed20000306/incumbent_live/progress.json
+Flight diagnostics: artifacts/exact_state_corner_training/attempt1_seed0/screen3/exact_state/seed20000306/candidate_live (initializing; first step includes compilation)
+Flight 1-1 | sim 1.0s | wall 18s | passed 1-1/12
+  error max 0.02m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 2.0s | wall 37s | passed 1-1/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 3.0s | wall 56s | passed 3-3/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 4.0s | wall 74s | passed 4-4/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 5.0s | wall 92s | passed 4-4/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 6.0s | wall 110s | passed 5-5/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 7.0s | wall 129s | passed 6-6/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 8.0s | wall 147s | passed 6-6/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 9.0s | wall 166s | passed 7-7/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 10.0s | wall 185s | passed 8-8/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 11.0s | wall 203s | passed 9-9/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 12.0s | wall 222s | passed 10-10/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.0s | wall 241s | passed 11-11/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.7s | wall 253s | passed 12-12/12
+  error max 0.02m | collisions 0 | fallbacks 0
+Flight diagnostics completed: artifacts/exact_state_corner_training/attempt1_seed0/screen3/exact_state/seed20000306/candidate_live/progress.json
+exact_state: 7/8 controller pairs recorded
+Flight diagnostics: artifacts/exact_state_corner_training/attempt1_seed0/screen3/exact_state/seed20000307/incumbent_live (initializing; first step includes compilation)
+Flight 1-1 | sim 1.0s | wall 19s | passed 0-0/12
+  error max 0.03m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 2.0s | wall 37s | passed 1-1/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 3.0s | wall 56s | passed 3-3/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 4.0s | wall 74s | passed 4-4/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 5.0s | wall 92s | passed 4-4/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 6.0s | wall 110s | passed 5-5/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 7.0s | wall 127s | passed 5-5/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 8.0s | wall 145s | passed 6-6/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 9.0s | wall 163s | passed 6-6/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 10.0s | wall 181s | passed 8-8/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 11.0s | wall 199s | passed 9-9/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 12.0s | wall 217s | passed 10-10/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.0s | wall 236s | passed 10-10/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.9s | wall 254s | passed 12-12/12
+  error max 0.02m | collisions 0 | fallbacks 0
+Flight diagnostics completed: artifacts/exact_state_corner_training/attempt1_seed0/screen3/exact_state/seed20000307/incumbent_live/progress.json
+Flight diagnostics: artifacts/exact_state_corner_training/attempt1_seed0/screen3/exact_state/seed20000307/candidate_live (initializing; first step includes compilation)
+Flight 1-1 | sim 1.0s | wall 17s | passed 0-0/12
+  error max 0.03m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 2.0s | wall 36s | passed 1-1/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 3.0s | wall 55s | passed 3-3/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 4.0s | wall 72s | passed 4-4/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 5.0s | wall 91s | passed 4-4/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 6.0s | wall 109s | passed 5-5/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 7.0s | wall 126s | passed 5-5/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 8.0s | wall 144s | passed 6-6/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 9.0s | wall 162s | passed 6-6/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 10.0s | wall 180s | passed 8-8/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 11.0s | wall 198s | passed 9-9/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 12.0s | wall 216s | passed 10-10/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.0s | wall 234s | passed 10-10/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.9s | wall 250s | passed 12-12/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight diagnostics completed: artifacts/exact_state_corner_training/attempt1_seed0/screen3/exact_state/seed20000307/candidate_live/progress.json
+exact_state: 8/8 controller pairs recorded

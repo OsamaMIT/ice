@@ -1,0 +1,231 @@
+{
+  "spec": {
+    "version": 2,
+    "caps": [
+      6.0,
+      12.0,
+      24.0,
+      null
+    ],
+    "initial_reference": "36a1d4e00f4e59b9829e7b3dac0c1b9db86fad4052c1ebc0338def6986de1c10",
+    "updates_per_block": 32,
+    "max_blocks": 4,
+    "conditions": {
+      "exact_state": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "position_1cm": [
+        0.01,
+        0.0,
+        0.0
+      ],
+      "position_3cm": [
+        0.03,
+        0.0,
+        0.0
+      ],
+      "velocity_2cms": [
+        0.0,
+        0.02,
+        0.0
+      ],
+      "velocity_5cms": [
+        0.0,
+        0.05,
+        0.0
+      ],
+      "delay_10ms": [
+        0.0,
+        0.0,
+        0.01
+      ],
+      "delay_30ms": [
+        0.0,
+        0.0,
+        0.03
+      ]
+    },
+    "screening_trials": 8,
+    "final_trials": 100,
+    "max_lap_ratio": 1.02,
+    "source": {
+      "src/a2rl_drone_training/__init__.py": "8b72b4fc844447710c7afcf047fc1d61713de8c2c6a9c641174e422a67817494",
+      "src/a2rl_drone_training/actions.py": "93e9308696b7f981dee1aaec0c399a8b9474d2d1ab7d798c198c6b2a820a8735",
+      "src/a2rl_drone_training/config.py": "baf265daba086578359342e6f25a339d8edb0406d8486829fdf6437c4c697f3d",
+      "src/a2rl_drone_training/console.py": "5eb82d8119db6bc0a8c1012ee4fd40244a1211ef1f6ba6f16bc196789a68c7a3",
+      "src/a2rl_drone_training/course.py": "c7a30c3578df1dcbd278e16cecc79440e457067927d452d1494e4f50eb66d1cc",
+      "src/a2rl_drone_training/curriculum.py": "4ef92efcfaef99b091a83b169dfadfc9c620fc92fd9f5604393394c7ad0a27f8",
+      "src/a2rl_drone_training/env.py": "6ae0a4db12f068ec0cf4be4173774e8ba457cef27ad6b2df708edf7705333901",
+      "src/a2rl_drone_training/hierarchical/__init__.py": "02006ad818eb8cf76bef2f43bd3f5487024d88a8a61737d3d0ccc9e2b02a3820",
+      "src/a2rl_drone_training/hierarchical/cli.py": "9cf5be6b98126b50a851f8513159752279610697b576a08ebe66959677c675ed",
+      "src/a2rl_drone_training/hierarchical/diagnostics.py": "d6d22c8c5679ca1e4ccc458a86fab9864296183c399178a7ca6f2acff01c5f9f",
+      "src/a2rl_drone_training/hierarchical/dynamics.py": "fcf48094fc3ff517c74a76bd4026d2e6dd7646c6d5a76589ab1032727eea9678",
+      "src/a2rl_drone_training/hierarchical/environment.py": "19bc443d6d2f59614a9ddc51a445aac52598957bced961cf01ea96d139a9b47a",
+      "src/a2rl_drone_training/hierarchical/evaluation.py": "695605c18972ab79a58c7b2e504c24ff1da6ae2025861f1298ecd35a029c45b0",
+      "src/a2rl_drone_training/hierarchical/geometry.py": "b07172aa06eccf6547c189e2f2e12ec17f2cefb1a793fa8628988f10d5f3e818",
+      "src/a2rl_drone_training/hierarchical/mpc.py": "0c4be6f27335c4b2cb58c654b0b53e3e9271b1f1f3ef7afe1e9bff09a69a36bf",
+      "src/a2rl_drone_training/hierarchical/planner.py": "1e018b63eac96e281dd6559d93b6f830a240397b5b5adb8d0c4016fa6320b384",
+      "src/a2rl_drone_training/hierarchical/reference.py": "bbffb376d3f8981232275299637a50a45fa8f6ffcc5f97cb063ecceaa317d3f2",
+      "src/a2rl_drone_training/hierarchical/sensors.py": "2da5016c3a092960e57ced9a62c46caa3cb43225f3e3b1063338890ad548bbed",
+      "src/a2rl_drone_training/networks.py": "4ba3d2f9f74871c78beb2e32e2f09451f5e637f35daccbd79938710e6503bb13",
+      "src/a2rl_drone_training/normalization.py": "e52a0ee11e99b108029826fac1370f8d292b2fe41d70345db82dbf1581ed1234",
+      "src/a2rl_drone_training/observations.py": "a3b9d93b8329aa86410a40caad9db7d66ab31b1410f8cd801367eca361619c54",
+      "src/a2rl_drone_training/optim.py": "6677c933d8d7e74d0d6639f4a23e801819945d5b1d323a8c39e1d65e15525180",
+      "src/a2rl_drone_training/ppo.py": "078be9fbb3f171d83ba0865fb61c8bc7dafd75dc769756e7e69bebf234c21f78",
+      "src/a2rl_drone_training/rewards.py": "aa2090f53e72df23c8eea22f69d25fa68e742272231d06c5241986efe8fd3bf3",
+      "src/a2rl_drone_training/runtime.py": "35b31631b42064bf93f666bb81ea5ae6eb40dc451ee1886e2fef949292afec49",
+      "src/a2rl_drone_training/train.py": "220f6009cf42119379c08788db95b392fe03bc6743c2fbca92c9e1243402c846",
+      "src/a2rl_drone_training/trainer.py": "7bfad3aabdea8aca1bf312f8ad971d4a50625d1392650e55ef20190dd92db743"
+    },
+    "runner": "00ccfee71bc2202afe8fd28c570a45964aceb90f16f4fa073c4d61257f466c80",
+    "staging_helper": "e2659de52ffb27c5459a55b23903819890d6a35b17bc96efee35675e442033cd",
+    "dependencies": "4df88c33b6e3cdebdd2fa052df09f31fb53aa0e37926071bbfc75ca12dd614dd",
+    "evaluation_worker": "46ea5960865e20c5ff45175a5f94079216d7d4c4e0a0cc5ccb69cea8b8daae36",
+    "reference_only": true,
+    "racing_runner": "258114e79510b87ebc57c23f969b8a66487741a32cddd4c598e57887b9186461",
+    "paired_worker": "9af3325c05185d0ee08eee5d229d9fe5af250dcbc2a289d0be715a5b60e4ddbf",
+    "incumbent_checkpoint": "671b072f0ae9f0e3256e5e1c19789cab656f7845e5e0142410e3fd0793521ef7",
+    "risk_schedule": [
+      [
+        0.1,
+        0.8
+      ],
+      [
+        0.075,
+        0.8
+      ],
+      [
+        0.075,
+        0.85
+      ],
+      [
+        0.05,
+        0.9
+      ]
+    ],
+    "prior_run": "34a084de8111d39f44ef2d187a06541c60053b18ea68ac29b347e0085d2f9e0c"
+  },
+  "tasks": {
+    "attempt1_seed0/nominal": {
+      "inputs": {
+        "artifacts/recovery_sensitive/uncapped/reference.npz": "36a1d4e00f4e59b9829e7b3dac0c1b9db86fad4052c1ebc0338def6986de1c10"
+      },
+      "attempt": 1,
+      "completed": true,
+      "outputs": {
+        "artifacts/reference_racing_policy/attempt1_seed0/nominal/report.json": "89a66a34ced83febfe82cca36f17d8fa6c3de43afad4606105819f8e151488a7",
+        "artifacts/reference_racing_policy/attempt1_seed0/nominal/exact_state_baseline.npz": "97af7d58c72b071f324ee1f3b106ec2c48a0db66bd44fcb45a41ee27d5fb1ebf"
+      }
+    },
+    "attempt1_seed0/perturbed": {
+      "inputs": {
+        "artifacts/recovery_sensitive/uncapped/reference.npz": "36a1d4e00f4e59b9829e7b3dac0c1b9db86fad4052c1ebc0338def6986de1c10"
+      },
+      "attempt": 1,
+      "completed": true,
+      "outputs": {
+        "artifacts/reference_racing_policy/attempt1_seed0/perturbed/report.json": "62d82015834db0b197ef5d76e4be03abce7e7c6095dbec94d70d1b57edc334eb",
+        "artifacts/reference_racing_policy/attempt1_seed0/perturbed/exact_state_baseline.npz": "4d1acaf904fe84878ad1670284d82ce10ede8a73924733d1a6a5813d0d4e6ff0"
+      }
+    },
+    "attempt1_seed0/train1": {
+      "inputs": {
+        "artifacts/recovery_sensitive/uncapped/reference.npz": "36a1d4e00f4e59b9829e7b3dac0c1b9db86fad4052c1ebc0338def6986de1c10"
+      },
+      "attempt": 1,
+      "completed": true,
+      "outputs": {
+        "artifacts/reference_racing_policy/attempt1_seed0/checkpoints/checkpoint_000016.pkl": "29106801054013272aa57c57a19fd5f8ce484b5a8a745a63dedc281ef83a2010"
+      }
+    },
+    "attempt1_seed0/screen1/exact_state": {
+      "inputs": {
+        "artifacts/recovery_sensitive/uncapped/reference.npz": "36a1d4e00f4e59b9829e7b3dac0c1b9db86fad4052c1ebc0338def6986de1c10",
+        "artifacts/reference_racing_policy/attempt1_seed0/checkpoints/checkpoint_000016.pkl": "29106801054013272aa57c57a19fd5f8ce484b5a8a745a63dedc281ef83a2010",
+        "artifacts/recovery_sensitive/uncapped/checkpoints/checkpoint_000016.pkl": "671b072f0ae9f0e3256e5e1c19789cab656f7845e5e0142410e3fd0793521ef7"
+      },
+      "attempt": 1,
+      "completed": true,
+      "outputs": {
+        "artifacts/reference_racing_policy/attempt1_seed0/screen1/exact_state/completed.json": "fba97c1873f09b4c7deb417ae0855845fb73ad8fdcfa4ce50ca93a6deb1a0396"
+      }
+    },
+    "attempt1_seed0/screen1/position_1cm": {
+      "inputs": {
+        "artifacts/recovery_sensitive/uncapped/reference.npz": "36a1d4e00f4e59b9829e7b3dac0c1b9db86fad4052c1ebc0338def6986de1c10",
+        "artifacts/reference_racing_policy/attempt1_seed0/checkpoints/checkpoint_000016.pkl": "29106801054013272aa57c57a19fd5f8ce484b5a8a745a63dedc281ef83a2010",
+        "artifacts/recovery_sensitive/uncapped/checkpoints/checkpoint_000016.pkl": "671b072f0ae9f0e3256e5e1c19789cab656f7845e5e0142410e3fd0793521ef7"
+      },
+      "attempt": 1,
+      "completed": true,
+      "outputs": {
+        "artifacts/reference_racing_policy/attempt1_seed0/screen1/position_1cm/completed.json": "ea914253bdc114a3e7d71d706a3f93ea3ebf151e1b5fb06651aa5fdbf2813947"
+      }
+    },
+    "attempt1_seed0/train2": {
+      "inputs": {
+        "artifacts/recovery_sensitive/uncapped/reference.npz": "36a1d4e00f4e59b9829e7b3dac0c1b9db86fad4052c1ebc0338def6986de1c10"
+      },
+      "attempt": 1,
+      "completed": true,
+      "outputs": {
+        "artifacts/reference_racing_policy/attempt1_seed0/checkpoints/checkpoint_000032.pkl": "fb30332367e6898c3e8d4b69d7d4e13be30fa4598dfecb36c8e7f2eb5b4e356a"
+      }
+    },
+    "attempt1_seed0/screen2/exact_state": {
+      "inputs": {
+        "artifacts/recovery_sensitive/uncapped/reference.npz": "36a1d4e00f4e59b9829e7b3dac0c1b9db86fad4052c1ebc0338def6986de1c10",
+        "artifacts/reference_racing_policy/attempt1_seed0/checkpoints/checkpoint_000032.pkl": "fb30332367e6898c3e8d4b69d7d4e13be30fa4598dfecb36c8e7f2eb5b4e356a",
+        "artifacts/recovery_sensitive/uncapped/checkpoints/checkpoint_000016.pkl": "671b072f0ae9f0e3256e5e1c19789cab656f7845e5e0142410e3fd0793521ef7"
+      },
+      "attempt": 1,
+      "completed": false
+    }
+  },
+  "stages": {},
+  "elapsed_seconds": 75706.40872828903,
+  "completed_final_trials": 8,
+  "pid": 444,
+  "child_pid": null,
+  "process_alive": false,
+  "stage": "interrupted",
+  "updated_at": 1791053428.6041584,
+  "remaining_seconds": 10693.591272343987,
+  "search_elapsed_limit": 74379.74768294841,
+  "budget_carried_from": "artifacts/racing_optimization/status.json",
+  "candidate": "attempt1_seed0",
+  "reference": {
+    "duration_s": 13.817079254997214,
+    "peak_speed_m_s": 10.738753297891806,
+    "model_fingerprint": "e05e42ec260bc3f2811008ac30b77dc53d07d4a5ae50e57f7257e9eb5e00ed8c",
+    "planner_cap_m_s": null,
+    "fingerprint": "d5e9f368be7db13b43aa2dc3486dd134ff6da7c4b2e0ce75059e09c40abb6986",
+    "sha256": "36a1d4e00f4e59b9829e7b3dac0c1b9db86fad4052c1ebc0338def6986de1c10"
+  },
+  "current_log": "artifacts/reference_racing_policy/attempt1_seed0_screen2_exact_state.attempt1.log",
+  "command": [
+    "/mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/.venv/bin/python",
+    "/mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/scripts/evaluate_racing_pair.py",
+    "--reference",
+    "artifacts/recovery_sensitive/uncapped/reference.npz",
+    "--checkpoint",
+    "artifacts/reference_racing_policy/attempt1_seed0/checkpoints/checkpoint_000032.pkl",
+    "--incumbent-reference",
+    "artifacts/recovery_sensitive/uncapped/reference.npz",
+    "--incumbent-checkpoint",
+    "artifacts/recovery_sensitive/uncapped/checkpoints/checkpoint_000016.pkl",
+    "--condition",
+    "exact_state",
+    "--trials",
+    "8",
+    "--seed-start",
+    "20000200",
+    "--output-dir",
+    "artifacts/reference_racing_policy/attempt1_seed0/screen2/exact_state"
+  ],
+  "update_count": 32,
+  "completed_condition_trials": 8,
+  "reason": ""
+}

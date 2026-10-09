@@ -1,0 +1,16 @@
+﻿{
+    "checkpoint":  "artifacts/staged_validation/pilot_checkpoints/checkpoint_latest.pkl",
+    "checkpoint_sha256":  "6DB84EAEE7B8873828B674A9020AE55F447B6969188A8577D7D72CD514EE317F",
+    "reference":  "artifacts/arena_reference.npz",
+    "reference_sha256":  "7A01E3AFA077FDB429D860EFF1D88E5AB549E4A313B2BBA68DCDE9329142BA2E",
+    "trials_per_controller":  4,
+    "num_envs":  4,
+    "seed":  1000123,
+    "spawn_position_std_m":  0.02,
+    "spawn_velocity_std_m_s":  0.05,
+    "estimation_noise_std":  0,
+    "max_episode_time_s":  120,
+    "comparison":  "zero-offset MPC versus deterministic pilot residual policy",
+    "scope":  "Preliminary paired evaluation; four pairs cannot establish statistical reliability",
+    "started_at":  "2026-09-28T09:06:41.1981614+04:00"
+}

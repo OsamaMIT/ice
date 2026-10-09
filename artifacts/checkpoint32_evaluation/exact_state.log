@@ -1,0 +1,338 @@
+exact_state: 1/8 controller pairs recorded
+exact_state: 2/8 controller pairs recorded
+exact_state: 3/8 controller pairs recorded
+-------------------------------------------------------------------------------
+| checkpoint/           |                                                     |
+|     status            | restored                                            |
+|     path              | /mnt/c/Users/abdul/Downloads/not ice dont open/i... |
+|     total_timesteps   | 16,384                                              |
+|     updates           | 16                                                  |
+|     episodes          | 56                                                  |
+|     schedule_steps    | 16,384                                              |
+|     schedule_progress | 12.5%                                               |
+|     curriculum_phase  | A                                                   |
+|     migrated_schedule | no                                                  |
+|     pre_correction_v2 | no                                                  |
+-------------------------------------------------------------------------------
+Flight diagnostics: /mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/artifacts/reference_racing_policy_15pct_active/attempt1_seed0/screen2/exact_state/seed20000203/incumbent_live (initializing; first step includes compilation)
+Flight 1-1 | sim 0.1s | wall 45s | passed 0-0/12
+  error max 0.02m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 1.1s | wall 64s | passed 1-1/12
+  error max 0.03m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 2.1s | wall 84s | passed 1-1/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 3.1s | wall 102s | passed 3-3/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 4.1s | wall 121s | passed 4-4/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 5.1s | wall 139s | passed 4-4/12
+  error max 0.02m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 6.1s | wall 158s | passed 5-5/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 7.1s | wall 176s | passed 6-6/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 8.1s | wall 195s | passed 6-6/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 9.1s | wall 213s | passed 7-7/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 10.1s | wall 232s | passed 8-8/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 11.1s | wall 250s | passed 9-9/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 12.1s | wall 271s | passed 10-10/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.1s | wall 290s | passed 11-11/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.8s | wall 303s | passed 12-12/12
+  error max 0.03m | collisions 0 | fallbacks 0
+Flight diagnostics completed: /mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/artifacts/reference_racing_policy_15pct_active/attempt1_seed0/screen2/exact_state/seed20000203/incumbent_live/progress.json
+-------------------------------------------------------------------------------
+| checkpoint/           |                                                     |
+|     status            | restored                                            |
+|     path              | /mnt/c/Users/abdul/Downloads/not ice dont open/i... |
+|     total_timesteps   | 32,768                                              |
+|     updates           | 32                                                  |
+|     episodes          | 117                                                 |
+|     schedule_steps    | 32,768                                              |
+|     schedule_progress | 25.0%                                               |
+|     curriculum_phase  | A                                                   |
+|     migrated_schedule | no                                                  |
+|     pre_correction_v2 | no                                                  |
+-------------------------------------------------------------------------------
+Flight diagnostics: /mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/artifacts/reference_racing_policy_15pct_active/attempt1_seed0/screen2/exact_state/seed20000203/candidate_live (initializing; first step includes compilation)
+Flight 1-1 | sim 0.7s | wall 30s | passed 0-0/12
+  error max 0.05m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 1.7s | wall 50s | passed 1-1/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 2.7s | wall 69s | passed 2-2/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 3.7s | wall 88s | passed 4-4/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 4.7s | wall 107s | passed 4-4/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 5.7s | wall 126s | passed 5-5/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 6.7s | wall 146s | passed 5-5/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 7.7s | wall 165s | passed 6-6/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 8.7s | wall 184s | passed 6-6/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 9.7s | wall 204s | passed 8-8/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 10.7s | wall 225s | passed 8-8/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 11.7s | wall 245s | passed 9-9/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 12.7s | wall 264s | passed 10-10/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.7s | wall 283s | passed 11-11/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.7s | wall 284s | passed 12-12/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight diagnostics completed: /mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/artifacts/reference_racing_policy_15pct_active/attempt1_seed0/screen2/exact_state/seed20000203/candidate_live/progress.json
+exact_state: 4/8 controller pairs recorded
+Flight diagnostics: /mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/artifacts/reference_racing_policy_15pct_active/attempt1_seed0/screen2/exact_state/seed20000204/incumbent_live (initializing; first step includes compilation)
+Flight 1-1 | sim 1.0s | wall 28s | passed 1-1/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 2.0s | wall 47s | passed 1-1/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 3.0s | wall 66s | passed 3-3/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 4.0s | wall 85s | passed 4-4/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 5.0s | wall 103s | passed 4-4/12
+  error max 0.02m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 6.0s | wall 121s | passed 5-5/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 7.0s | wall 139s | passed 5-5/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 8.0s | wall 159s | passed 6-6/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 9.0s | wall 178s | passed 7-7/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 10.0s | wall 196s | passed 8-8/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 11.0s | wall 215s | passed 9-9/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 12.0s | wall 233s | passed 10-10/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.0s | wall 252s | passed 10-10/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.8s | wall 266s | passed 12-12/12
+  error max 0.03m | collisions 0 | fallbacks 0
+Flight diagnostics completed: /mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/artifacts/reference_racing_policy_15pct_active/attempt1_seed0/screen2/exact_state/seed20000204/incumbent_live/progress.json
+Flight diagnostics: /mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/artifacts/reference_racing_policy_15pct_active/attempt1_seed0/screen2/exact_state/seed20000204/candidate_live (initializing; first step includes compilation)
+Flight 1-1 | sim 1.0s | wall 19s | passed 1-1/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 2.0s | wall 37s | passed 1-1/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 3.0s | wall 56s | passed 3-3/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 4.0s | wall 75s | passed 4-4/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 5.0s | wall 93s | passed 4-4/12
+  error max 0.02m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 6.0s | wall 111s | passed 5-5/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 7.0s | wall 131s | passed 6-6/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 8.0s | wall 150s | passed 6-6/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 9.0s | wall 169s | passed 7-7/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 10.0s | wall 188s | passed 8-8/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 11.0s | wall 207s | passed 9-9/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 12.0s | wall 226s | passed 10-10/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.0s | wall 245s | passed 11-11/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.7s | wall 259s | passed 12-12/12
+  error max 0.02m | collisions 0 | fallbacks 0
+Flight diagnostics completed: /mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/artifacts/reference_racing_policy_15pct_active/attempt1_seed0/screen2/exact_state/seed20000204/candidate_live/progress.json
+exact_state: 5/8 controller pairs recorded
+Flight diagnostics: /mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/artifacts/reference_racing_policy_15pct_active/attempt1_seed0/screen2/exact_state/seed20000205/incumbent_live (initializing; first step includes compilation)
+Flight 1-1 | sim 1.0s | wall 19s | passed 0-0/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 2.0s | wall 37s | passed 1-1/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 3.0s | wall 55s | passed 3-3/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 4.0s | wall 73s | passed 4-4/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 5.0s | wall 91s | passed 4-4/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 6.0s | wall 110s | passed 5-5/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 7.0s | wall 130s | passed 5-5/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 8.0s | wall 148s | passed 6-6/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 9.0s | wall 167s | passed 6-6/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 10.0s | wall 185s | passed 8-8/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 11.0s | wall 203s | passed 8-8/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 12.0s | wall 221s | passed 10-10/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.0s | wall 239s | passed 10-10/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 14.0s | wall 257s | passed 12-12/12
+  error max 0.03m | collisions 0 | fallbacks 0
+Flight diagnostics completed: /mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/artifacts/reference_racing_policy_15pct_active/attempt1_seed0/screen2/exact_state/seed20000205/incumbent_live/progress.json
+Flight diagnostics: /mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/artifacts/reference_racing_policy_15pct_active/attempt1_seed0/screen2/exact_state/seed20000205/candidate_live (initializing; first step includes compilation)
+Flight 1-1 | sim 1.0s | wall 19s | passed 0-0/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 2.0s | wall 37s | passed 1-1/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 3.0s | wall 56s | passed 3-3/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 4.0s | wall 74s | passed 4-4/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 5.0s | wall 94s | passed 4-4/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 6.0s | wall 114s | passed 5-5/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 7.0s | wall 133s | passed 5-5/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 8.0s | wall 152s | passed 6-6/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 9.0s | wall 170s | passed 6-6/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 10.0s | wall 189s | passed 8-8/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 11.0s | wall 208s | passed 9-9/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 12.0s | wall 226s | passed 10-10/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.0s | wall 246s | passed 10-10/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.9s | wall 262s | passed 12-12/12
+  error max 0.02m | collisions 0 | fallbacks 0
+Flight diagnostics completed: /mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/artifacts/reference_racing_policy_15pct_active/attempt1_seed0/screen2/exact_state/seed20000205/candidate_live/progress.json
+exact_state: 6/8 controller pairs recorded
+Flight diagnostics: /mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/artifacts/reference_racing_policy_15pct_active/attempt1_seed0/screen2/exact_state/seed20000206/incumbent_live (initializing; first step includes compilation)
+Flight 1-1 | sim 1.0s | wall 19s | passed 1-1/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 2.0s | wall 37s | passed 1-1/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 3.0s | wall 56s | passed 3-3/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 4.0s | wall 76s | passed 4-4/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 5.0s | wall 95s | passed 4-4/12
+  error max 0.02m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 6.0s | wall 113s | passed 5-5/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 7.0s | wall 131s | passed 5-5/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 8.0s | wall 150s | passed 6-6/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 9.0s | wall 168s | passed 7-7/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 10.0s | wall 187s | passed 8-8/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 11.0s | wall 205s | passed 9-9/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 12.0s | wall 224s | passed 10-10/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.0s | wall 244s | passed 10-10/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.8s | wall 266s | passed 12-12/12
+  error max 0.03m | collisions 0 | fallbacks 0
+Flight diagnostics completed: /mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/artifacts/reference_racing_policy_15pct_active/attempt1_seed0/screen2/exact_state/seed20000206/incumbent_live/progress.json
+Flight diagnostics: /mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/artifacts/reference_racing_policy_15pct_active/attempt1_seed0/screen2/exact_state/seed20000206/candidate_live (initializing; first step includes compilation)
+Flight 1-1 | sim 1.0s | wall 27s | passed 1-1/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 2.0s | wall 57s | passed 1-1/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 3.0s | wall 84s | passed 3-3/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 4.0s | wall 111s | passed 4-4/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 5.0s | wall 138s | passed 4-4/12
+  error max 0.02m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 6.0s | wall 164s | passed 5-5/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 7.0s | wall 192s | passed 5-5/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 8.0s | wall 219s | passed 6-6/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 9.0s | wall 246s | passed 7-7/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 10.0s | wall 273s | passed 8-8/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 11.0s | wall 302s | passed 9-9/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 12.0s | wall 329s | passed 10-10/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.0s | wall 357s | passed 10-10/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.8s | wall 378s | passed 12-12/12
+  error max 0.02m | collisions 0 | fallbacks 0
+Flight diagnostics completed: /mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/artifacts/reference_racing_policy_15pct_active/attempt1_seed0/screen2/exact_state/seed20000206/candidate_live/progress.json
+exact_state: 7/8 controller pairs recorded
+Flight diagnostics: /mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/artifacts/reference_racing_policy_15pct_active/attempt1_seed0/screen2/exact_state/seed20000207/incumbent_live (initializing; first step includes compilation)
+Flight 1-1 | sim 1.0s | wall 27s | passed 1-1/12
+  error max 0.12m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 2.0s | wall 53s | passed 1-1/12
+  error max 0.02m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 3.0s | wall 79s | passed 3-3/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 4.0s | wall 101s | passed 4-4/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 5.0s | wall 118s | passed 4-4/12
+  error max 0.02m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 6.0s | wall 135s | passed 5-5/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 7.0s | wall 152s | passed 5-5/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 8.0s | wall 170s | passed 6-6/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 9.0s | wall 187s | passed 7-7/12
+  error max 0.02m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 10.0s | wall 203s | passed 8-8/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 11.0s | wall 221s | passed 9-9/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 12.0s | wall 238s | passed 10-10/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.0s | wall 254s | passed 11-11/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.7s | wall 267s | passed 12-12/12
+  error max 0.03m | collisions 0 | fallbacks 0
+Flight diagnostics completed: /mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/artifacts/reference_racing_policy_15pct_active/attempt1_seed0/screen2/exact_state/seed20000207/incumbent_live/progress.json
+Flight diagnostics: /mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/artifacts/reference_racing_policy_15pct_active/attempt1_seed0/screen2/exact_state/seed20000207/candidate_live (initializing; first step includes compilation)
+Flight 1-1 | sim 1.0s | wall 17s | passed 1-1/12
+  error max 0.10m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 2.0s | wall 34s | passed 1-1/12
+  error max 0.02m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 3.0s | wall 52s | passed 3-3/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 4.0s | wall 69s | passed 4-4/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 5.0s | wall 86s | passed 4-4/12
+  error max 0.02m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 6.0s | wall 102s | passed 5-5/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 7.0s | wall 120s | passed 6-6/12
+  error max 0.02m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 8.0s | wall 137s | passed 6-6/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 9.0s | wall 154s | passed 7-7/12
+  error max 0.02m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 10.0s | wall 172s | passed 8-8/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 11.0s | wall 190s | passed 9-9/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 12.0s | wall 207s | passed 10-10/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.0s | wall 224s | passed 11-11/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.7s | wall 236s | passed 12-12/12
+  error max 0.02m | collisions 0 | fallbacks 0
+Flight diagnostics completed: /mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/artifacts/reference_racing_policy_15pct_active/attempt1_seed0/screen2/exact_state/seed20000207/candidate_live/progress.json
+exact_state: 8/8 controller pairs recorded

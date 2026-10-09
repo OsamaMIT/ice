@@ -1,0 +1,382 @@
+Validating zero-offset MPC before residual training...
+Flight diagnostics: artifacts/recovery_sensitive/12mps/checkpoints/baseline_diagnostics (initializing; first step includes compilation)
+Flight 1-1 | sim 0.1s | wall 62s | passed 0-0/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 1.1s | wall 81s | passed 1-1/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 2.1s | wall 99s | passed 1-1/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 3.1s | wall 116s | passed 3-3/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 4.1s | wall 134s | passed 4-4/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 5.1s | wall 151s | passed 4-4/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 6.1s | wall 168s | passed 5-5/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 7.1s | wall 186s | passed 6-6/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 8.1s | wall 203s | passed 6-6/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 9.1s | wall 220s | passed 7-7/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 10.1s | wall 237s | passed 8-8/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 11.1s | wall 254s | passed 9-9/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 12.1s | wall 272s | passed 10-10/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.1s | wall 289s | passed 11-11/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-1 | sim 13.8s | wall 301s | passed 12-12/12
+  error max 0.03m | collisions 0 | fallbacks 0
+Flight diagnostics completed: artifacts/recovery_sensitive/12mps/checkpoints/baseline_diagnostics/progress.json
+-------------------------------------------------------------------------------
+| system/                 |                                                   |
+|     device              | gpu                                               |
+|     jax_backend         | gpu                                               |
+|     parameter_devices   | cuda:0                                            |
+|     physics             | first_principles                                  |
+|     sim_frequency       | 500 Hz                                            |
+|     control_frequency   | 20 Hz                                             |
+| training/               |                                                   |
+|     algorithm           | PPO                                               |
+|     action_space        | world_position_speed_residual_v1                  |
+|     num_envs            | 4                                                 |
+|     rollout_length      | 256                                               |
+|     batch_size          | 1,024                                             |
+|     start_timesteps     | 0                                                 |
+|     target_timesteps    | 16,384                                            |
+|     schedule_timesteps  | 131,072                                           |
+|     schedule_consumed   | 0                                                 |
+|     total_iterations    | 16                                                |
+|     actor_obs_dim       | 82                                                |
+|     critic_obs_dim      | 50                                                |
+|     reward_version      | v2                                                |
+|     curriculum          | no                                                |
+|     strict_evaluation   | no                                                |
+|     skill_attempts_gate | 8                                                 |
+|     checkpoint_dir      | artifacts/recovery_sensitive/12mps/checkpoints    |
+|     checkpoint_interval | 1                                                 |
+|     metrics_file        | artifacts/recovery_sensitive/12mps/checkpoints... |
+-------------------------------------------------------------------------------
+[Update 1/16] Collecting flight experience...
+[Update 1] Learning from collected flights...
+-----------------------------------------------
+| Progress/               |                   |
+|     Update completed    | 1 / 16            |
+|     Steps               | 1,024 / 16,384    |
+|     Estimated remaining | 1h33m             |
+|     Training time       | 6m14s             |
+|     Evaluation time     | 0s                |
+| Training/               |                   |
+|     Gate opening        | 1.00x             |
+|     G1 start target     | 100%              |
+|     Mean episode reward | -4.17             |
+|     Status              | PPO values finite |
+|     Policy change (KL)  | 0.0057            |
+|     Clipped samples     | 7.9%              |
+| Course test/            |                   |
+|     Status              | Not evaluated yet |
+-----------------------------------------------
+[Update 1] Checkpoint saved: artifacts/recovery_sensitive/12mps/checkpoints/checkpoint_latest.pkl
+[Update 2/16] Collecting flight experience...
+[Update 2] Learning from collected flights...
+-----------------------------------------------
+| Progress/               |                   |
+|     Update completed    | 2 / 16            |
+|     Steps               | 2,048 / 16,384    |
+|     Estimated remaining | 1h09m             |
+|     Training time       | 3m43s             |
+|     Evaluation time     | 0s                |
+| Training/               |                   |
+|     Gate opening        | 1.00x             |
+|     G1 start target     | 100%              |
+|     Mean episode reward | 80.48             |
+|     Status              | PPO values finite |
+|     Policy change (KL)  | 0.0058            |
+|     Clipped samples     | 7.6%              |
+| Course test/            |                   |
+|     Status              | Not evaluated yet |
+-----------------------------------------------
+[Update 2] Checkpoint saved: artifacts/recovery_sensitive/12mps/checkpoints/checkpoint_latest.pkl
+[Update 3/16] Collecting flight experience...
+[Update 3] Learning from collected flights...
+-----------------------------------------------
+| Progress/               |                   |
+|     Update completed    | 3 / 16            |
+|     Steps               | 3,072 / 16,384    |
+|     Estimated remaining | 59m16s            |
+|     Training time       | 3m43s             |
+|     Evaluation time     | 0s                |
+| Training/               |                   |
+|     Gate opening        | 1.00x             |
+|     G1 start target     | 100%              |
+|     Mean episode reward | 80.32             |
+|     Status              | PPO values finite |
+|     Policy change (KL)  | 0.0030            |
+|     Clipped samples     | 3.0%              |
+| Course test/            |                   |
+|     Status              | Not evaluated yet |
+-----------------------------------------------
+[Update 3] Checkpoint saved: artifacts/recovery_sensitive/12mps/checkpoints/checkpoint_latest.pkl
+[Update 4/16] Collecting flight experience...
+[Update 4] Learning from collected flights...
+-----------------------------------------------
+| Progress/               |                   |
+|     Update completed    | 4 / 16            |
+|     Steps               | 4,096 / 16,384    |
+|     Estimated remaining | 51m55s            |
+|     Training time       | 3m38s             |
+|     Evaluation time     | 0s                |
+| Training/               |                   |
+|     Gate opening        | 1.00x             |
+|     G1 start target     | 100%              |
+|     Mean episode reward | 80.32             |
+|     Status              | PPO values finite |
+|     Policy change (KL)  | 0.0039            |
+|     Clipped samples     | 5.0%              |
+| Course test/            |                   |
+|     Status              | Not evaluated yet |
+-----------------------------------------------
+[Update 4] Checkpoint saved: artifacts/recovery_sensitive/12mps/checkpoints/checkpoint_latest.pkl
+[Update 5/16] Collecting flight experience...
+[Update 5] Learning from collected flights...
+-----------------------------------------------
+| Progress/               |                   |
+|     Update completed    | 5 / 16            |
+|     Steps               | 5,120 / 16,384    |
+|     Estimated remaining | 45m44s            |
+|     Training time       | 3m29s             |
+|     Evaluation time     | 0s                |
+| Training/               |                   |
+|     Gate opening        | 1.00x             |
+|     G1 start target     | 100%              |
+|     Mean episode reward | 61.56             |
+|     Status              | PPO values finite |
+|     Policy change (KL)  | 0.0050            |
+|     Clipped samples     | 6.2%              |
+| Course test/            |                   |
+|     Status              | Not evaluated yet |
+-----------------------------------------------
+[Update 5] Checkpoint saved: artifacts/recovery_sensitive/12mps/checkpoints/checkpoint_latest.pkl
+[Update 6/16] Collecting flight experience...
+[Update 6] Learning from collected flights...
+-----------------------------------------------
+| Progress/               |                   |
+|     Update completed    | 6 / 16            |
+|     Steps               | 6,144 / 16,384    |
+|     Estimated remaining | 40m39s            |
+|     Training time       | 3m36s             |
+|     Evaluation time     | 0s                |
+| Training/               |                   |
+|     Gate opening        | 1.00x             |
+|     G1 start target     | 100%              |
+|     Mean episode reward | 80.48             |
+|     Status              | PPO values finite |
+|     Policy change (KL)  | 0.0072            |
+|     Clipped samples     | 10.5%             |
+| Course test/            |                   |
+|     Status              | Not evaluated yet |
+-----------------------------------------------
+[Update 6] Checkpoint saved: artifacts/recovery_sensitive/12mps/checkpoints/checkpoint_latest.pkl
+[Update 7/16] Collecting flight experience...
+[Update 7] Learning from collected flights...
+-----------------------------------------------
+| Progress/               |                   |
+|     Update completed    | 7 / 16            |
+|     Steps               | 7,168 / 16,384    |
+|     Estimated remaining | 36m00s            |
+|     Training time       | 3m36s             |
+|     Evaluation time     | 0s                |
+| Training/               |                   |
+|     Gate opening        | 1.00x             |
+|     G1 start target     | 100%              |
+|     Mean episode reward | 62.72             |
+|     Status              | PPO values finite |
+|     Policy change (KL)  | 0.0039            |
+|     Clipped samples     | 4.3%              |
+| Course test/            |                   |
+|     Status              | Not evaluated yet |
+-----------------------------------------------
+[Update 7] Checkpoint saved: artifacts/recovery_sensitive/12mps/checkpoints/checkpoint_latest.pkl
+[Update 8/16] Collecting flight experience...
+[Update 8] Learning from collected flights...
+-----------------------------------------------
+| Progress/               |                   |
+|     Update completed    | 8 / 16            |
+|     Steps               | 8,192 / 16,384    |
+|     Estimated remaining | 31m37s            |
+|     Training time       | 3m37s             |
+|     Evaluation time     | 0s                |
+| Training/               |                   |
+|     Gate opening        | 1.00x             |
+|     G1 start target     | 100%              |
+|     Mean episode reward | 63.54             |
+|     Status              | PPO values finite |
+|     Policy change (KL)  | 0.0070            |
+|     Clipped samples     | 9.1%              |
+| Course test/            |                   |
+|     Status              | Not evaluated yet |
+-----------------------------------------------
+[Update 8] Checkpoint saved: artifacts/recovery_sensitive/12mps/checkpoints/checkpoint_latest.pkl
+[Update 9/16] Collecting flight experience...
+[Update 9] Learning from collected flights...
+-----------------------------------------------
+| Progress/               |                   |
+|     Update completed    | 9 / 16            |
+|     Steps               | 9,216 / 16,384    |
+|     Estimated remaining | 27m22s            |
+|     Training time       | 3m33s             |
+|     Evaluation time     | 0s                |
+| Training/               |                   |
+|     Gate opening        | 1.00x             |
+|     G1 start target     | 100%              |
+|     Mean episode reward | 80.31             |
+|     Status              | PPO values finite |
+|     Policy change (KL)  | 0.0046            |
+|     Clipped samples     | 5.6%              |
+| Course test/            |                   |
+|     Status              | Not evaluated yet |
+-----------------------------------------------
+[Update 9] Checkpoint saved: artifacts/recovery_sensitive/12mps/checkpoints/checkpoint_latest.pkl
+[Update 10/16] Collecting flight experience...
+[Update 10] Learning from collected flights...
+-----------------------------------------------
+| Progress/               |                   |
+|     Update completed    | 10 / 16           |
+|     Steps               | 10,240 / 16,384   |
+|     Estimated remaining | 23m12s            |
+|     Training time       | 3m29s             |
+|     Evaluation time     | 0s                |
+| Training/               |                   |
+|     Gate opening        | 1.00x             |
+|     G1 start target     | 100%              |
+|     Mean episode reward | 80.53             |
+|     Status              | PPO values finite |
+|     Policy change (KL)  | 0.0054            |
+|     Clipped samples     | 6.5%              |
+| Course test/            |                   |
+|     Status              | Not evaluated yet |
+-----------------------------------------------
+[Update 10] Checkpoint saved: artifacts/recovery_sensitive/12mps/checkpoints/checkpoint_latest.pkl
+[Update 11/16] Collecting flight experience...
+[Update 11] Learning from collected flights...
+-----------------------------------------------
+| Progress/               |                   |
+|     Update completed    | 11 / 16           |
+|     Steps               | 11,264 / 16,384   |
+|     Estimated remaining | 19m13s            |
+|     Training time       | 3m36s             |
+|     Evaluation time     | 0s                |
+| Training/               |                   |
+|     Gate opening        | 1.00x             |
+|     G1 start target     | 100%              |
+|     Mean episode reward | 80.39             |
+|     Status              | PPO values finite |
+|     Policy change (KL)  | 0.0084            |
+|     Clipped samples     | 11.5%             |
+| Course test/            |                   |
+|     Status              | Not evaluated yet |
+-----------------------------------------------
+[Update 11] Checkpoint saved: artifacts/recovery_sensitive/12mps/checkpoints/checkpoint_latest.pkl
+[Update 12/16] Collecting flight experience...
+[Update 12] Learning from collected flights...
+-----------------------------------------------
+| Progress/               |                   |
+|     Update completed    | 12 / 16           |
+|     Steps               | 12,288 / 16,384   |
+|     Estimated remaining | 15m17s            |
+|     Training time       | 3m34s             |
+|     Evaluation time     | 0s                |
+| Training/               |                   |
+|     Gate opening        | 1.00x             |
+|     G1 start target     | 100%              |
+|     Mean episode reward | 80.09             |
+|     Status              | PPO values finite |
+|     Policy change (KL)  | 0.0070            |
+|     Clipped samples     | 9.7%              |
+| Course test/            |                   |
+|     Status              | Not evaluated yet |
+-----------------------------------------------
+[Update 12] Checkpoint saved: artifacts/recovery_sensitive/12mps/checkpoints/checkpoint_latest.pkl
+[Update 13/16] Collecting flight experience...
+[Update 13] Learning from collected flights...
+-----------------------------------------------
+| Progress/               |                   |
+|     Update completed    | 13 / 16           |
+|     Steps               | 13,312 / 16,384   |
+|     Estimated remaining | 11m25s            |
+|     Training time       | 3m36s             |
+|     Evaluation time     | 0s                |
+| Training/               |                   |
+|     Gate opening        | 1.00x             |
+|     G1 start target     | 100%              |
+|     Mean episode reward | 80.75             |
+|     Status              | PPO values finite |
+|     Policy change (KL)  | 0.0062            |
+|     Clipped samples     | 7.9%              |
+| Course test/            |                   |
+|     Status              | Not evaluated yet |
+-----------------------------------------------
+[Update 13] Checkpoint saved: artifacts/recovery_sensitive/12mps/checkpoints/checkpoint_latest.pkl
+[Update 14/16] Collecting flight experience...
+[Update 14] Learning from collected flights...
+-----------------------------------------------
+| Progress/               |                   |
+|     Update completed    | 14 / 16           |
+|     Steps               | 14,336 / 16,384   |
+|     Estimated remaining | 7m35s             |
+|     Training time       | 3m35s             |
+|     Evaluation time     | 0s                |
+| Training/               |                   |
+|     Gate opening        | 1.00x             |
+|     G1 start target     | 100%              |
+|     Mean episode reward | 80.56             |
+|     Status              | PPO values finite |
+|     Policy change (KL)  | 0.0079            |
+|     Clipped samples     | 10.2%             |
+| Course test/            |                   |
+|     Status              | Not evaluated yet |
+-----------------------------------------------
+[Update 14] Checkpoint saved: artifacts/recovery_sensitive/12mps/checkpoints/checkpoint_latest.pkl
+[Update 15/16] Collecting flight experience...
+[Update 15] Learning from collected flights...
+-----------------------------------------------
+| Progress/               |                   |
+|     Update completed    | 15 / 16           |
+|     Steps               | 15,360 / 16,384   |
+|     Estimated remaining | 3m46s             |
+|     Training time       | 3m34s             |
+|     Evaluation time     | 0s                |
+| Training/               |                   |
+|     Gate opening        | 1.00x             |
+|     G1 start target     | 100%              |
+|     Mean episode reward | 80.25             |
+|     Status              | PPO values finite |
+|     Policy change (KL)  | 0.0067            |
+|     Clipped samples     | 9.0%              |
+| Course test/            |                   |
+|     Status              | Not evaluated yet |
+-----------------------------------------------
+[Update 15] Checkpoint saved: artifacts/recovery_sensitive/12mps/checkpoints/checkpoint_latest.pkl
+[Update 16/16] Collecting flight experience...
+[Update 16] Learning from collected flights...
+-----------------------------------------------
+| Progress/               |                   |
+|     Update completed    | 16 / 16           |
+|     Steps               | 16,384 / 16,384   |
+|     Estimated remaining | 0s                |
+|     Training time       | 3m37s             |
+|     Evaluation time     | 0s                |
+| Training/               |                   |
+|     Gate opening        | 1.00x             |
+|     G1 start target     | 100%              |
+|     Mean episode reward | 80.45             |
+|     Status              | PPO values finite |
+|     Policy change (KL)  | 0.0080            |
+|     Clipped samples     | 9.8%              |
+| Course test/            |                   |
+|     Status              | Not evaluated yet |
+-----------------------------------------------
+[Update 16] Checkpoint saved: artifacts/recovery_sensitive/12mps/checkpoints/checkpoint_latest.pkl

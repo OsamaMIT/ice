@@ -1,0 +1,42 @@
+{
+  "scripts/run_racing_optimization.py": {
+    "before": "c8e6d0d52bc5822f03ad82ac064a29a4f42ebba23550128f56a20766f63207e4",
+    "after": "57de5397156a583b1b8a7e66aea3810e177f095585e7a21326028f4036c2bf71"
+  },
+  "src/a2rl_drone_training/config.py": {
+    "before": "3a7832862b18325da90559bd6d1dcb9d1895cd5cece172122209a75ded42617d",
+    "after": "5a4d66ceda6d4dd26fc4db35d5ddc7f1f5f740005da2331f1a8d267199c6085b"
+  },
+  "src/a2rl_drone_training/hierarchical/environment.py": {
+    "before": "d8e89ee04528f82721a8a132d9717927b1508e2d6faac5c5dd5a952401bf7c71",
+    "after": "e108a376652f3ea57637ffa18299f163c10b5cf8d2a576bd12bc8dc947a8905b"
+  },
+  "src/a2rl_drone_training/rewards.py": {
+    "before": "aa2090f53e72df23c8eea22f69d25fa68e742272231d06c5241986efe8fd3bf3",
+    "after": "dcdc917feb925c6e10bc9d9b720a05fd398579c3a59e565fd3159cbbe2f26a0d"
+  },
+  "src/a2rl_drone_training/train.py": {
+    "before": "c5af68918714e8fa5e874c202dcfa39fb022d8230d755563a6f6a94ab473057b",
+    "after": "707577f7e0746532890b848564a71a017e7f62bdcdea5f846cdbb6accc59664f"
+  },
+  "src/a2rl_drone_training/trainer.py": {
+    "before": "8635c00a60b226592ca8f4272302bb78bf92a36396f99e329690321130158852",
+    "after": "ea4916880e65163342d4f4842aceedf17b0d3d7d802dc66e3b32d1a2c59302f2"
+  },
+  "tests/test_racing_optimization.py": {
+    "before": "f39a3eb59e118d0ba2af4028bf62a5954d14326d4c7e4e817582ee9c4e25058c",
+    "after": "b324054cd132e75bfee1c2f687333d10a5aafc401e307703c63864e7ec3a5c23"
+  },
+  "README.md": {
+    "before": "5f6490bd1bd7b023a10f1b9c1bcee3abd307c71b648a54f491a73030e536ed74",
+    "after": "df07151d7cb44ace31e71602a54df4e8ef616db2fd3fc456d11694d2868e83b8"
+  },
+  "tests/test_corner_geometry_reward.py": {
+    "before": null,
+    "after": "d7f0300b73ecc7bf994678673aba551d4fa897d97f07e0baf3814331f9a005e1"
+  },
+  "tests/test_hierarchical.py": {
+    "before": "594ad55dfd2afec10912b534d98d9108980bfc755d6c9b27118b52f280b5b737",
+    "after": "8e377203bbdf925c9f85cae1214107df2d32e3b18e3a41dda346ab2367c03258"
+  }
+}

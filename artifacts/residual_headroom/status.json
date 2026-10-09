@@ -1,0 +1,195 @@
+{
+  "spec": {
+    "version": 2,
+    "caps": [
+      null
+    ],
+    "initial_reference": "7a01e3afa077fdb429d860eff1d88e5ab549e4a313b2bba68dcde9329142ba2e",
+    "updates_per_block": 32,
+    "max_blocks": 4,
+    "conditions": {
+      "exact_state": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "position_1cm": [
+        0.01,
+        0.0,
+        0.0
+      ],
+      "position_3cm": [
+        0.03,
+        0.0,
+        0.0
+      ],
+      "velocity_2cms": [
+        0.0,
+        0.02,
+        0.0
+      ],
+      "velocity_5cms": [
+        0.0,
+        0.05,
+        0.0
+      ],
+      "delay_10ms": [
+        0.0,
+        0.0,
+        0.01
+      ],
+      "delay_30ms": [
+        0.0,
+        0.0,
+        0.03
+      ]
+    },
+    "screening_trials": 8,
+    "final_trials": 100,
+    "max_lap_ratio": 1.02,
+    "source": {
+      "src/a2rl_drone_training/__init__.py": "8b72b4fc844447710c7afcf047fc1d61713de8c2c6a9c641174e422a67817494",
+      "src/a2rl_drone_training/actions.py": "93e9308696b7f981dee1aaec0c399a8b9474d2d1ab7d798c198c6b2a820a8735",
+      "src/a2rl_drone_training/config.py": "776d0e7daa3d184f4b090ef5347bff59666e408c5fe4d07301c241a57f7da5f7",
+      "src/a2rl_drone_training/console.py": "5eb82d8119db6bc0a8c1012ee4fd40244a1211ef1f6ba6f16bc196789a68c7a3",
+      "src/a2rl_drone_training/course.py": "c7a30c3578df1dcbd278e16cecc79440e457067927d452d1494e4f50eb66d1cc",
+      "src/a2rl_drone_training/curriculum.py": "4ef92efcfaef99b091a83b169dfadfc9c620fc92fd9f5604393394c7ad0a27f8",
+      "src/a2rl_drone_training/env.py": "6ae0a4db12f068ec0cf4be4173774e8ba457cef27ad6b2df708edf7705333901",
+      "src/a2rl_drone_training/hierarchical/__init__.py": "02006ad818eb8cf76bef2f43bd3f5487024d88a8a61737d3d0ccc9e2b02a3820",
+      "src/a2rl_drone_training/hierarchical/cli.py": "00e86e9d4a7929318d1c6594ed777a24ebfd3b1f78511e7bb065ebd3d72bf405",
+      "src/a2rl_drone_training/hierarchical/diagnostics.py": "d6d22c8c5679ca1e4ccc458a86fab9864296183c399178a7ca6f2acff01c5f9f",
+      "src/a2rl_drone_training/hierarchical/dynamics.py": "fcf48094fc3ff517c74a76bd4026d2e6dd7646c6d5a76589ab1032727eea9678",
+      "src/a2rl_drone_training/hierarchical/environment.py": "41f98542593b3f4ca5d1c3f6e05a51a229fe16b2b518c9b7a3b29f26fc0442a6",
+      "src/a2rl_drone_training/hierarchical/evaluation.py": "695605c18972ab79a58c7b2e504c24ff1da6ae2025861f1298ecd35a029c45b0",
+      "src/a2rl_drone_training/hierarchical/geometry.py": "b07172aa06eccf6547c189e2f2e12ec17f2cefb1a793fa8628988f10d5f3e818",
+      "src/a2rl_drone_training/hierarchical/mpc.py": "0c4be6f27335c4b2cb58c654b0b53e3e9271b1f1f3ef7afe1e9bff09a69a36bf",
+      "src/a2rl_drone_training/hierarchical/planner.py": "708c6fac5d36a83ca1635f26a132eb869856d9e7073491c1642ac8bc33810922",
+      "src/a2rl_drone_training/hierarchical/reference.py": "bbffb376d3f8981232275299637a50a45fa8f6ffcc5f97cb063ecceaa317d3f2",
+      "src/a2rl_drone_training/hierarchical/sensors.py": "2da5016c3a092960e57ced9a62c46caa3cb43225f3e3b1063338890ad548bbed",
+      "src/a2rl_drone_training/networks.py": "4ba3d2f9f74871c78beb2e32e2f09451f5e637f35daccbd79938710e6503bb13",
+      "src/a2rl_drone_training/normalization.py": "e52a0ee11e99b108029826fac1370f8d292b2fe41d70345db82dbf1581ed1234",
+      "src/a2rl_drone_training/observations.py": "a3b9d93b8329aa86410a40caad9db7d66ab31b1410f8cd801367eca361619c54",
+      "src/a2rl_drone_training/optim.py": "6677c933d8d7e74d0d6639f4a23e801819945d5b1d323a8c39e1d65e15525180",
+      "src/a2rl_drone_training/ppo.py": "078be9fbb3f171d83ba0865fb61c8bc7dafd75dc769756e7e69bebf234c21f78",
+      "src/a2rl_drone_training/rewards.py": "aa2090f53e72df23c8eea22f69d25fa68e742272231d06c5241986efe8fd3bf3",
+      "src/a2rl_drone_training/runtime.py": "35b31631b42064bf93f666bb81ea5ae6eb40dc451ee1886e2fef949292afec49",
+      "src/a2rl_drone_training/train.py": "6f5250c9200019d4c9decbaadff8b79a37d67fceed1fb42604d52c81a3fc6589",
+      "src/a2rl_drone_training/trainer.py": "bf6025aa7ec8350a99f64388fea56a77f0ccc43c29910aea407517a56d027c22"
+    },
+    "runner": "105a685d77b190ce0f73f8df6d74d57a51e15751ec6349fcc85188772d0afff5",
+    "staging_helper": "e2659de52ffb27c5459a55b23903819890d6a35b17bc96efee35675e442033cd",
+    "dependencies": "4df88c33b6e3cdebdd2fa052df09f31fb53aa0e37926071bbfc75ca12dd614dd",
+    "evaluation_worker": "46ea5960865e20c5ff45175a5f94079216d7d4c4e0a0cc5ccb69cea8b8daae36",
+    "strategy": "uncapped_reference_progressive_residual",
+    "rl_stages": [
+      {
+        "speedup": 0.1,
+        "std_floor": 0.2,
+        "std_ceiling": 0.35,
+        "entropy": 0.003
+      },
+      {
+        "speedup": 0.2,
+        "std_floor": 0.35,
+        "std_ceiling": 0.5,
+        "entropy": 0.005
+      },
+      {
+        "speedup": 0.3,
+        "std_floor": 0.5,
+        "std_ceiling": 0.65,
+        "entropy": 0.008
+      }
+    ],
+    "residual_runner": "549ccae3a67b8ac7b89ae90e079ea1c3eddeae0846d2b08a681ec932ec489270",
+    "initial_elapsed_seconds": 3607.7920048089995,
+    "prior_run": "865546c9b7657d742e7ac187c6addf6fa645af7b3d4f88e281b9ac9c6df01666",
+    "motor_command_limit": 0.8,
+    "warm_start": "artifacts/residual_curriculum/reference.npz",
+    "warm_start_sha": "b681d536ce4ce7eb9f7bc64cab730dfb971a9dfe88edd9fca37407abc9496b26"
+  },
+  "tasks": {
+    "planning": {
+      "inputs": {
+        "artifacts/residual_curriculum/reference.npz": "b681d536ce4ce7eb9f7bc64cab730dfb971a9dfe88edd9fca37407abc9496b26"
+      },
+      "attempt": 1,
+      "completed": true,
+      "outputs": {
+        "artifacts/residual_headroom/reference.npz": "428d3320674eed7f35f451c5eb43268b4f289ca223000ddf6295f36cf0d926e6"
+      }
+    },
+    "nominal": {
+      "inputs": {
+        "artifacts/residual_headroom/reference.npz": "428d3320674eed7f35f451c5eb43268b4f289ca223000ddf6295f36cf0d926e6"
+      },
+      "attempt": 1,
+      "completed": true,
+      "outputs": {
+        "artifacts/residual_headroom/nominal/report.json": "d9758ba7f2bc7c95792ede1d93b75dd72b9f58baa9c6def1be97f6c3863bd61d",
+        "artifacts/residual_headroom/nominal/exact_state_baseline.npz": "750569f9116847cd62d562f525e8e76bee7803f2888e8f5d057ca116fe1b2ef7"
+      }
+    },
+    "perturbed": {
+      "inputs": {
+        "artifacts/residual_headroom/reference.npz": "428d3320674eed7f35f451c5eb43268b4f289ca223000ddf6295f36cf0d926e6"
+      },
+      "attempt": 1,
+      "completed": true,
+      "outputs": {
+        "artifacts/residual_headroom/perturbed/report.json": "b56798e2f9a99c4dbf0de10fa63923285de4fe75aec5c5b72393d9721e4a8ca4",
+        "artifacts/residual_headroom/perturbed/exact_state_baseline.npz": "232872b7d1d6064c1ce21e7beefc100c934432eefab53cc60ad82295fb92cd3e"
+      }
+    }
+  },
+  "stages": {},
+  "elapsed_seconds": 4851.13712469,
+  "completed_final_trials": 0,
+  "pid": 435,
+  "child_pid": null,
+  "process_alive": false,
+  "stage": "blocked",
+  "updated_at": 1790672516.4967105,
+  "remaining_seconds": 81548.862876685,
+  "budget_carried_from": "artifacts/residual_curriculum/status.json",
+  "current_log": "artifacts/residual_headroom/perturbed.attempt1.log",
+  "command": [
+    "/mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/.venv/bin/a2rl-drone-evaluate",
+    "--reference-path",
+    "artifacts/residual_headroom/reference.npz",
+    "--device",
+    "gpu",
+    "--num-envs",
+    "4",
+    "--trials",
+    "4",
+    "--seed",
+    "170929",
+    "--spawn-position-std",
+    ".02",
+    "--spawn-velocity-std",
+    ".05",
+    "--max-episode-time",
+    "120",
+    "--output-dir",
+    "artifacts/residual_headroom/perturbed",
+    "--suite",
+    "exact_state",
+    "--position-noise-std",
+    "0.0",
+    "--velocity-noise-std",
+    "0.0",
+    "--sensor-delay",
+    "0.0"
+  ],
+  "reference": {
+    "duration_s": 13.449154167008194,
+    "peak_speed_m_s": 11.214337801628854,
+    "model_fingerprint": "e05e42ec260bc3f2811008ac30b77dc53d07d4a5ae50e57f7257e9eb5e00ed8c",
+    "planner_cap_m_s": null,
+    "fingerprint": "9fdf06bf4c211d72dd8e3cf279ae7c32813ec4406c922669fbecd8286d90873e",
+    "sha256": "428d3320674eed7f35f451c5eb43268b4f289ca223000ddf6295f36cf0d926e6"
+  },
+  "speed_cap_m_s": null,
+  "reason": "Not every trial completed the course"
+}

@@ -1,0 +1,49 @@
+Flight diagnostics: artifacts/uncapped_curriculum/6mps/nominal/exact_state_baseline_live (initializing; first step includes compilation)
+Flight 1-1 | sim 0.1s | wall 96s | passed 0-0/12
+  error max 0.00m | collisions 0 | fallbacks 0
+  time: MPC 16.9s | physics 0.5s | other 78.2s
+  other detail: gate_reward 1.3s | observation 3.7s | reference 3.6s | bookkeeping 2.1s
+Flight 1-1 | sim 1.1s | wall 119s | passed 0-0/12
+  error max 0.00m | collisions 0 | fallbacks 0
+  time: MPC 24.2s | physics 1.2s | other 93.6s
+  other detail: gate_reward 2.0s | observation 6.4s | reference 3.9s | bookkeeping 4.9s
+Flight 1-1 | sim 2.1s | wall 141s | passed 1-1/12
+  error max 0.00m | collisions 0 | fallbacks 0
+  time: MPC 31.4s | physics 1.8s | other 107.6s
+  other detail: gate_reward 2.8s | observation 9.3s | reference 4.2s | bookkeeping 6.4s
+Flight 1-1 | sim 3.1s | wall 164s | passed 1-1/12
+  error max 0.00m | collisions 0 | fallbacks 0
+  time: MPC 39.0s | physics 2.5s | other 122.0s
+  other detail: gate_reward 3.5s | observation 12.3s | reference 4.5s | bookkeeping 7.8s
+Flight 1-1 | sim 4.1s | wall 185s | passed 1-1/12
+  error max 0.00m | collisions 0 | fallbacks 0
+  time: MPC 46.4s | physics 3.2s | other 135.6s
+  other detail: gate_reward 4.2s | observation 15.0s | reference 4.8s | bookkeeping 9.1s
+Flight 1-1 | sim 5.1s | wall 206s | passed 1-1/12
+  error max 0.00m | collisions 0 | fallbacks 0
+  time: MPC 53.6s | physics 3.9s | other 148.8s
+  other detail: gate_reward 5.0s | observation 17.6s | reference 5.1s | bookkeeping 10.5s
+Flight 1-1 | sim 6.1s | wall 227s | passed 1-1/12
+  error max 0.00m | collisions 0 | fallbacks 0
+  time: MPC 60.8s | physics 4.6s | other 161.8s
+  other detail: gate_reward 5.7s | observation 20.1s | reference 5.3s | bookkeeping 11.8s
+Flight 1-1 | sim 7.1s | wall 249s | passed 2-2/12
+  error max 0.00m | collisions 0 | fallbacks 0
+  time: MPC 68.1s | physics 5.3s | other 175.5s
+  other detail: gate_reward 6.4s | observation 22.9s | reference 5.6s | bookkeeping 13.1s
+Flight 1-1 | sim 8.1s | wall 271s | passed 2-2/12
+  error max 0.00m | collisions 0 | fallbacks 0
+  time: MPC 75.3s | physics 6.0s | other 189.4s
+  other detail: gate_reward 7.1s | observation 25.7s | reference 5.9s | bookkeeping 14.5s
+Flight 1-1 | sim 9.1s | wall 292s | passed 3-3/12
+  error max 0.00m | collisions 0 | fallbacks 0
+  time: MPC 82.6s | physics 6.6s | other 203.1s
+  other detail: gate_reward 7.9s | observation 28.5s | reference 6.2s | bookkeeping 15.9s
+Flight 1-1 | sim 10.1s | wall 315s | passed 3-3/12
+  error max 0.00m | collisions 0 | fallbacks 0
+  time: MPC 90.2s | physics 7.3s | other 217.4s
+  other detail: gate_reward 8.7s | observation 31.3s | reference 6.5s | bookkeeping 17.4s
+Flight 1-1 | sim 11.1s | wall 337s | passed 3-3/12
+  error max 0.00m | collisions 0 | fallbacks 0
+  time: MPC 97.7s | physics 8.0s | other 231.1s
+  other detail: gate_reward 9.4s | observation 34.1s | reference 6.8s | bookkeeping 18.8s

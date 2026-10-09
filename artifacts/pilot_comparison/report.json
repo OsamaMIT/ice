@@ -1,0 +1,60 @@
+{
+  "exact_state": {
+    "baseline": {
+      "diagnostic_mpc_seconds": 390.4718694169999,
+      "diagnostic_physics_seconds": 38.9246373050089,
+      "diagnostic_other_seconds": 670.7541493769911,
+      "diagnostic_gate_reward_seconds": 29.38932212001032,
+      "diagnostic_observation_seconds": 140.4671373890012,
+      "diagnostic_reference_seconds": 17.736700164994318,
+      "diagnostic_bookkeeping_seconds": 53.41859182299095,
+      "diagnostic_unclassified_seconds": 429.7423978799943,
+      "trials": 4,
+      "completion_rate": 1.0,
+      "collision_rate": 0.0,
+      "mean_lap_time_s": 53.19350242614746,
+      "median_lap_time_s": 53.15100288391113,
+      "lap_time_std_s": 0.1928338957045362,
+      "minimum_clearance_m": 0.5757683515548706,
+      "mean_tracking_error_m": 0.0017714467625191098,
+      "fallbacks": 0,
+      "mpc_latency_median_s": 0.05923444899997321,
+      "mpc_latency_p95_s": 0.07245993400000827,
+      "physics_steps_per_second": 96.6985010240521
+    },
+    "learned": {
+      "diagnostic_mpc_seconds": 397.54046322799195,
+      "diagnostic_physics_seconds": 40.374806271953275,
+      "diagnostic_other_seconds": 759.0580369960549,
+      "diagnostic_gate_reward_seconds": 32.18444095302675,
+      "diagnostic_observation_seconds": 159.2985335500157,
+      "diagnostic_reference_seconds": 18.935617257989634,
+      "diagnostic_bookkeeping_seconds": 61.77786281902672,
+      "diagnostic_unclassified_seconds": 486.86158241599605,
+      "trials": 4,
+      "completion_rate": 1.0,
+      "collision_rate": 0.0,
+      "mean_lap_time_s": 53.83750343322754,
+      "median_lap_time_s": 53.78900337219238,
+      "lap_time_std_s": 0.16178640922216622,
+      "minimum_clearance_m": 0.5480183362960815,
+      "mean_tracking_error_m": 0.0485888615542534,
+      "fallbacks": 0,
+      "mpc_latency_median_s": 0.06034058300019751,
+      "mpc_latency_p95_s": 0.07235322049996284,
+      "physics_steps_per_second": 89.95287672782588
+    },
+    "paired_successes": 4,
+    "mean_improvement_s": -0.6440010070800781,
+    "improvement_95pct_ci_s": [
+      -0.6805019378662109,
+      -0.6135005950927734
+    ],
+    "accepted": false,
+    "failures": {
+      "baseline": [],
+      "learned": []
+    }
+  },
+  "accepted": false
+}

@@ -1,0 +1,69 @@
+Building trajectory problem: 288 intervals, refinement 0
+Solving for a dynamically feasible reference...
+
+******************************************************************************
+This program contains Ipopt, a library for large-scale nonlinear optimization.
+ Ipopt is released as open source code under the Eclipse Public License (EPL).
+         For more information visit https://github.com/coin-or/Ipopt
+******************************************************************************
+
+      solver  :   t_proc      (avg)   t_wall      (avg)    n_eval
+       nlp_f  | 107.73ms ( 19.54us) 102.48ms ( 18.59us)      5513
+       nlp_g  |  11.32 s (  2.05ms)  11.33 s (  2.06ms)      5513
+  nlp_grad_f  |  85.02ms ( 42.47us)  76.11ms ( 38.02us)      2002
+   nlp_jac_g  |  68.14 s ( 34.03ms)  68.18 s ( 34.05ms)      2002
+       total  | 207.82 s (207.82 s) 207.90 s (207.90 s)         1
+Validating feasibility candidate at physics rate...
+Refining feasibility: 9 invalid intervals; maximum defect 0.09071
+Building trajectory problem: 576 intervals, refinement 1
+Solving for a dynamically feasible reference...
+      solver  :   t_proc      (avg)   t_wall      (avg)    n_eval
+       nlp_f  | 106.16ms ( 38.54us)  98.06ms ( 35.59us)      2755
+       nlp_g  |  11.23 s (  4.07ms)  11.23 s (  4.08ms)      2755
+  nlp_grad_f  |  83.64ms ( 81.21us)  77.48ms ( 75.22us)      1030
+   nlp_jac_g  |  69.46 s ( 67.43ms)  69.51 s ( 67.49ms)      1030
+       total  | 226.83 s (226.83 s) 226.91 s (226.91 s)         1
+Validating feasibility candidate at physics rate...
+Validated feasible reference saved: artifacts/uncapped_curriculum/6mps/reference_feasible.npz
+Solving minimum-time trajectory...
+      solver  :   t_proc      (avg)   t_wall      (avg)    n_eval
+       nlp_f  |  86.35ms ( 23.83us)  71.42ms ( 19.71us)      3624
+       nlp_g  |  14.73 s (  4.07ms)  14.74 s (  4.07ms)      3624
+  nlp_grad_f  |  79.33ms ( 55.36us)  68.57ms ( 47.85us)      1433
+   nlp_jac_g  |  97.39 s ( 67.97ms)  97.43 s ( 67.99ms)      1433
+       total  | 318.63 s (318.63 s) 318.68 s (318.68 s)         1
+Validating minimum_time candidate at physics rate...
+Speed candidate failed dense validation; retaining validated feasible reference.
+{
+  "reference": "artifacts/uncapped_curriculum/6mps/reference.npz",
+  "duration_s": 53.37465856293674,
+  "fingerprint": "e14c48962dc87ee604e2a3fb65a47211cf07f3d9caac39d6ea65f561ec833846",
+  "schema": 1,
+  "course_fingerprint": "d7616d8a532cdd107f20dfd7f21c5a6e6c0e2ac4fa08a2b40caaa5c77866417b",
+  "model_fingerprint": "e05e42ec260bc3f2811008ac30b77dc53d07d4a5ae50e57f7257e9eb5e00ed8c",
+  "planner_fingerprint": "c50b14d0c0fdde653c1a1055138b3601ea0ea0f5db29e08e1418513889de5d61",
+  "planner": {
+    "feasibility_only": false,
+    "tracking_margin_m": 0.1,
+    "frame_depth_m": 0.1,
+    "nodes_per_segment": 24,
+    "max_refinements": 1,
+    "max_iterations": 2000,
+    "max_speed_m_s": 6.0,
+    "max_body_rate_rad_s": 12.0,
+    "validation_hz": 500,
+    "integration_substeps": 10,
+    "dynamics_tolerance": 0.05
+  },
+  "vehicle_radius_m": 0.15,
+  "solver": "ipopt",
+  "solver_status": "Solved_To_Acceptable_Level",
+  "solver_converged": true,
+  "solver_iterations": 1028,
+  "objective": "feasibility",
+  "refinement": 1,
+  "validated": true,
+  "invalid_intervals": [],
+  "maximum_dynamics_defect": 0.026341015075852958,
+  "minimum_clearance_m": 0.4843190312385559
+}

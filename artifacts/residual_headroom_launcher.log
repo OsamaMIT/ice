@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/scripts/run_residual_curriculum.py", line 153, in <module>
+    main()
+    ~~~~^^
+  File "/mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/scripts/run_residual_curriculum.py", line 142, in main
+    pipeline(runner, args.motor_command_limit, args.warm_start)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/scripts/run_residual_curriculum.py", line 49, in pipeline
+    require_clean_flights(baseline, count)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/scripts/run_staged_validation.py", line 18, in require_clean_flights
+    raise ValueError("Not every trial completed the course")
+ValueError: Not every trial completed the course

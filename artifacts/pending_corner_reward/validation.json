@@ -1,0 +1,16 @@
+{
+  "reward_tests_passed": 18,
+  "installer_checks_passed": true,
+  "source_files": [
+    "scripts/run_racing_optimization.py",
+    "src/a2rl_drone_training/config.py",
+    "src/a2rl_drone_training/hierarchical/environment.py",
+    "src/a2rl_drone_training/rewards.py",
+    "src/a2rl_drone_training/train.py",
+    "src/a2rl_drone_training/trainer.py",
+    "tests/test_racing_optimization.py",
+    "README.md",
+    "tests/test_corner_geometry_reward.py",
+    "tests/test_hierarchical.py"
+  ]
+}

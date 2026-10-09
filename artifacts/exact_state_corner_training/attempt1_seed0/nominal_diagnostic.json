@@ -1,0 +1,21 @@
+{
+  "peak_speed_m_s": 10.738283157348633,
+  "termination_counts": {
+    "crashed": 0,
+    "out_of_bounds": 0,
+    "missed_gate": 0,
+    "deadline": 0
+  },
+  "trials": 1,
+  "completion_rate": 1.0,
+  "collision_rate": 0.0,
+  "mean_lap_time_s": 13.842000961303711,
+  "median_lap_time_s": 13.842000961303711,
+  "lap_time_std_s": 0.0,
+  "minimum_clearance_m": 0.10095778107643127,
+  "mean_tracking_error_m": 0.002475352050214989,
+  "fallbacks": 0,
+  "mpc_latency_median_s": 0.06239198299999771,
+  "mpc_latency_p95_s": 0.07719228960000919,
+  "physics_steps_per_second": 20.68788777854424
+}

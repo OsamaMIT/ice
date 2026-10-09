@@ -1,0 +1,28 @@
+{
+  "status": "completed",
+  "wall_seconds": 1182.577156407,
+  "trials": [
+    {
+      "trial": 0,
+      "simulated_seconds": 53.0780029296875,
+      "gates_passed": 12,
+      "total_gates": 12,
+      "next_gate": null,
+      "tracking_error_m": 0.005440126173198223,
+      "collision": false,
+      "fallbacks": 0,
+      "success": true,
+      "active": false
+    }
+  ],
+  "timing": {
+    "mpc_seconds": 389.2990730069887,
+    "physics_seconds": 34.17052454799614,
+    "other_seconds": 759.0486841470156,
+    "gate_reward_seconds": 39.48458769205536,
+    "observation_seconds": 140.47276698204496,
+    "reference_seconds": 18.261781163993874,
+    "bookkeeping_seconds": 71.10981748907398,
+    "unclassified_seconds": 489.7197308198474
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "failures": [
+    {
+      "interval": 0,
+      "gate": 1,
+      "time_start_s": 0.0,
+      "time_end_s": 0.03377044398223819,
+      "reason": "dynamics_defect",
+      "measured": 0.06223462586537298,
+      "limit": 0.05
+    },
+    {
+      "interval": 72,
+      "gate": 4,
+      "time_start_s": 2.4813338802211238,
+      "time_end_s": 2.516359341617753,
+      "reason": "frame_collision",
+      "measured": true,
+      "limit": false
+    },
+    {
+      "interval": 119,
+      "gate": 5,
+      "time_start_s": 4.8184899991480545,
+      "time_end_s": 4.883557175035351,
+      "reason": "frame_collision",
+      "measured": true,
+      "limit": false
+    },
+    {
+      "interval": 120,
+      "gate": 6,
+      "time_start_s": 4.883557175035351,
+      "time_end_s": 4.955804307123285,
+      "reason": "frame_collision",
+      "measured": true,
+      "limit": false
+    },
+    {
+      "interval": 144,
+      "gate": 7,
+      "time_start_s": 6.617488345145754,
+      "time_end_s": 6.69557137592355,
+      "reason": "frame_collision",
+      "measured": true,
+      "limit": false
+    },
+    {
+      "interval": 216,
+      "gate": 10,
+      "time_start_s": 10.208605266769606,
+      "time_end_s": 10.246379097769978,
+      "reason": "frame_collision",
+      "measured": true,
+      "limit": false
+    },
+    {
+      "interval": 238,
+      "gate": 10,
+      "time_start_s": 11.039629548777793,
+      "time_end_s": 11.077403379778165,
+      "reason": "frame_collision",
+      "measured": true,
+      "limit": false
+    }
+  ],
+  "validated": false,
+  "invalid_intervals": [
+    0,
+    72,
+    119,
+    120,
+    144,
+    216,
+    238
+  ],
+  "maximum_dynamics_defect": 0.06223462586537298,
+  "minimum_clearance_m": -0.009758248925209045,
+  "stage": "minimum_time",
+  "refinement": 0,
+  "solver_status": "Maximum_Iterations_Exceeded",
+  "duration_s": 12.92545222046125,
+  "peak_speed_m_s": 11.513522508687569,
+  "gate_offset_fraction": -0.5
+}

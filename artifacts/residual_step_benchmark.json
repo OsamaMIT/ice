@@ -1,0 +1,27 @@
+{
+  "eager": {
+    "steps": 4,
+    "wall_seconds": 35.45745358199929,
+    "seconds_per_policy_step": 8.864363395499822,
+    "mpc_seconds": 1.6741625929980728,
+    "physics_seconds": 0.15579669799626572,
+    "gate_reward_seconds": 15.967395611998654,
+    "observation_seconds": 7.768986975999724,
+    "reference_seconds": 0.06121781999718223,
+    "bookkeeping_seconds": 7.872864388997186
+  },
+  "compiled": {
+    "steps": 4,
+    "wall_seconds": 12.041873898000631,
+    "seconds_per_policy_step": 3.0104684745001578,
+    "mpc_seconds": 1.4138799339989419,
+    "physics_seconds": 0.14458963399647473,
+    "gate_reward_seconds": 0.10385042399866506,
+    "observation_seconds": 0.6558154320009635,
+    "reference_seconds": 0.059407694999208616,
+    "bookkeeping_seconds": 7.924042757002098
+  },
+  "equivalent": true,
+  "maximum_absolute_difference": 0.0,
+  "speedup": 2.944512945604459
+}

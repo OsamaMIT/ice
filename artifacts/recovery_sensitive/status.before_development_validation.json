@@ -1,0 +1,587 @@
+{
+  "spec": {
+    "version": 2,
+    "caps": [
+      12.0,
+      24.0,
+      null
+    ],
+    "initial_reference": "fcbb8008d0e04de3769abbc4a1b2aaea4d831cd57687638967fa21a29bafc1ae",
+    "updates_per_block": 16,
+    "max_blocks": 8,
+    "conditions": {
+      "exact_state": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "position_1cm": [
+        0.01,
+        0.0,
+        0.0
+      ],
+      "position_3cm": [
+        0.03,
+        0.0,
+        0.0
+      ],
+      "velocity_2cms": [
+        0.0,
+        0.02,
+        0.0
+      ],
+      "velocity_5cms": [
+        0.0,
+        0.05,
+        0.0
+      ],
+      "delay_10ms": [
+        0.0,
+        0.0,
+        0.01
+      ],
+      "delay_30ms": [
+        0.0,
+        0.0,
+        0.03
+      ]
+    },
+    "screening_trials": 8,
+    "final_trials": 100,
+    "max_lap_ratio": 1.02,
+    "source": {
+      "src/a2rl_drone_training/__init__.py": "8b72b4fc844447710c7afcf047fc1d61713de8c2c6a9c641174e422a67817494",
+      "src/a2rl_drone_training/actions.py": "93e9308696b7f981dee1aaec0c399a8b9474d2d1ab7d798c198c6b2a820a8735",
+      "src/a2rl_drone_training/config.py": "9abec39f8a70e0d69d8775fab8ad10e653cc6f0250a26eeca0109100ac3e8b59",
+      "src/a2rl_drone_training/console.py": "5eb82d8119db6bc0a8c1012ee4fd40244a1211ef1f6ba6f16bc196789a68c7a3",
+      "src/a2rl_drone_training/course.py": "c7a30c3578df1dcbd278e16cecc79440e457067927d452d1494e4f50eb66d1cc",
+      "src/a2rl_drone_training/curriculum.py": "4ef92efcfaef99b091a83b169dfadfc9c620fc92fd9f5604393394c7ad0a27f8",
+      "src/a2rl_drone_training/env.py": "6ae0a4db12f068ec0cf4be4173774e8ba457cef27ad6b2df708edf7705333901",
+      "src/a2rl_drone_training/hierarchical/__init__.py": "02006ad818eb8cf76bef2f43bd3f5487024d88a8a61737d3d0ccc9e2b02a3820",
+      "src/a2rl_drone_training/hierarchical/cli.py": "00e86e9d4a7929318d1c6594ed777a24ebfd3b1f78511e7bb065ebd3d72bf405",
+      "src/a2rl_drone_training/hierarchical/diagnostics.py": "d6d22c8c5679ca1e4ccc458a86fab9864296183c399178a7ca6f2acff01c5f9f",
+      "src/a2rl_drone_training/hierarchical/dynamics.py": "fcf48094fc3ff517c74a76bd4026d2e6dd7646c6d5a76589ab1032727eea9678",
+      "src/a2rl_drone_training/hierarchical/environment.py": "03a5b5c9ff2b5bd96f75c08bb4b291ef215e6961a411d36cd47dcbc2314a3013",
+      "src/a2rl_drone_training/hierarchical/evaluation.py": "695605c18972ab79a58c7b2e504c24ff1da6ae2025861f1298ecd35a029c45b0",
+      "src/a2rl_drone_training/hierarchical/geometry.py": "b07172aa06eccf6547c189e2f2e12ec17f2cefb1a793fa8628988f10d5f3e818",
+      "src/a2rl_drone_training/hierarchical/mpc.py": "0c4be6f27335c4b2cb58c654b0b53e3e9271b1f1f3ef7afe1e9bff09a69a36bf",
+      "src/a2rl_drone_training/hierarchical/planner.py": "708c6fac5d36a83ca1635f26a132eb869856d9e7073491c1642ac8bc33810922",
+      "src/a2rl_drone_training/hierarchical/reference.py": "bbffb376d3f8981232275299637a50a45fa8f6ffcc5f97cb063ecceaa317d3f2",
+      "src/a2rl_drone_training/hierarchical/sensors.py": "2da5016c3a092960e57ced9a62c46caa3cb43225f3e3b1063338890ad548bbed",
+      "src/a2rl_drone_training/networks.py": "4ba3d2f9f74871c78beb2e32e2f09451f5e637f35daccbd79938710e6503bb13",
+      "src/a2rl_drone_training/normalization.py": "e52a0ee11e99b108029826fac1370f8d292b2fe41d70345db82dbf1581ed1234",
+      "src/a2rl_drone_training/observations.py": "a3b9d93b8329aa86410a40caad9db7d66ab31b1410f8cd801367eca361619c54",
+      "src/a2rl_drone_training/optim.py": "6677c933d8d7e74d0d6639f4a23e801819945d5b1d323a8c39e1d65e15525180",
+      "src/a2rl_drone_training/ppo.py": "078be9fbb3f171d83ba0865fb61c8bc7dafd75dc769756e7e69bebf234c21f78",
+      "src/a2rl_drone_training/rewards.py": "aa2090f53e72df23c8eea22f69d25fa68e742272231d06c5241986efe8fd3bf3",
+      "src/a2rl_drone_training/runtime.py": "35b31631b42064bf93f666bb81ea5ae6eb40dc451ee1886e2fef949292afec49",
+      "src/a2rl_drone_training/train.py": "4d8ddda4cf2e4e873d307da89f55540e1c5d893f7bc287bb70934e9b12ad084e",
+      "src/a2rl_drone_training/trainer.py": "59baf074432b3a6cb1d5b2586b1908dddacd7d4c091a4ff599256394b1331c3c"
+    },
+    "runner": "bb7816e76fd8f6c5646a33de6956da6cd567e63cc2803fd85ab3c9015c7087a7",
+    "staging_helper": "e2659de52ffb27c5459a55b23903819890d6a35b17bc96efee35675e442033cd",
+    "dependencies": "4df88c33b6e3cdebdd2fa052df09f31fb53aa0e37926071bbfc75ca12dd614dd",
+    "evaluation_worker": "46ea5960865e20c5ff45175a5f94079216d7d4c4e0a0cc5ccb69cea8b8daae36",
+    "recovery_only": true,
+    "train_before_qualification": true,
+    "motor_command_limit": 0.8,
+    "prior_run": "0c286d9dad08c58a4a3f0081a5b3eb2cbe1beea2b632c619c1a5298c7c586bd2",
+    "initial_elapsed_seconds": 13476.512736155
+  },
+  "tasks": {
+    "12mps/planning": {
+      "inputs": {
+        "artifacts/recovery_assistant/12mps/reference.npz": "fcbb8008d0e04de3769abbc4a1b2aaea4d831cd57687638967fa21a29bafc1ae"
+      },
+      "attempt": 1,
+      "completed": true,
+      "outputs": {
+        "artifacts/recovery_sensitive/12mps/reference.npz": "4b201824411f87552a95d84997f3b2bf99c06f30efe5bce6fcf37e6a8f6222d7"
+      }
+    },
+    "12mps/train1": {
+      "inputs": {
+        "artifacts/recovery_sensitive/12mps/reference.npz": "4b201824411f87552a95d84997f3b2bf99c06f30efe5bce6fcf37e6a8f6222d7"
+      },
+      "attempt": 1,
+      "completed": true,
+      "outputs": {
+        "artifacts/recovery_sensitive/12mps/checkpoints/checkpoint_000016.pkl": "7850c85ec65590e380eaf418463399acec9a5e55abbb32512da2362625bb6ad1"
+      }
+    },
+    "12mps/screen1/exact_state": {
+      "inputs": {
+        "artifacts/recovery_sensitive/12mps/reference.npz": "4b201824411f87552a95d84997f3b2bf99c06f30efe5bce6fcf37e6a8f6222d7",
+        "artifacts/recovery_sensitive/12mps/checkpoints/checkpoint_000016.pkl": "7850c85ec65590e380eaf418463399acec9a5e55abbb32512da2362625bb6ad1"
+      },
+      "attempt": 1,
+      "completed": true,
+      "outputs": {
+        "artifacts/recovery_sensitive/12mps/screen1/exact_state/report.json": "aa0f21d1e545cdcbdba872d34a76e221dab1eb81c831e46ce188350730c9cba2",
+        "artifacts/recovery_sensitive/12mps/screen1/exact_state/exact_state_baseline.npz": "5d6916c891a83b2bfbd5e9b49791737e913e1ad4b4f21a3572ca7c5dd180296b",
+        "artifacts/recovery_sensitive/12mps/screen1/exact_state/exact_state_learned.npz": "ef33ab67edd949a3b3a1cca04a530c00206de5fd08e9c718889e5a7d516bed18"
+      }
+    },
+    "12mps/screen1/position_1cm": {
+      "inputs": {
+        "artifacts/recovery_sensitive/12mps/reference.npz": "4b201824411f87552a95d84997f3b2bf99c06f30efe5bce6fcf37e6a8f6222d7",
+        "artifacts/recovery_sensitive/12mps/checkpoints/checkpoint_000016.pkl": "7850c85ec65590e380eaf418463399acec9a5e55abbb32512da2362625bb6ad1"
+      },
+      "attempt": 1,
+      "completed": true,
+      "outputs": {
+        "artifacts/recovery_sensitive/12mps/screen1/position_1cm/report.json": "ecb7da501d8e1cc2d45d66849d86c5c240d3b167423ced856e864ab67b79e179",
+        "artifacts/recovery_sensitive/12mps/screen1/position_1cm/noisy_state_baseline.npz": "696334fe822ee70516ee360089bd8b8905d1540b90a35923442c2480e0e7f8fa",
+        "artifacts/recovery_sensitive/12mps/screen1/position_1cm/noisy_state_learned.npz": "7468691e3a1b6058ed19ec5613e174982fd11936cb6b0a854e2c3a9e5ef81746"
+      }
+    },
+    "24mps/planning": {
+      "inputs": {
+        "artifacts/recovery_sensitive/12mps/reference.npz": "4b201824411f87552a95d84997f3b2bf99c06f30efe5bce6fcf37e6a8f6222d7"
+      },
+      "attempt": 1,
+      "completed": true,
+      "outputs": {
+        "artifacts/recovery_sensitive/24mps/reference.npz": "f3b1c81e537197ded32f84a456412d513055fcf8a72d870a099b13e7d65e8d5e"
+      }
+    },
+    "24mps/train1": {
+      "inputs": {
+        "artifacts/recovery_sensitive/24mps/reference.npz": "f3b1c81e537197ded32f84a456412d513055fcf8a72d870a099b13e7d65e8d5e"
+      },
+      "attempt": 1,
+      "completed": true,
+      "outputs": {
+        "artifacts/recovery_sensitive/24mps/checkpoints/checkpoint_000016.pkl": "2e8f79689519a2baca76c7a83dc70de67d5672239d34a2d13af0fb08f774e6ad"
+      }
+    },
+    "24mps/screen1/exact_state": {
+      "inputs": {
+        "artifacts/recovery_sensitive/24mps/reference.npz": "f3b1c81e537197ded32f84a456412d513055fcf8a72d870a099b13e7d65e8d5e",
+        "artifacts/recovery_sensitive/24mps/checkpoints/checkpoint_000016.pkl": "2e8f79689519a2baca76c7a83dc70de67d5672239d34a2d13af0fb08f774e6ad"
+      },
+      "attempt": 1,
+      "completed": true,
+      "outputs": {
+        "artifacts/recovery_sensitive/24mps/screen1/exact_state/report.json": "c7a0773f40eb51a765b91ce1be8eb1d4266b732f45f58c0e1bf2316519615f28",
+        "artifacts/recovery_sensitive/24mps/screen1/exact_state/exact_state_baseline.npz": "abd2c868bb949ada04bd7083e24828beb5b0ddf7d249d136cb3b9285825f20dc",
+        "artifacts/recovery_sensitive/24mps/screen1/exact_state/exact_state_learned.npz": "ef233715eeff6cd58bfd21ae0c8cdce5739b582b75f4fafcbbc676fc3bdc925f"
+      }
+    },
+    "24mps/screen1/position_1cm": {
+      "inputs": {
+        "artifacts/recovery_sensitive/24mps/reference.npz": "f3b1c81e537197ded32f84a456412d513055fcf8a72d870a099b13e7d65e8d5e",
+        "artifacts/recovery_sensitive/24mps/checkpoints/checkpoint_000016.pkl": "2e8f79689519a2baca76c7a83dc70de67d5672239d34a2d13af0fb08f774e6ad"
+      },
+      "attempt": 2,
+      "completed": true,
+      "outputs": {
+        "artifacts/recovery_sensitive/24mps/screen1/position_1cm/report.json": "49f85ea82c5d2ee3436ee767ed222a00886980c8794b2bd9581a0c30afb62e0f",
+        "artifacts/recovery_sensitive/24mps/screen1/position_1cm/noisy_state_baseline.npz": "c47f653d4616595a37341079c96f9365dc9bffc63ff1d2cc16d4c45400b33c7b",
+        "artifacts/recovery_sensitive/24mps/screen1/position_1cm/noisy_state_learned.npz": "fa6f620a8d90586f5c68eb745e8cf52a631c4a2647eb666703be8be1868b2fa1"
+      }
+    },
+    "uncapped/planning": {
+      "inputs": {
+        "artifacts/recovery_sensitive/24mps/reference.npz": "f3b1c81e537197ded32f84a456412d513055fcf8a72d870a099b13e7d65e8d5e"
+      },
+      "attempt": 1,
+      "completed": true,
+      "outputs": {
+        "artifacts/recovery_sensitive/uncapped/reference.npz": "36a1d4e00f4e59b9829e7b3dac0c1b9db86fad4052c1ebc0338def6986de1c10"
+      }
+    },
+    "uncapped/train1": {
+      "inputs": {
+        "artifacts/recovery_sensitive/uncapped/reference.npz": "36a1d4e00f4e59b9829e7b3dac0c1b9db86fad4052c1ebc0338def6986de1c10"
+      },
+      "attempt": 1,
+      "completed": true,
+      "outputs": {
+        "artifacts/recovery_sensitive/uncapped/checkpoints/checkpoint_000016.pkl": "671b072f0ae9f0e3256e5e1c19789cab656f7845e5e0142410e3fd0793521ef7"
+      }
+    },
+    "uncapped/screen1/exact_state": {
+      "inputs": {
+        "artifacts/recovery_sensitive/uncapped/reference.npz": "36a1d4e00f4e59b9829e7b3dac0c1b9db86fad4052c1ebc0338def6986de1c10",
+        "artifacts/recovery_sensitive/uncapped/checkpoints/checkpoint_000016.pkl": "671b072f0ae9f0e3256e5e1c19789cab656f7845e5e0142410e3fd0793521ef7"
+      },
+      "attempt": 1,
+      "completed": true,
+      "outputs": {
+        "artifacts/recovery_sensitive/uncapped/screen1/exact_state/report.json": "0368c231fc06c5243df5c1eca1f5bf4e84375df7c7977a258f7a5bcfadce72e5",
+        "artifacts/recovery_sensitive/uncapped/screen1/exact_state/exact_state_baseline.npz": "0fdd5b7fcecde844a4e44092601468a5c8a77608f3c66d9ac90bbe49e417e444",
+        "artifacts/recovery_sensitive/uncapped/screen1/exact_state/exact_state_learned.npz": "22e78ce0824dc14998f1428d4e8c1d9f394422b4ec576ec49c1141a76b87bdf1"
+      }
+    },
+    "uncapped/screen1/position_1cm": {
+      "inputs": {
+        "artifacts/recovery_sensitive/uncapped/reference.npz": "36a1d4e00f4e59b9829e7b3dac0c1b9db86fad4052c1ebc0338def6986de1c10",
+        "artifacts/recovery_sensitive/uncapped/checkpoints/checkpoint_000016.pkl": "671b072f0ae9f0e3256e5e1c19789cab656f7845e5e0142410e3fd0793521ef7"
+      },
+      "attempt": 1,
+      "completed": true,
+      "outputs": {
+        "artifacts/recovery_sensitive/uncapped/screen1/position_1cm/report.json": "d8d22466370107ba7201dce34ebfe0187209b5863e9d5a8a6812ca3e427bcb90",
+        "artifacts/recovery_sensitive/uncapped/screen1/position_1cm/noisy_state_baseline.npz": "ca563884facb34133df4eaa75dc17ff55618c341d26d1a0c8cd97b28eb06c1cd",
+        "artifacts/recovery_sensitive/uncapped/screen1/position_1cm/noisy_state_learned.npz": "bcf746181e941385eb1ed36954a3254c4d803030c8206d8bea89e99ec1ebb540"
+      }
+    },
+    "final/exact_state": {
+      "inputs": {
+        "artifacts/recovery_sensitive/uncapped/reference.npz": "36a1d4e00f4e59b9829e7b3dac0c1b9db86fad4052c1ebc0338def6986de1c10",
+        "artifacts/recovery_sensitive/uncapped/checkpoints/checkpoint_000016.pkl": "671b072f0ae9f0e3256e5e1c19789cab656f7845e5e0142410e3fd0793521ef7"
+      },
+      "attempt": 1,
+      "completed": false
+    }
+  },
+  "stages": {
+    "12mps": {
+      "reference": {
+        "duration_s": 13.73503411556927,
+        "peak_speed_m_s": 10.865776152750525,
+        "model_fingerprint": "e05e42ec260bc3f2811008ac30b77dc53d07d4a5ae50e57f7257e9eb5e00ed8c",
+        "planner_cap_m_s": 12.0,
+        "fingerprint": "81d1f3b59c82d6c64a2420e0da1546e76dabad8a21a6bb3e118daa2e83aa052c",
+        "sha256": "4b201824411f87552a95d84997f3b2bf99c06f30efe5bce6fcf37e6a8f6222d7"
+      },
+      "pretraining_qualification": "deferred_by_user",
+      "selected_checkpoint": "artifacts/recovery_sensitive/12mps/checkpoints/checkpoint_000016.pkl",
+      "comparison": {
+        "exact_state": {
+          "baseline": {
+            "peak_speed_m_s": 10.867198944091797,
+            "termination_counts": {
+              "crashed": 0,
+              "out_of_bounds": 0,
+              "missed_gate": 0,
+              "deadline": 0
+            },
+            "trials": 8,
+            "completion_rate": 1.0,
+            "collision_rate": 0.0,
+            "mean_lap_time_s": 13.798250555992126,
+            "median_lap_time_s": 13.766000270843506,
+            "lap_time_std_s": 0.12712769257225648,
+            "minimum_clearance_m": 0.1009034514427185,
+            "mean_tracking_error_m": 0.005251566283483712,
+            "fallbacks": 0,
+            "mpc_latency_median_s": 0.06098893999978827,
+            "mpc_latency_p95_s": 0.07427972235000198,
+            "physics_steps_per_second": 102.7138958744987
+          },
+          "learned": {
+            "peak_speed_m_s": 10.867700576782227,
+            "termination_counts": {
+              "crashed": 0,
+              "out_of_bounds": 0,
+              "missed_gate": 0,
+              "deadline": 0
+            },
+            "trials": 8,
+            "completion_rate": 1.0,
+            "collision_rate": 0.0,
+            "mean_lap_time_s": 13.804000735282898,
+            "median_lap_time_s": 13.772000312805176,
+            "lap_time_std_s": 0.11725181809211697,
+            "minimum_clearance_m": 0.09657761454582214,
+            "mean_tracking_error_m": 0.010250651503145932,
+            "fallbacks": 0,
+            "mpc_latency_median_s": 0.06099466199975723,
+            "mpc_latency_p95_s": 0.07523406779982907,
+            "physics_steps_per_second": 105.75271176193677
+          }
+        },
+        "position_1cm": {
+          "baseline": {
+            "peak_speed_m_s": 10.869060516357422,
+            "termination_counts": {
+              "crashed": 0,
+              "out_of_bounds": 0,
+              "missed_gate": 0,
+              "deadline": 0
+            },
+            "trials": 8,
+            "completion_rate": 1.0,
+            "collision_rate": 0.0,
+            "mean_lap_time_s": 13.825000762939453,
+            "median_lap_time_s": 13.785000801086426,
+            "lap_time_std_s": 0.11743499818172794,
+            "minimum_clearance_m": 0.07742437720298767,
+            "mean_tracking_error_m": 0.011083011572667233,
+            "fallbacks": 0,
+            "mpc_latency_median_s": 0.06182723399979295,
+            "mpc_latency_p95_s": 0.07445939160043054,
+            "physics_steps_per_second": 97.663682575808
+          },
+          "learned": {
+            "peak_speed_m_s": 10.878376007080078,
+            "termination_counts": {
+              "crashed": 0,
+              "out_of_bounds": 0,
+              "missed_gate": 0,
+              "deadline": 0
+            },
+            "trials": 8,
+            "completion_rate": 1.0,
+            "collision_rate": 0.0,
+            "mean_lap_time_s": 13.826750636100769,
+            "median_lap_time_s": 13.802000522613525,
+            "lap_time_std_s": 0.09855939292281686,
+            "minimum_clearance_m": 0.08015592396259308,
+            "mean_tracking_error_m": 0.018950376185204773,
+            "fallbacks": 0,
+            "mpc_latency_median_s": 0.0609012994996192,
+            "mpc_latency_p95_s": 0.07438689755008454,
+            "physics_steps_per_second": 106.75170675208719
+          }
+        }
+      }
+    },
+    "24mps": {
+      "reference": {
+        "duration_s": 13.772417586596434,
+        "peak_speed_m_s": 10.8172490110366,
+        "model_fingerprint": "e05e42ec260bc3f2811008ac30b77dc53d07d4a5ae50e57f7257e9eb5e00ed8c",
+        "planner_cap_m_s": 24.0,
+        "fingerprint": "b49ef4e7390a6ad6fe38d38e05a0b6768f6e1d77275a04e144dbd5c8cbdc676b",
+        "sha256": "f3b1c81e537197ded32f84a456412d513055fcf8a72d870a099b13e7d65e8d5e"
+      },
+      "pretraining_qualification": "deferred_by_user",
+      "selected_checkpoint": "artifacts/recovery_sensitive/24mps/checkpoints/checkpoint_000016.pkl",
+      "comparison": {
+        "exact_state": {
+          "baseline": {
+            "peak_speed_m_s": 10.818870544433594,
+            "termination_counts": {
+              "crashed": 0,
+              "out_of_bounds": 0,
+              "missed_gate": 0,
+              "deadline": 0
+            },
+            "trials": 8,
+            "completion_rate": 1.0,
+            "collision_rate": 0.0,
+            "mean_lap_time_s": 13.911000728607178,
+            "median_lap_time_s": 13.921000480651855,
+            "lap_time_std_s": 0.2066808512323131,
+            "minimum_clearance_m": 0.10090774297714233,
+            "mean_tracking_error_m": 0.007307643333616027,
+            "fallbacks": 0,
+            "mpc_latency_median_s": 0.056238736000523204,
+            "mpc_latency_p95_s": 0.06774115160005748,
+            "physics_steps_per_second": 95.87829700606058
+          },
+          "learned": {
+            "peak_speed_m_s": 10.822199821472168,
+            "termination_counts": {
+              "crashed": 0,
+              "out_of_bounds": 0,
+              "missed_gate": 0,
+              "deadline": 0
+            },
+            "trials": 8,
+            "completion_rate": 1.0,
+            "collision_rate": 0.0,
+            "mean_lap_time_s": 13.88200068473816,
+            "median_lap_time_s": 13.897000789642334,
+            "lap_time_std_s": 0.16376492135606488,
+            "minimum_clearance_m": 0.09151133894920349,
+            "mean_tracking_error_m": 0.013300186923088736,
+            "fallbacks": 0,
+            "mpc_latency_median_s": 0.06151238300026307,
+            "mpc_latency_p95_s": 0.074712935399657,
+            "physics_steps_per_second": 107.67172074087074
+          }
+        },
+        "position_1cm": {
+          "baseline": {
+            "peak_speed_m_s": 10.821224212646484,
+            "termination_counts": {
+              "crashed": 0,
+              "out_of_bounds": 0,
+              "missed_gate": 0,
+              "deadline": 0
+            },
+            "trials": 8,
+            "completion_rate": 1.0,
+            "collision_rate": 0.0,
+            "mean_lap_time_s": 13.92750072479248,
+            "median_lap_time_s": 13.932000637054443,
+            "lap_time_std_s": 0.21295945456854556,
+            "minimum_clearance_m": 0.1000729501247406,
+            "mean_tracking_error_m": 0.010119980341126926,
+            "fallbacks": 0,
+            "mpc_latency_median_s": 0.0618843289999802,
+            "mpc_latency_p95_s": 0.07545759164999026,
+            "physics_steps_per_second": 105.12522907173118
+          },
+          "learned": {
+            "peak_speed_m_s": 10.82554817199707,
+            "termination_counts": {
+              "crashed": 0,
+              "out_of_bounds": 0,
+              "missed_gate": 0,
+              "deadline": 0
+            },
+            "trials": 8,
+            "completion_rate": 1.0,
+            "collision_rate": 0.0,
+            "mean_lap_time_s": 13.895500540733337,
+            "median_lap_time_s": 13.931000709533691,
+            "lap_time_std_s": 0.16088106491378307,
+            "minimum_clearance_m": 0.08908846974372864,
+            "mean_tracking_error_m": 0.01605214647846329,
+            "fallbacks": 0,
+            "mpc_latency_median_s": 0.06324291299995366,
+            "mpc_latency_p95_s": 0.07567266460002883,
+            "physics_steps_per_second": 116.65913255254695
+          }
+        }
+      }
+    },
+    "uncapped": {
+      "reference": {
+        "duration_s": 13.817079254997214,
+        "peak_speed_m_s": 10.738753297891806,
+        "model_fingerprint": "e05e42ec260bc3f2811008ac30b77dc53d07d4a5ae50e57f7257e9eb5e00ed8c",
+        "planner_cap_m_s": null,
+        "fingerprint": "d5e9f368be7db13b43aa2dc3486dd134ff6da7c4b2e0ce75059e09c40abb6986",
+        "sha256": "36a1d4e00f4e59b9829e7b3dac0c1b9db86fad4052c1ebc0338def6986de1c10"
+      },
+      "pretraining_qualification": "deferred_by_user",
+      "selected_checkpoint": "artifacts/recovery_sensitive/uncapped/checkpoints/checkpoint_000016.pkl",
+      "comparison": {
+        "exact_state": {
+          "baseline": {
+            "peak_speed_m_s": 10.740347862243652,
+            "termination_counts": {
+              "crashed": 0,
+              "out_of_bounds": 0,
+              "missed_gate": 0,
+              "deadline": 0
+            },
+            "trials": 8,
+            "completion_rate": 1.0,
+            "collision_rate": 0.0,
+            "mean_lap_time_s": 13.878000617027283,
+            "median_lap_time_s": 13.852000713348389,
+            "lap_time_std_s": 0.11254761560510088,
+            "minimum_clearance_m": 0.10093992948532104,
+            "mean_tracking_error_m": 0.00485092479195034,
+            "fallbacks": 0,
+            "mpc_latency_median_s": 0.061567092000132106,
+            "mpc_latency_p95_s": 0.07666822814985609,
+            "physics_steps_per_second": 104.27331402947497
+          },
+          "learned": {
+            "peak_speed_m_s": 10.744451522827148,
+            "termination_counts": {
+              "crashed": 0,
+              "out_of_bounds": 0,
+              "missed_gate": 0,
+              "deadline": 0
+            },
+            "trials": 8,
+            "completion_rate": 1.0,
+            "collision_rate": 0.0,
+            "mean_lap_time_s": 13.868000745773315,
+            "median_lap_time_s": 13.85300064086914,
+            "lap_time_std_s": 0.09695358583678494,
+            "minimum_clearance_m": 0.09788930416107178,
+            "mean_tracking_error_m": 0.010383726177845505,
+            "fallbacks": 0,
+            "mpc_latency_median_s": 0.06178045100023155,
+            "mpc_latency_p95_s": 0.08462059399971622,
+            "physics_steps_per_second": 89.66360584506558
+          }
+        },
+        "position_1cm": {
+          "baseline": {
+            "peak_speed_m_s": 10.740971565246582,
+            "termination_counts": {
+              "crashed": 0,
+              "out_of_bounds": 0,
+              "missed_gate": 0,
+              "deadline": 0
+            },
+            "trials": 8,
+            "completion_rate": 1.0,
+            "collision_rate": 0.0,
+            "mean_lap_time_s": 13.888500571250916,
+            "median_lap_time_s": 13.87100076675415,
+            "lap_time_std_s": 0.0885368361085891,
+            "minimum_clearance_m": 0.09831871092319489,
+            "mean_tracking_error_m": 0.007737266975340187,
+            "fallbacks": 0,
+            "mpc_latency_median_s": 0.05926633799981573,
+            "mpc_latency_p95_s": 0.07549509104969729,
+            "physics_steps_per_second": 88.63583500150536
+          },
+          "learned": {
+            "peak_speed_m_s": 10.744670867919922,
+            "termination_counts": {
+              "crashed": 0,
+              "out_of_bounds": 0,
+              "missed_gate": 0,
+              "deadline": 0
+            },
+            "trials": 8,
+            "completion_rate": 1.0,
+            "collision_rate": 0.0,
+            "mean_lap_time_s": 13.884000897407532,
+            "median_lap_time_s": 13.861000537872314,
+            "lap_time_std_s": 0.08221311810224352,
+            "minimum_clearance_m": 0.09433144330978394,
+            "mean_tracking_error_m": 0.01574863428184118,
+            "fallbacks": 0,
+            "mpc_latency_median_s": 0.05983965850009554,
+            "mpc_latency_p95_s": 0.07339400419996307,
+            "physics_steps_per_second": 102.52218889287188
+          }
+        }
+      }
+    }
+  },
+  "elapsed_seconds": 45311.2066375,
+  "completed_final_trials": 19,
+  "pid": 439,
+  "child_pid": null,
+  "process_alive": false,
+  "stage": "interrupted",
+  "updated_at": 1790927734.680097,
+  "remaining_seconds": 41088.793363294,
+  "budget_carried_from": "artifacts/recovery_assistant/status.json",
+  "speed_cap_m_s": null,
+  "update_count": 16,
+  "current_log": "artifacts/recovery_sensitive/final_exact_state.attempt1.log",
+  "command": [
+    "/mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/.venv/bin/python",
+    "/mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/scripts/evaluate_seeded_condition.py",
+    "--reference-path",
+    "artifacts/recovery_sensitive/uncapped/reference.npz",
+    "--checkpoint",
+    "artifacts/recovery_sensitive/uncapped/checkpoints/checkpoint_000016.pkl",
+    "--output-dir",
+    "artifacts/recovery_sensitive/final/exact_state",
+    "--condition",
+    "exact_state",
+    "--seed-start",
+    "10000000",
+    "--trials",
+    "100"
+  ],
+  "reference": {
+    "duration_s": 13.817079254997214,
+    "peak_speed_m_s": 10.738753297891806,
+    "model_fingerprint": "e05e42ec260bc3f2811008ac30b77dc53d07d4a5ae50e57f7257e9eb5e00ed8c",
+    "planner_cap_m_s": null,
+    "fingerprint": "d5e9f368be7db13b43aa2dc3486dd134ff6da7c4b2e0ce75059e09c40abb6986",
+    "sha256": "36a1d4e00f4e59b9829e7b3dac0c1b9db86fad4052c1ebc0338def6986de1c10"
+  },
+  "qualification_note": "Training allowed before MPC qualification; promotion checks remain mandatory",
+  "block": 1,
+  "reason": "",
+  "completed_condition_trials": 19
+}

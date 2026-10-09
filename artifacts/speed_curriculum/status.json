@@ -1,0 +1,33 @@
+{
+  "pid": 344,
+  "stage": "planning",
+  "stages": {},
+  "speed_caps_m_s": [
+    6.0,
+    12.0
+  ],
+  "updates_per_stage": 32,
+  "policy_transitions_per_stage": 32768,
+  "held_out_pairs_per_suite": 8,
+  "eventual_target_m_s": 41.666666666666664,
+  "eventual_target_source": "https://a2rl.io/autonomous-drone-race",
+  "hardware_target_enabled": false,
+  "limitations": "Planner caps are not hard actual-flight speed limits. cf2x_L250 is not a verified A2RL hardware model. Small-sample promotion is experimental, not deployment acceptance.",
+  "updated_at": 1790658876.3335733,
+  "speed_cap_m_s": 6.0,
+  "child_pid": 435,
+  "current_log": "artifacts/speed_curriculum/6mps/planner.log",
+  "command": [
+    "/mnt/c/Users/abdul/Downloads/not ice dont open/ice-main/.venv/bin/a2rl-drone-plan",
+    "--max-speed",
+    "6.0",
+    "--nodes-per-segment",
+    "24",
+    "--max-refinements",
+    "1",
+    "--max-iterations",
+    "2000",
+    "--output",
+    "artifacts/speed_curriculum/6mps/reference.npz"
+  ]
+}

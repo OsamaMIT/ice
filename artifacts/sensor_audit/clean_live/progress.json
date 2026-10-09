@@ -1,0 +1,40 @@
+{
+  "status": "completed",
+  "wall_seconds": 1319.477069538,
+  "trials": [
+    {
+      "trial": 0,
+      "simulated_seconds": 53.0780029296875,
+      "gates_passed": 12,
+      "total_gates": 12,
+      "next_gate": null,
+      "tracking_error_m": 0.005441019311547279,
+      "collision": false,
+      "fallbacks": 0,
+      "success": true,
+      "active": false
+    },
+    {
+      "trial": 1,
+      "simulated_seconds": 53.0780029296875,
+      "gates_passed": 12,
+      "total_gates": 12,
+      "next_gate": null,
+      "tracking_error_m": 0.005441019311547279,
+      "collision": false,
+      "fallbacks": 0,
+      "success": true,
+      "active": false
+    }
+  ],
+  "timing": {
+    "mpc_seconds": 388.35356800200134,
+    "physics_seconds": 37.5506363210136,
+    "other_seconds": 893.5341239059851,
+    "gate_reward_seconds": 31.1072719260128,
+    "observation_seconds": 142.85623472897714,
+    "reference_seconds": 19.725662938000596,
+    "bookkeeping_seconds": 54.55063946001087,
+    "unclassified_seconds": 645.2943148529837
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "reason": "Status file contained only NUL bytes; reconstructed from validated checkpoints and paired artifacts",
+  "source_spec_reconstructed": true,
+  "budget_method": "Last observed active elapsed plus wall time to corrupted status modification (conservative)",
+  "elapsed_seconds": 22071.77586983428,
+  "remaining_seconds": 21128.22413016572,
+  "verified_completed_tasks": [
+    "attempt1_seed0/nominal",
+    "attempt1_seed0/perturbed",
+    "attempt1_seed0/train1",
+    "attempt1_seed0/screen1/exact_state",
+    "attempt1_seed0/train2",
+    "attempt1_seed0/screen2/exact_state"
+  ]
+}

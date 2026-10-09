@@ -1,0 +1,60 @@
+Flight diagnostics: artifacts/reference_racing_policy/attempt1_seed0/perturbed/exact_state_baseline_live (initializing; first step includes compilation)
+Flight 1-4 | sim 0.1s | wall 98s | passed 0-0/12
+  error max 0.04m | collisions 0 | fallbacks 0
+Flight 1-4 | sim 1.1s | wall 115s | passed 1-1/12
+  error max 0.07m | collisions 0 | fallbacks 0
+Flight 1-4 | sim 2.1s | wall 131s | passed 1-1/12
+  error max 0.01m | collisions 0 | fallbacks 0
+Flight 1-4 | sim 3.1s | wall 148s | passed 3-3/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-4 | sim 4.1s | wall 164s | passed 4-4/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-4 | sim 5.1s | wall 180s | passed 4-4/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-4 | sim 6.1s | wall 196s | passed 5-5/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-4 | sim 7.1s | wall 212s | passed 6-6/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-4 | sim 8.1s | wall 229s | passed 6-6/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-4 | sim 9.1s | wall 246s | passed 7-7/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-4 | sim 10.1s | wall 263s | passed 8-8/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-4 | sim 11.1s | wall 280s | passed 9-9/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-4 | sim 12.1s | wall 298s | passed 10-10/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-4 | sim 13.1s | wall 315s | passed 11-11/12
+  error max 0.00m | collisions 0 | fallbacks 0
+Flight 1-4 | sim 13.7s | wall 327s | passed 12-12/12
+  error max 0.03m | collisions 0 | fallbacks 0
+Flight diagnostics completed: artifacts/reference_racing_policy/attempt1_seed0/perturbed/exact_state_baseline_live/progress.json
+{
+  "exact_state": {
+    "baseline": {
+      "peak_speed_m_s": 10.740706443786621,
+      "termination_counts": {
+        "crashed": 0,
+        "out_of_bounds": 0,
+        "missed_gate": 0,
+        "deadline": 0
+      },
+      "trials": 4,
+      "completion_rate": 1.0,
+      "collision_rate": 0.0,
+      "mean_lap_time_s": 13.71250057220459,
+      "median_lap_time_s": 13.71000051498413,
+      "lap_time_std_s": 0.012599456329666359,
+      "minimum_clearance_m": 0.10093069076538086,
+      "mean_tracking_error_m": 0.0090012857983116,
+      "fallbacks": 0,
+      "mpc_latency_median_s": 0.06182931250003776,
+      "mpc_latency_p95_s": 0.08319323270002313,
+      "physics_steps_per_second": 83.91362308438023
+    },
+    "accepted": false,
+    "reason": "No learned checkpoint supplied"
+  },
+  "accepted": false
+}

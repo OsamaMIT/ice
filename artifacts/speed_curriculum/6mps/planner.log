@@ -1,0 +1,19 @@
+Building trajectory problem: 288 intervals, refinement 0
+Solving for a dynamically feasible reference...
+
+******************************************************************************
+This program contains Ipopt, a library for large-scale nonlinear optimization.
+ Ipopt is released as open source code under the Eclipse Public License (EPL).
+         For more information visit https://github.com/coin-or/Ipopt
+******************************************************************************
+
+      solver  :   t_proc      (avg)   t_wall      (avg)    n_eval
+       nlp_f  |  95.02ms ( 22.95us)  88.66ms ( 21.41us)      4141
+       nlp_g  |   8.67 s (  2.09ms)   8.67 s (  2.09ms)      4141
+  nlp_grad_f  |  89.44ms ( 44.68us)  80.78ms ( 40.35us)      2002
+   nlp_jac_g  |  69.37 s ( 34.65ms)  69.41 s ( 34.67ms)      2002
+       total  | 206.96 s (206.96 s) 207.05 s (207.05 s)         1
+Validating feasibility candidate at physics rate...
+Refining feasibility: 14 invalid intervals; maximum defect 0.1429
+Building trajectory problem: 576 intervals, refinement 1
+Solving for a dynamically feasible reference...

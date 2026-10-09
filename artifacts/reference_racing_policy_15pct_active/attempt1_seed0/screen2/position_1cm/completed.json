@@ -1,0 +1,46 @@
+{
+  "trials": 8,
+  "seed_start": 20000220,
+  "incumbent": {
+    "peak_speed_m_s": 10.743785858154297,
+    "termination_counts": {
+      "crashed": 0,
+      "out_of_bounds": 0,
+      "missed_gate": 0,
+      "deadline": 0
+    },
+    "trials": 8,
+    "completion_rate": 1.0,
+    "collision_rate": 0.0,
+    "mean_lap_time_s": 13.866750597953796,
+    "median_lap_time_s": 13.821000576019287,
+    "lap_time_std_s": 0.11786831798009453,
+    "minimum_clearance_m": 0.0968019962310791,
+    "mean_tracking_error_m": 0.01318743168033771,
+    "fallbacks": 0,
+    "mpc_latency_median_s": 0.058076784999684605,
+    "mpc_latency_p95_s": 0.07151258199992298,
+    "physics_steps_per_second": 28.73024859019585
+  },
+  "candidate": {
+    "peak_speed_m_s": 10.753277778625488,
+    "termination_counts": {
+      "crashed": 0,
+      "out_of_bounds": 0,
+      "missed_gate": 0,
+      "deadline": 0
+    },
+    "trials": 8,
+    "completion_rate": 1.0,
+    "collision_rate": 0.0,
+    "mean_lap_time_s": 13.811250448226929,
+    "median_lap_time_s": 13.76900053024292,
+    "lap_time_std_s": 0.11506058754245085,
+    "minimum_clearance_m": 0.08031578361988068,
+    "mean_tracking_error_m": 0.018469872036659063,
+    "fallbacks": 0,
+    "mpc_latency_median_s": 0.05785340399961569,
+    "mpc_latency_p95_s": 0.0709273947998554,
+    "physics_steps_per_second": 28.709896098927157
+  }
+}
